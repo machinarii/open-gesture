@@ -1,0 +1,2535 @@
+{
+  "generated_at": "2026-03-27T23:43:59.058462+00:00",
+  "total_gestures": 99,
+  "categories": [
+    "Affirmative & Positive",
+    "Bicycle Signals",
+    "Conversational Emphasis",
+    "Creative & Expressive",
+    "Directional & Wayfinding",
+    "Greetings & Farewells",
+    "Love & Affection",
+    "Meme & Fantasy",
+    "Money & Transaction",
+    "Negative & Disapproval",
+    "Numbers",
+    "Practical & Functional",
+    "Quantity & Counting",
+    "Respect & Religious",
+    "Rude & Offensive",
+    "Silence & Secrecy",
+    "Size & Degree",
+    "Sports & Taunting",
+    "Team Building",
+    "Urgency & Attention",
+    "Wishful & Luck"
+  ],
+  "schema": {
+    "physical_description": "How the body physically performs the gesture (posture, hand shape, movement)",
+    "intent": "The communicative purpose or message the gesture conveys",
+    "emotional_state": "Overall valence: positive, neutral, or negative",
+    "arousal": "Activation energy level: low, medium, or high (PAD dimensional model)",
+    "emotional_adjectives": "CBT-informed list of emotions associated with the gesture (Plutchik componential model)",
+    "gesture_type": "McNeill/Ekman taxonomy: emblem, illustrator-iconic, illustrator-metaphoric, illustrator-beat, illustrator-deictic, or adaptor",
+    "body_parts": "Body parts involved in performing the gesture (BAP anatomical coding)",
+    "number_of_people": "Participants required: single, 2 person, or 3 or more",
+    "cultural_context": "Geographic/cultural scope: universal, western, east-asian, southern-european, etc."
+  },
+  "gestures": [
+    {
+      "index": 1,
+      "id": "affirm-01",
+      "name": "Thumbs Up",
+      "category": "Affirmative & Positive",
+      "file": "gesture_images/affirmative-and-positive/affirm-01-thumbs-up.png",
+      "physical_description": "Make a fist and extend the thumb straight upward; arm can be at waist or raised for visibility",
+      "intent": "Signal approval, agreement, or that things are good",
+      "emotional_state": "positive",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "approval",
+        "encouragement",
+        "satisfaction",
+        "confidence"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "thumb"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 2,
+      "id": "affirm-02",
+      "name": "OK Sign",
+      "category": "Affirmative & Positive",
+      "file": "gesture_images/affirmative-and-positive/affirm-02-ok-sign.png",
+      "physical_description": "Touch the tip of the index finger to the tip of the thumb forming a circle; remaining three fingers extend upward and slightly apart",
+      "intent": "Confirm something is satisfactory or precise",
+      "emotional_state": "positive",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "confidence",
+        "assurance",
+        "satisfaction",
+        "agreement"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "thumb"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 3,
+      "id": "affirm-03",
+      "name": "Clapping",
+      "category": "Affirmative & Positive",
+      "file": "gesture_images/affirmative-and-positive/affirm-03-clapping.png",
+      "physical_description": "Strike both open palms together repeatedly at chest height with fingers aligned; vary speed and force to match enthusiasm",
+      "intent": "Applaud, congratulate, or celebrate an achievement",
+      "emotional_state": "positive",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "joy",
+        "admiration",
+        "excitement",
+        "pride",
+        "appreciation"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "palms",
+        "arms"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 4,
+      "id": "affirm-04",
+      "name": "Double Thumbs Up",
+      "category": "Affirmative & Positive",
+      "file": "gesture_images/affirmative-and-positive/affirm-04-double-thumbs-up.png",
+      "physical_description": "Make fists with both hands and extend both thumbs straight upward simultaneously; hold at chest or shoulder height",
+      "intent": "Express strong approval or enthusiastic agreement",
+      "emotional_state": "positive",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "enthusiasm",
+        "excitement",
+        "strong approval",
+        "encouragement"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "thumbs"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 5,
+      "id": "affirm-06",
+      "name": "Raised Fist - Solidarity",
+      "category": "Affirmative & Positive",
+      "file": "gesture_images/affirmative-and-positive/affirm-06-raised-fist-solidarity.png",
+      "physical_description": "Clench one hand into a tight fist and raise the arm straight overhead; body upright and chest open",
+      "intent": "Show solidarity, unity, or empowerment",
+      "emotional_state": "positive",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "solidarity",
+        "determination",
+        "empowerment",
+        "pride",
+        "strength"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "fist",
+        "arm",
+        "shoulder"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 6,
+      "id": "affirm-07",
+      "name": "Arms Raised in V - Victory",
+      "category": "Affirmative & Positive",
+      "file": "gesture_images/affirmative-and-positive/affirm-07-arms-raised-in-v-victory.png",
+      "physical_description": "Raise both arms above the head in a wide V-shape with hands open or in fists; head tilted back slightly",
+      "intent": "Celebrate a triumph or express elation",
+      "emotional_state": "positive",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "triumph",
+        "joy",
+        "elation",
+        "pride",
+        "exuberance"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "arms",
+        "hands",
+        "shoulders",
+        "torso"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 7,
+      "id": "affirm-08",
+      "name": "Head Nod with Chin Lift",
+      "category": "Affirmative & Positive",
+      "file": "gesture_images/affirmative-and-positive/affirm-08-head-nod-with-chin-lift.png",
+      "physical_description": "Tilt the chin upward in a brief, single upward nod; maintain eye contact",
+      "intent": "Casually acknowledge or affirm someone",
+      "emotional_state": "positive",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "acknowledgment",
+        "confidence",
+        "agreement",
+        "respect"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "head",
+        "neck",
+        "chin"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 8,
+      "id": "bicycle-01",
+      "name": "Left Turn Signal (Bicycle)",
+      "category": "Bicycle Signals",
+      "file": "gesture_images/bicycle/bicycle-01-left-turn-signal.png",
+      "physical_description": "Extend the left arm straight out to the side at shoulder height with palm facing downward or forward; hold steady while riding",
+      "intent": "Signal an upcoming left turn to other road users",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "alertness",
+        "responsibility",
+        "safety",
+        "focus"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "arm",
+        "hand"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 9,
+      "id": "bicycle-02",
+      "name": "Right Turn Signal (Bicycle)",
+      "category": "Bicycle Signals",
+      "file": "gesture_images/bicycle/bicycle-02-right-turn-signal.png",
+      "physical_description": "Extend the right arm straight out to the side at shoulder height, or bend the left arm upward at a 90-degree angle at the elbow",
+      "intent": "Signal an upcoming right turn to other road users",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "alertness",
+        "responsibility",
+        "safety",
+        "focus"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "arm",
+        "hand"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 10,
+      "id": "bicycle-03",
+      "name": "Stop Signal (Bicycle)",
+      "category": "Bicycle Signals",
+      "file": "gesture_images/bicycle/bicycle-03-stop-signal.png",
+      "physical_description": "Extend the left arm downward and to the side at a 45-degree angle with the palm open and facing backward",
+      "intent": "Signal an upcoming stop to other road users",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "alertness",
+        "caution",
+        "responsibility",
+        "safety"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "arm",
+        "hand",
+        "palm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 11,
+      "id": "conv-01",
+      "name": "Air Quotes",
+      "category": "Conversational Emphasis",
+      "file": "gesture_images/conversational-emphasis/conv-01-air-quotes.png",
+      "physical_description": "Raise both hands to head height and curl the index and middle fingers of each hand twice in a hooking motion, mimicking quotation marks",
+      "intent": "Indicate sarcasm, irony, or skepticism about a term",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "skepticism",
+        "sarcasm",
+        "irony",
+        "amusement",
+        "playfulness"
+      ],
+      "gesture_type": "illustrator-metaphoric",
+      "body_parts": [
+        "hands",
+        "index fingers",
+        "middle fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 12,
+      "id": "conv-02",
+      "name": "Finger Wag - Scolding",
+      "category": "Conversational Emphasis",
+      "file": "gesture_images/conversational-emphasis/conv-02-finger-wag-scolding.png",
+      "physical_description": "Extend the index finger upward and swing it side to side in a pendulum motion at face height; facial expression stern",
+      "intent": "Scold or warn someone against a behavior",
+      "emotional_state": "negative",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "disapproval",
+        "authority",
+        "admonishment",
+        "frustration"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "wrist"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 13,
+      "id": "conv-03",
+      "name": "Counting Off Points on Fingers",
+      "category": "Conversational Emphasis",
+      "file": "gesture_images/conversational-emphasis/conv-03-counting-off-points-on-fingers.png",
+      "physical_description": "Hold one hand up and use the index finger of the other hand to tap or grasp each finger in sequence while listing items",
+      "intent": "Enumerate key arguments or items in a discussion",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "assertiveness",
+        "clarity",
+        "determination",
+        "confidence"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hands",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 14,
+      "id": "conv-04",
+      "name": "Hand Chop into Palm",
+      "category": "Conversational Emphasis",
+      "file": "gesture_images/conversational-emphasis/conv-04-hand-chop-into-palm.png",
+      "physical_description": "Strike the edge of one flattened hand into the open palm of the other in repeated downward chops, emphasizing each point",
+      "intent": "Emphasize a critical point with force and conviction",
+      "emotional_state": "neutral",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "assertiveness",
+        "conviction",
+        "determination",
+        "intensity"
+      ],
+      "gesture_type": "illustrator-beat",
+      "body_parts": [
+        "hands",
+        "palms"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 15,
+      "id": "conv-05",
+      "name": "Palms Together - Pleading",
+      "category": "Conversational Emphasis",
+      "file": "gesture_images/conversational-emphasis/conv-05-palms-together-pleading.png",
+      "physical_description": "Press both palms flat together at chest height in a prayer-like position; lean the body slightly forward with earnest expression",
+      "intent": "Earnestly beg, plead, or make a heartfelt request",
+      "emotional_state": "positive",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "desperation",
+        "hope",
+        "vulnerability",
+        "sincerity",
+        "earnestness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "palms",
+        "torso"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 16,
+      "id": "conv-06",
+      "name": "Mind-Blown Gesture",
+      "category": "Conversational Emphasis",
+      "file": "gesture_images/conversational-emphasis/conv-06-mind-blown-gesture.png",
+      "physical_description": "Place both hands on either side of the head with fingers together, then fling them outward while spreading fingers wide, mimicking an explosion",
+      "intent": "Express that something is overwhelmingly amazing or shocking",
+      "emotional_state": "positive",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "amazement",
+        "shock",
+        "awe",
+        "wonder",
+        "astonishment"
+      ],
+      "gesture_type": "illustrator-metaphoric",
+      "body_parts": [
+        "hands",
+        "fingers",
+        "head"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 17,
+      "id": "conv-07",
+      "name": "Italian Pinched Fingers",
+      "category": "Conversational Emphasis",
+      "file": "gesture_images/conversational-emphasis/conv-07-italian-pinched-fingers.png",
+      "physical_description": "Bring all five fingertips together pointing upward, forming a tight cone shape; bob the hand up and down at the wrist",
+      "intent": "Question, emphasize, or express disbelief about what was said",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "incredulity",
+        "emphasis",
+        "expressiveness",
+        "curiosity"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "fingers",
+        "wrist"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "southern-european"
+    },
+    {
+      "index": 18,
+      "id": "creative-01",
+      "name": "About Yea Big - Framing",
+      "category": "Creative & Expressive",
+      "file": "gesture_images/creative/creative-01-about-yea-big-framing.png",
+      "physical_description": "Hold both hands in front of the body with palms facing each other; adjust the distance between them to indicate approximate size",
+      "intent": "Estimate or communicate the approximate size of an object",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "creativity",
+        "estimation",
+        "expressiveness",
+        "casualness"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hands",
+        "palms",
+        "arms"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 19,
+      "id": "dir-01",
+      "name": "Index Finger Point",
+      "category": "Directional & Wayfinding",
+      "file": "gesture_images/directional-and-wayfinding/dir-01-index-finger-point.png",
+      "physical_description": "Extend the index finger straight out while curling the remaining fingers into the palm; arm extends toward the target with the wrist aligned",
+      "intent": "Direct attention to a specific location, object, or person",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "focus",
+        "determination",
+        "assertiveness",
+        "clarity"
+      ],
+      "gesture_type": "illustrator-deictic",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 20,
+      "id": "dir-02",
+      "name": "Open Palm Point",
+      "category": "Directional & Wayfinding",
+      "file": "gesture_images/directional-and-wayfinding/dir-02-open-palm-point.png",
+      "physical_description": "Extend the arm toward the target with all fingers together and palm facing upward or sideways; wrist relaxed and fingers straight",
+      "intent": "Politely indicate a direction or draw attention to something",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "helpfulness",
+        "openness",
+        "courtesy",
+        "warmth"
+      ],
+      "gesture_type": "illustrator-deictic",
+      "body_parts": [
+        "hand",
+        "palm",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 21,
+      "id": "dir-05",
+      "name": "Beckoning with Index Finger",
+      "category": "Directional & Wayfinding",
+      "file": "gesture_images/directional-and-wayfinding/dir-05-beckoning-with-index-finger.png",
+      "physical_description": "Curl the index finger repeatedly toward the body in a hooking motion while the hand is held at chest height, palm facing inward",
+      "intent": "Summon someone to come closer",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "curiosity",
+        "authority",
+        "anticipation",
+        "confidence"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 22,
+      "id": "dir-06",
+      "name": "Beckoning with Full Hand Palm Up",
+      "category": "Directional & Wayfinding",
+      "file": "gesture_images/directional-and-wayfinding/dir-06-beckoning-with-full-hand-palm-up.png",
+      "physical_description": "Hold the hand out with palm facing upward and repeatedly curl all four fingers toward the body in a scooping motion",
+      "intent": "Warmly invite someone to approach",
+      "emotional_state": "positive",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "warmth",
+        "openness",
+        "hospitality",
+        "welcoming"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "fingers",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 23,
+      "id": "dir-07",
+      "name": "Waving Arm Overhead",
+      "category": "Directional & Wayfinding",
+      "file": "gesture_images/directional-and-wayfinding/dir-07-waving-arm-overhead.png",
+      "physical_description": "Raise one arm fully above the head and wave it side to side in broad sweeping arcs; hand open with fingers spread",
+      "intent": "Signal your location or get attention from a distance",
+      "emotional_state": "positive",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "excitement",
+        "urgency",
+        "enthusiasm",
+        "eagerness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "arm",
+        "hand",
+        "shoulder"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 24,
+      "id": "dir-08",
+      "name": "Two-Handed Over Here Wave",
+      "category": "Directional & Wayfinding",
+      "file": "gesture_images/directional-and-wayfinding/dir-08-two-handed-over-here-wave.png",
+      "physical_description": "Raise both arms above shoulder height and wave them simultaneously toward the body in large inward-sweeping arcs",
+      "intent": "Emphatically beckon someone to come over",
+      "emotional_state": "positive",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "excitement",
+        "eagerness",
+        "welcoming",
+        "enthusiasm"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "arms",
+        "hands",
+        "shoulders"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 25,
+      "id": "dir-09",
+      "name": "Palm-Out Push Gesture",
+      "category": "Directional & Wayfinding",
+      "file": "gesture_images/directional-and-wayfinding/dir-09-palm-out-push-gesture.png",
+      "physical_description": "Extend one or both arms forward with palms facing outward and fingers together; push slightly away from the body",
+      "intent": "Refuse entry or set a physical boundary",
+      "emotional_state": "negative",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "firmness",
+        "resistance",
+        "boundary-setting",
+        "assertiveness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "palm",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 26,
+      "id": "dir-11",
+      "name": "After You Open Palm Sweep",
+      "category": "Directional & Wayfinding",
+      "file": "gesture_images/directional-and-wayfinding/dir-11-after-you-open-palm-sweep.png",
+      "physical_description": "Extend one arm to the side with palm facing upward and sweep it forward in a smooth arc, gesturing toward the path ahead",
+      "intent": "Offer someone to proceed ahead of you",
+      "emotional_state": "positive",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "politeness",
+        "respect",
+        "courtesy",
+        "generosity"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "arm",
+        "hand",
+        "palm",
+        "torso"
+      ],
+      "number_of_people": "2 person",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 27,
+      "id": "greet-01",
+      "name": "Open Hand Wave",
+      "category": "Greetings & Farewells",
+      "file": "gesture_images/greetings-and-farewells/greet-01-open-hand-wave.png",
+      "physical_description": "Raise one hand to head height with palm facing outward and pivot the hand side to side at the wrist, fingers together or slightly spread",
+      "intent": "Greet or say goodbye to someone",
+      "emotional_state": "positive",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "friendliness",
+        "warmth",
+        "joy",
+        "openness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "wrist",
+        "forearm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 28,
+      "id": "greet-02",
+      "name": "Single Raised Palm Greeting",
+      "category": "Greetings & Farewells",
+      "file": "gesture_images/greetings-and-farewells/greet-02-single-raised-palm-greeting.png",
+      "physical_description": "Raise one hand to head height with palm flat and facing outward; hold it still momentarily",
+      "intent": "Acknowledge or formally greet someone",
+      "emotional_state": "positive",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "respect",
+        "acknowledgment",
+        "friendliness",
+        "composure"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "palm",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 29,
+      "id": "greet-05",
+      "name": "High Five",
+      "category": "Greetings & Farewells",
+      "file": "gesture_images/greetings-and-farewells/greet-05-high-five.png",
+      "physical_description": "Raise one hand above head height with palm facing the other person; slap palms together with the partner at the peak of the reach",
+      "intent": "Celebrate a shared success or connect enthusiastically",
+      "emotional_state": "positive",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "joy",
+        "excitement",
+        "camaraderie",
+        "celebration"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "palm",
+        "arm",
+        "shoulder"
+      ],
+      "number_of_people": "2 person",
+      "cultural_context": "western"
+    },
+    {
+      "index": 30,
+      "id": "greet-06",
+      "name": "Peace Sign on Departure",
+      "category": "Greetings & Farewells",
+      "file": "gesture_images/greetings-and-farewells/greet-06-peace-sign-on-departure.png",
+      "physical_description": "Raise the hand with index and middle fingers extended in a V-shape, palm facing outward; hold briefly while stepping away",
+      "intent": "Bid a casual farewell with goodwill",
+      "emotional_state": "positive",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "peace",
+        "contentment",
+        "goodwill",
+        "casualness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "middle finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 31,
+      "id": "greet-07",
+      "name": "Salute",
+      "category": "Greetings & Farewells",
+      "file": "gesture_images/greetings-and-farewells/greet-07-salute.png",
+      "physical_description": "Bring the right hand sharply to the right brow with fingers together and palm tilted slightly downward; elbow raised to shoulder height",
+      "intent": "Show formal respect or acknowledge authority",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "respect",
+        "honor",
+        "duty",
+        "discipline"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "arm",
+        "forehead"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 32,
+      "id": "greet-08",
+      "name": "Finger Guns",
+      "category": "Greetings & Farewells",
+      "file": "gesture_images/greetings-and-farewells/greet-08-finger-guns.png",
+      "physical_description": "Point both index fingers forward with thumbs raised like pistol hammers; optionally flick the thumbs down as if firing while nodding",
+      "intent": "Playfully acknowledge or greet someone with confidence",
+      "emotional_state": "positive",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "playfulness",
+        "confidence",
+        "amusement",
+        "charm"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "index fingers",
+        "thumbs"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 33,
+      "id": "greet-09",
+      "name": "Hat Tip Gesture",
+      "category": "Greetings & Farewells",
+      "file": "gesture_images/greetings-and-farewells/greet-09-hat-tip-gesture.png",
+      "physical_description": "Reach up and pinch the brim of an imaginary hat between the thumb and index finger; tilt it slightly forward while nodding the head",
+      "intent": "Acknowledge someone with polite charm",
+      "emotional_state": "positive",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "respect",
+        "courtesy",
+        "charm",
+        "appreciation"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "fingers",
+        "head"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 34,
+      "id": "greet-10",
+      "name": "About to Hug",
+      "category": "Greetings & Farewells",
+      "file": "gesture_images/greetings-and-farewells/greet-10-about-to-hug.png",
+      "physical_description": "Open both arms wide at shoulder height with palms facing inward; step forward slightly with a warm facial expression",
+      "intent": "Welcome someone with an embrace",
+      "emotional_state": "positive",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "love",
+        "warmth",
+        "affection",
+        "joy",
+        "anticipation"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "arms",
+        "hands",
+        "torso",
+        "shoulders"
+      ],
+      "number_of_people": "2 person",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 35,
+      "id": "love-01",
+      "name": "Chef's Kiss",
+      "category": "Love & Affection",
+      "file": "gesture_images/love/love-01-chefs-kiss.png",
+      "physical_description": "Bring the fingertips of one hand together and touch them to the lips; pull the hand away while opening the fingers in a blossoming motion",
+      "intent": "Express that something is perfect or exquisite",
+      "emotional_state": "positive",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "delight",
+        "admiration",
+        "satisfaction",
+        "appreciation",
+        "joy"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "fingers",
+        "lips"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 36,
+      "id": "love-02",
+      "name": "Blowing a Kiss",
+      "category": "Love & Affection",
+      "file": "gesture_images/love/love-02-blowing-kiss.png",
+      "physical_description": "Place the fingertips of one open hand against the lips; extend the arm outward while opening the palm as if releasing the kiss into the air",
+      "intent": "Send love or affection to someone at a distance",
+      "emotional_state": "positive",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "love",
+        "affection",
+        "warmth",
+        "flirtation",
+        "tenderness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "lips",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 37,
+      "id": "love-03",
+      "name": "Two Hands Heart",
+      "category": "Love & Affection",
+      "file": "gesture_images/love/love-03-two-hands-heart.png",
+      "physical_description": "Curve both hands symmetrically with fingertips touching at top and thumb-bases meeting at bottom to form a large heart shape; hold at chest level",
+      "intent": "Express love, gratitude, or deep appreciation",
+      "emotional_state": "positive",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "love",
+        "compassion",
+        "gratitude",
+        "warmth",
+        "sincerity"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "fingers",
+        "thumbs"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 38,
+      "id": "meme-01",
+      "name": "Dab Pose",
+      "category": "Meme & Fantasy",
+      "file": "gesture_images/meme-and-fantasy/meme-01-dab-pose.png",
+      "physical_description": "Drop the head into the crook of one bent arm while simultaneously extending the other arm out diagonally in the opposite direction",
+      "intent": "Celebrate or show off with a viral pop-culture move",
+      "emotional_state": "positive",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "playfulness",
+        "confidence",
+        "humor",
+        "exuberance",
+        "joy"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "arms",
+        "head",
+        "torso"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 39,
+      "id": "meme-02",
+      "name": "Evil Horns (Rock On)",
+      "category": "Meme & Fantasy",
+      "file": "gesture_images/meme-and-fantasy/meme-02-evil-horns.png",
+      "physical_description": "Extend the index and pinky fingers upward while curling the middle and ring fingers down with the thumb; hold the hand up",
+      "intent": "Express rock spirit, rebellion, or intense excitement",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "rebellion",
+        "excitement",
+        "defiance",
+        "playfulness",
+        "intensity"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "pinky finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 40,
+      "id": "meme-03",
+      "name": "Bang Bang (Finger Pistols)",
+      "category": "Meme & Fantasy",
+      "file": "gesture_images/meme-and-fantasy/meme-03-bang-bang.png",
+      "physical_description": "Form both hands into finger-gun shapes with index fingers extended and thumbs up; point and flick thumbs down as if shooting",
+      "intent": "Playfully point at someone for fun or emphasis",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "playfulness",
+        "confidence",
+        "humor",
+        "bravado"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "index fingers",
+        "thumbs"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 41,
+      "id": "money-01",
+      "name": "Money Rubbing Gesture",
+      "category": "Money & Transaction",
+      "file": "gesture_images/money-and-transaction/money-01-money-rubbing-gesture.png",
+      "physical_description": "Rub the thumb against the pads of the index and middle fingers in a repeated sliding motion, palm facing upward",
+      "intent": "Refer to money, cost, or suggest something is expensive",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "pragmatism",
+        "anticipation",
+        "shrewdness",
+        "expectation"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "thumb",
+        "index finger",
+        "middle finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 42,
+      "id": "money-02",
+      "name": "Palm-Up Hand Extension",
+      "category": "Money & Transaction",
+      "file": "gesture_images/money-and-transaction/money-02-palm-up-hand-extension.png",
+      "physical_description": "Extend one arm forward with the hand open and palm facing upward; hold steady at waist height",
+      "intent": "Request payment, a tip, or offer to receive something",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "expectation",
+        "openness",
+        "patience",
+        "directness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "palm",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 43,
+      "id": "neg-01",
+      "name": "Thumbs Down",
+      "category": "Negative & Disapproval",
+      "file": "gesture_images/negative-disapproval/neg-01-thumbs-down.png",
+      "physical_description": "Make a fist and extend the thumb straight downward; arm held at chest height or lowered for emphasis",
+      "intent": "Signal disapproval or rejection",
+      "emotional_state": "negative",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "disapproval",
+        "dissatisfaction",
+        "rejection",
+        "disappointment"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "thumb"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 44,
+      "id": "neg-02",
+      "name": "Head Shake with Wagging Finger",
+      "category": "Negative & Disapproval",
+      "file": "gesture_images/negative-disapproval/neg-02-head-shake-with-wagging-finger.png",
+      "physical_description": "Extend the index finger upward and wag it side to side while simultaneously shaking the head left and right",
+      "intent": "Scold or firmly refuse someone",
+      "emotional_state": "negative",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "disapproval",
+        "admonishment",
+        "frustration",
+        "authority"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "head",
+        "neck",
+        "hand",
+        "index finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 45,
+      "id": "neg-03",
+      "name": "X Formed with Forearms",
+      "category": "Negative & Disapproval",
+      "file": "gesture_images/negative-disapproval/neg-03-x-formed-with-forearms.png",
+      "physical_description": "Cross both forearms in front of the chest forming an X-shape; hands flat or in fists, palms facing inward",
+      "intent": "Strongly block or refuse something",
+      "emotional_state": "negative",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "rejection",
+        "firmness",
+        "refusal",
+        "determination"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "forearms",
+        "arms",
+        "hands"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 46,
+      "id": "neg-05",
+      "name": "Palm-Out Stop Hand",
+      "category": "Negative & Disapproval",
+      "file": "gesture_images/negative-disapproval/neg-05-palm-out-stop-hand.png",
+      "physical_description": "Raise one hand to head height with palm flat and facing outward; fingers together and arm fully extended",
+      "intent": "Command someone to halt or cease an action",
+      "emotional_state": "negative",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "authority",
+        "firmness",
+        "boundary-setting",
+        "resistance"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "palm",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 47,
+      "id": "neg-06",
+      "name": "Both Palms Pushing Away",
+      "category": "Negative & Disapproval",
+      "file": "gesture_images/negative-disapproval/neg-06-both-palms-pushing-away.png",
+      "physical_description": "Extend both arms forward with palms facing outward and push repeatedly away from the body at chest height",
+      "intent": "Reject or create distance from something unwanted",
+      "emotional_state": "negative",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "rejection",
+        "aversion",
+        "overwhelm",
+        "distress"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "palms",
+        "arms"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 48,
+      "id": "neg-07",
+      "name": "Facepalm",
+      "category": "Negative & Disapproval",
+      "file": "gesture_images/negative-disapproval/neg-07-facepalm.png",
+      "physical_description": "Raise one open hand and slap it flat against the forehead or upper face; hold briefly with eyes closed or looking down",
+      "intent": "Express disbelief or frustration at a mistake or absurdity",
+      "emotional_state": "negative",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "frustration",
+        "embarrassment",
+        "exasperation",
+        "disbelief"
+      ],
+      "gesture_type": "adaptor",
+      "body_parts": [
+        "hand",
+        "palm",
+        "face",
+        "forehead"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 49,
+      "id": "neg-08",
+      "name": "Dismissive Backhand Wave",
+      "category": "Negative & Disapproval",
+      "file": "gesture_images/negative-disapproval/neg-08-dismissive-backhand-wave.png",
+      "physical_description": "Flick the back of the hand outward and away from the body in a quick, careless sweeping motion at waist height",
+      "intent": "Dismiss or show disregard for someone or something",
+      "emotional_state": "negative",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "contempt",
+        "dismissiveness",
+        "indifference",
+        "annoyance"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "wrist",
+        "forearm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 50,
+      "id": "neg-09",
+      "name": "Exasperated Shrug with Hands Raised",
+      "category": "Negative & Disapproval",
+      "file": "gesture_images/negative-disapproval/neg-09-exasperated-shrug-with-hands-raised.png",
+      "physical_description": "Raise both shoulders toward the ears while lifting both palms upward to shoulder height; head tilts slightly to one side with mouth open",
+      "intent": "Express helpless frustration or disbelief",
+      "emotional_state": "negative",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "frustration",
+        "exasperation",
+        "helplessness",
+        "confusion"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "shoulders",
+        "hands",
+        "palms",
+        "head"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 51,
+      "id": "neg-10",
+      "name": "D'oh Facepalm",
+      "category": "Negative & Disapproval",
+      "file": "gesture_images/negative-disapproval/neg-10-doh-facepalm.png",
+      "physical_description": "Slap the forehead with the heel of the palm while wincing and tilting the head back slightly; hand slides down the face",
+      "intent": "Express self-directed frustration over one's own blunder",
+      "emotional_state": "negative",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "self-frustration",
+        "embarrassment",
+        "regret",
+        "exasperation"
+      ],
+      "gesture_type": "adaptor",
+      "body_parts": [
+        "hand",
+        "palm",
+        "forehead",
+        "face"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 52,
+      "id": "neg-11",
+      "name": "Tensed Fingers",
+      "category": "Negative & Disapproval",
+      "file": "gesture_images/negative-disapproval/neg-11-tensed-fingers.png",
+      "physical_description": "Hold both hands in front of the torso with fingers spread wide and curled like claws; muscles visibly tensed and body rigid",
+      "intent": "Express barely contained anger or intense stress",
+      "emotional_state": "negative",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "anger",
+        "frustration",
+        "tension",
+        "irritation",
+        "anxiety"
+      ],
+      "gesture_type": "adaptor",
+      "body_parts": [
+        "hands",
+        "fingers",
+        "arms",
+        "torso"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 53,
+      "id": "number-01",
+      "name": "Number One",
+      "category": "Numbers",
+      "file": "gesture_images/numbers/number-01-one.png",
+      "physical_description": "Raise the index finger straight up from a closed fist; hold at face or chest height",
+      "intent": "Indicate the number one or signal 'first'",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "clarity",
+        "precision",
+        "communication",
+        "focus"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hand",
+        "index finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 54,
+      "id": "number-02",
+      "name": "Number Two",
+      "category": "Numbers",
+      "file": "gesture_images/numbers/number-02-two.png",
+      "physical_description": "Extend the index and middle fingers upward in a V-shape from a closed fist; palm facing outward",
+      "intent": "Indicate the number two or signal 'second'",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "clarity",
+        "precision",
+        "communication",
+        "focus"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "middle finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 55,
+      "id": "number-03",
+      "name": "Number Three",
+      "category": "Numbers",
+      "file": "gesture_images/numbers/number-03-three.png",
+      "physical_description": "Extend the index, middle, and ring fingers upward from a closed fist; thumb holds the pinky down",
+      "intent": "Indicate the number three",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "clarity",
+        "precision",
+        "communication",
+        "focus"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "middle finger",
+        "ring finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 56,
+      "id": "number-04",
+      "name": "Number Four",
+      "category": "Numbers",
+      "file": "gesture_images/numbers/number-04-four.png",
+      "physical_description": "Extend all four fingers upward with the thumb folded across the palm; fingers together or slightly spread",
+      "intent": "Indicate the number four",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "clarity",
+        "precision",
+        "communication",
+        "focus"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hand",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 57,
+      "id": "number-05",
+      "name": "Number Five",
+      "category": "Numbers",
+      "file": "gesture_images/numbers/number-05-five.png",
+      "physical_description": "Open the hand fully with all five fingers spread apart and palm facing outward; hold at face height",
+      "intent": "Indicate the number five",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "clarity",
+        "precision",
+        "communication",
+        "focus"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hand",
+        "fingers",
+        "palm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 58,
+      "id": "number-06",
+      "name": "Number Six",
+      "category": "Numbers",
+      "file": "gesture_images/numbers/number-06-six.png",
+      "physical_description": "Show five fingers on one hand and extend the index finger on the other; or fold the pinky and ring finger showing thumb, index, and middle",
+      "intent": "Indicate the number six",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "clarity",
+        "precision",
+        "communication",
+        "focus"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hands",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 59,
+      "id": "number-07",
+      "name": "Number Seven",
+      "category": "Numbers",
+      "file": "gesture_images/numbers/number-07-seven.png",
+      "physical_description": "Show five fingers on one hand and extend the index and middle fingers on the other hand",
+      "intent": "Indicate the number seven",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "clarity",
+        "precision",
+        "communication",
+        "focus"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hands",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 60,
+      "id": "number-08",
+      "name": "Number Eight",
+      "category": "Numbers",
+      "file": "gesture_images/numbers/number-08-eight.png",
+      "physical_description": "Show five fingers on one hand and extend three fingers on the other hand",
+      "intent": "Indicate the number eight",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "clarity",
+        "precision",
+        "communication",
+        "focus"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hands",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 61,
+      "id": "number-09",
+      "name": "Number Nine",
+      "category": "Numbers",
+      "file": "gesture_images/numbers/number-09-nine.png",
+      "physical_description": "Show five fingers on one hand and extend four fingers on the other hand",
+      "intent": "Indicate the number nine",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "clarity",
+        "precision",
+        "communication",
+        "focus"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hands",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 62,
+      "id": "number-10",
+      "name": "Number Ten",
+      "category": "Numbers",
+      "file": "gesture_images/numbers/number-10-ten.png",
+      "physical_description": "Open both hands fully with all ten fingers spread and palms facing outward",
+      "intent": "Indicate the number ten",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "clarity",
+        "precision",
+        "communication",
+        "focus"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hands",
+        "fingers",
+        "palms"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 63,
+      "id": "prac-01",
+      "name": "Hitchhiker's Thumb",
+      "category": "Practical & Functional",
+      "file": "gesture_images/practical-and-functional/prac-01-hitchhikers-thumb.png",
+      "physical_description": "Make a loose fist and extend the thumb outward, jerking it over the shoulder or pointing it in the direction of travel",
+      "intent": "Request a ride or casually indicate a direction behind you",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "adventurousness",
+        "hope",
+        "independence",
+        "casualness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "thumb"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 64,
+      "id": "prac-02",
+      "name": "Hand-as-Phone Gesture",
+      "category": "Practical & Functional",
+      "file": "gesture_images/practical-and-functional/prac-02-hand-as-phone-gesture.png",
+      "physical_description": "Extend the thumb and pinky finger while curling the middle three fingers; hold the thumb to the ear and the pinky near the mouth",
+      "intent": "Suggest making or receiving a phone call",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "pragmatism",
+        "urgency",
+        "communication",
+        "directness"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hand",
+        "thumb",
+        "pinky finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 65,
+      "id": "prac-03",
+      "name": "Hand-as-Camera Framing",
+      "category": "Practical & Functional",
+      "file": "gesture_images/practical-and-functional/prac-03-hand-as-camera-framing.png",
+      "physical_description": "Form an L-shape with each hand using the thumb and index finger; hold them together to create a rectangular frame and look through it",
+      "intent": "Frame a scene or composition as if viewing through a lens",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "creativity",
+        "focus",
+        "attention-to-detail",
+        "curiosity"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hands",
+        "thumbs",
+        "index fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 66,
+      "id": "prac-05",
+      "name": "Hand Visor - Shading Eyes",
+      "category": "Practical & Functional",
+      "file": "gesture_images/practical-and-functional/prac-05-hand-visor-shading-eyes.png",
+      "physical_description": "Place one flat hand horizontally above the eyebrows with palm facing downward; squint and look into the distance",
+      "intent": "Shield eyes from light or search for something far away",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "curiosity",
+        "attentiveness",
+        "searching",
+        "alertness"
+      ],
+      "gesture_type": "adaptor",
+      "body_parts": [
+        "hand",
+        "forehead",
+        "eyes"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 67,
+      "id": "prac-06",
+      "name": "Shoulder Shrug Palms Up",
+      "category": "Practical & Functional",
+      "file": "gesture_images/practical-and-functional/prac-06-shoulder-shrug-palms-up.png",
+      "physical_description": "Raise both shoulders toward the ears while turning both palms upward at waist height; eyebrows lifted and mouth slightly downturned",
+      "intent": "Express uncertainty, ignorance, or indifference",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "confusion",
+        "helplessness",
+        "indifference",
+        "acceptance"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "shoulders",
+        "hands",
+        "palms",
+        "head"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 68,
+      "id": "prac-07",
+      "name": "Call Me Hand",
+      "category": "Practical & Functional",
+      "file": "gesture_images/practical-and-functional/prac-07-call-me-hand.png",
+      "physical_description": "Extend the thumb and pinky finger with middle fingers curled; hold near the ear or wave casually with a nod",
+      "intent": "Suggest that someone should call you or stay in touch",
+      "emotional_state": "positive",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "friendliness",
+        "flirtation",
+        "casualness",
+        "confidence"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "thumb",
+        "pinky finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 69,
+      "id": "prac-08",
+      "name": "Typing on Air Keyboard",
+      "category": "Practical & Functional",
+      "file": "gesture_images/practical-and-functional/prac-08-typing-keyboard-air.png",
+      "physical_description": "Hold both hands in front of the body at waist height with fingers curved and rapidly tap the fingers up and down as if typing on an invisible keyboard",
+      "intent": "Indicate working on a computer, writing, or data entry",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "focus",
+        "productivity",
+        "communication",
+        "attentiveness"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hands",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 70,
+      "id": "prac-09",
+      "name": "Washing Hands",
+      "category": "Practical & Functional",
+      "file": "gesture_images/practical-and-functional/prac-09-wash-hands.png",
+      "physical_description": "Rub both hands together in circular motions, palms sliding over the backs of the hands alternately, mimicking lathering with soap",
+      "intent": "Demonstrate hand hygiene or indicate cleanliness",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "cleanliness",
+        "caution",
+        "conscientiousness",
+        "responsibility"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hands",
+        "palms",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 71,
+      "id": "quant-01",
+      "name": "Counting One Through Five",
+      "category": "Quantity & Counting",
+      "file": "gesture_images/quantity-and-counting/quant-01-counting-one-through-five.png",
+      "physical_description": "Sequentially extend fingers starting from the index finger, adding one finger at a time until all five are shown on one hand",
+      "intent": "Enumerate items or count from one to five",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "focus",
+        "clarity",
+        "precision",
+        "attentiveness"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hand",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 72,
+      "id": "quant-02",
+      "name": "Counting Six Through Ten",
+      "category": "Quantity & Counting",
+      "file": "gesture_images/quantity-and-counting/quant-02-counting-six-through-ten.png",
+      "physical_description": "Use both hands, starting with five fingers on one hand and extending fingers on the second hand from one to five",
+      "intent": "Continue counting from six to ten",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "focus",
+        "clarity",
+        "precision",
+        "attentiveness"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hands",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 73,
+      "id": "quant-03",
+      "name": "Just a Little Bit Gesture",
+      "category": "Quantity & Counting",
+      "file": "gesture_images/quantity-and-counting/quant-03-just-a-little-bit-gesture.png",
+      "physical_description": "Hold the thumb and index finger close together with a tiny gap between them; remaining fingers curled into the palm",
+      "intent": "Indicate a very small amount or degree",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "modesty",
+        "precision",
+        "restraint",
+        "casualness"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hand",
+        "thumb",
+        "index finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 74,
+      "id": "resp-02",
+      "name": "Praying Hands",
+      "category": "Respect & Religious",
+      "file": "gesture_images/respect-and-religious/resp-02-praying-hands.png",
+      "physical_description": "Press both palms flat together with fingers pointing upward at chest or chin height; eyes may close and head may bow",
+      "intent": "Pray, express deep gratitude, or show spiritual reverence",
+      "emotional_state": "positive",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "reverence",
+        "gratitude",
+        "hope",
+        "serenity",
+        "devotion",
+        "humility"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "palms",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 75,
+      "id": "rude-01",
+      "name": "Middle Finger",
+      "category": "Rude & Offensive",
+      "file": "gesture_images/rude-and-offensive/rude-01-middle-finger.png",
+      "physical_description": "Extend the middle finger straight up from a closed fist with the back of the hand facing the recipient",
+      "intent": "Express extreme contempt or hostility toward someone",
+      "emotional_state": "negative",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "anger",
+        "contempt",
+        "hostility",
+        "defiance",
+        "rage"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "middle finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 76,
+      "id": "rude-02",
+      "name": "Talk to the Hand",
+      "category": "Rude & Offensive",
+      "file": "gesture_images/rude-and-offensive/rude-02-talk-to-the-hand.png",
+      "physical_description": "Thrust one arm forward with the palm flat and facing the other person; fingers together, head turned away dismissively",
+      "intent": "Dismiss someone with exaggerated disregard",
+      "emotional_state": "negative",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "contempt",
+        "dismissiveness",
+        "arrogance",
+        "rejection"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "palm",
+        "arm",
+        "head"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 77,
+      "id": "rude-03",
+      "name": "Loser L on Forehead",
+      "category": "Rude & Offensive",
+      "file": "gesture_images/rude-and-offensive/rude-03-loser-l-on-forehead.png",
+      "physical_description": "Form an L-shape with the thumb and index finger and press it against the forehead with the L facing outward",
+      "intent": "Mock someone by branding them a loser",
+      "emotional_state": "negative",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "contempt",
+        "mockery",
+        "superiority",
+        "cruelty",
+        "scorn"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "thumb",
+        "index finger",
+        "forehead"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 78,
+      "id": "rude-04",
+      "name": "Cuckoo Sign",
+      "category": "Rude & Offensive",
+      "file": "gesture_images/rude-and-offensive/rude-04-cuckoo-sign.png",
+      "physical_description": "Extend the index finger and rotate it in small circles next to the temple; eyebrows raised with a knowing look",
+      "intent": "Imply that someone is irrational or out of their mind",
+      "emotional_state": "negative",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "mockery",
+        "dismissiveness",
+        "contempt",
+        "ridicule"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "head",
+        "temple"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 79,
+      "id": "rude-05",
+      "name": "Nose Thumb",
+      "category": "Rude & Offensive",
+      "file": "gesture_images/rude-and-offensive/rude-05-nose-thumb.png",
+      "physical_description": "Place the thumb on the tip of the nose with fingers spread wide and wiggle the fingers; optionally stack the second hand on top",
+      "intent": "Taunt or mock someone in a childish, defiant way",
+      "emotional_state": "negative",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "mockery",
+        "defiance",
+        "contempt",
+        "childishness",
+        "scorn"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "thumb",
+        "fingers",
+        "nose"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 80,
+      "id": "sil-01",
+      "name": "Finger to Lips - Shh",
+      "category": "Silence & Secrecy",
+      "file": "gesture_images/silence-and-secrecy/sil-01-finger-to-lips-shh.png",
+      "physical_description": "Place the extended index finger vertically against closed lips; other fingers curled into the palm, eyes widened slightly",
+      "intent": "Request silence or signal that a secret should be kept",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "secrecy",
+        "trust",
+        "caution",
+        "discretion"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "lips"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 81,
+      "id": "sil-02",
+      "name": "Zipped Lips Gesture",
+      "category": "Silence & Secrecy",
+      "file": "gesture_images/silence-and-secrecy/sil-02-zipped-lips-gesture.png",
+      "physical_description": "Pinch the thumb and index finger together and drag them across the closed lips from one corner to the other, mimicking a zipper",
+      "intent": "Promise to keep quiet or that a secret is sealed",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "discretion",
+        "loyalty",
+        "secrecy",
+        "trustworthiness"
+      ],
+      "gesture_type": "illustrator-metaphoric",
+      "body_parts": [
+        "hand",
+        "thumb",
+        "index finger",
+        "lips"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 82,
+      "id": "sil-03",
+      "name": "Hand Cupped Behind Ear",
+      "category": "Silence & Secrecy",
+      "file": "gesture_images/silence-and-secrecy/sil-03-hand-cupped-behind-ear.png",
+      "physical_description": "Cup one hand and place it behind the ear, tilting the head toward the speaker; lean the body slightly forward",
+      "intent": "Ask someone to speak louder or repeat themselves",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "curiosity",
+        "attentiveness",
+        "confusion",
+        "interest"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "ear",
+        "head"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 83,
+      "id": "sil-04",
+      "name": "Hands Over Mouth - Surprise",
+      "category": "Silence & Secrecy",
+      "file": "gesture_images/silence-and-secrecy/sil-04-hands-over-mouth-surprise.png",
+      "physical_description": "Raise both hands and press them flat over the open mouth; eyes widen and body recoils slightly backward",
+      "intent": "React to something shocking or unexpectedly delightful",
+      "emotional_state": "positive",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "surprise",
+        "shock",
+        "disbelief",
+        "amazement",
+        "wonder"
+      ],
+      "gesture_type": "adaptor",
+      "body_parts": [
+        "hands",
+        "mouth",
+        "face"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 84,
+      "id": "size-01",
+      "name": "Pinch Gesture for Tiny",
+      "category": "Size & Degree",
+      "file": "gesture_images/size-and-degree/size-01-pinch-gesture-for-tiny.png",
+      "physical_description": "Press the pads of thumb and index finger nearly together, leaving an almost invisible gap; hold at eye level and squint slightly",
+      "intent": "Indicate something is extremely small",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "precision",
+        "focus",
+        "amusement",
+        "clarity"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hand",
+        "thumb",
+        "index finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 85,
+      "id": "size-03",
+      "name": "Hands Apart for Height",
+      "category": "Size & Degree",
+      "file": "gesture_images/size-and-degree/size-03-hands-apart-for-height.png",
+      "physical_description": "Hold one hand flat and horizontal at a lower position and the other at a higher position; palms face downward to mark vertical distance",
+      "intent": "Indicate the height or vertical dimension of something",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "clarity",
+        "estimation",
+        "focus",
+        "expressiveness"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hands",
+        "palms",
+        "arms"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 86,
+      "id": "sport-01",
+      "name": "Timeout T-Shape (Sports)",
+      "category": "Sports & Taunting",
+      "file": "gesture_images/sports-and-tanting/sport-01-timeout-t-shape.png",
+      "physical_description": "Form a T-shape by placing one flat hand horizontally on top of the fingertips of the other vertical hand; raise above head for referee visibility",
+      "intent": "Call an official timeout during a sporting event",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "composure",
+        "strategy",
+        "authority",
+        "focus"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "fingers",
+        "arms"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 87,
+      "id": "sport-02",
+      "name": "Muscle Flex",
+      "category": "Sports & Taunting",
+      "file": "gesture_images/sports-and-tanting/sport-02-muscle-flex.png",
+      "physical_description": "Bend one or both arms at the elbow and contract the biceps; fists clenched, arms pulled tight to the body",
+      "intent": "Display strength or celebrate a physical achievement",
+      "emotional_state": "positive",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "pride",
+        "confidence",
+        "power",
+        "determination",
+        "bravado"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "arms",
+        "biceps",
+        "fists",
+        "shoulders"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 88,
+      "id": "team-01",
+      "name": "Team Chant Hands",
+      "category": "Team Building",
+      "file": "gesture_images/team-building/team-01-team-chant-hands.png",
+      "physical_description": "All members extend one hand into the center of a circle, stacking hands on top of each other; raise and release together on a chant",
+      "intent": "Build team unity and shared commitment before an activity",
+      "emotional_state": "positive",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "camaraderie",
+        "excitement",
+        "solidarity",
+        "belonging",
+        "unity"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "arms"
+      ],
+      "number_of_people": "3 or more",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 89,
+      "id": "team-02",
+      "name": "Timeout T-Shape",
+      "category": "Team Building",
+      "file": "gesture_images/team-building/team-02-timeout-t-shape.png",
+      "physical_description": "Form a T-shape by placing one flat hand horizontally on top of the fingertips of the other vertical hand at chest height",
+      "intent": "Request a pause or timeout during group activity",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "composure",
+        "authority",
+        "need-for-rest",
+        "patience"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 90,
+      "id": "urg-01",
+      "name": "Snapping Fingers",
+      "category": "Urgency & Attention",
+      "file": "gesture_images/urgency-and-attention/urg-01-snapping-fingers.png",
+      "physical_description": "Press the middle finger against the thumb pad and flick it down to strike the base of the thumb, producing a sharp snap sound",
+      "intent": "Demand immediate attention or signal recall of an idea",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "urgency",
+        "authority",
+        "impatience",
+        "alertness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "thumb",
+        "middle finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 91,
+      "id": "urg-02",
+      "name": "Hand Clap for Attention",
+      "category": "Urgency & Attention",
+      "file": "gesture_images/urgency-and-attention/urg-02-hand-clap-for-attention.png",
+      "physical_description": "Clap both open palms together in one or two sharp, loud strikes at chest height; body oriented toward the group",
+      "intent": "Command a group's attention with an auditory cue",
+      "emotional_state": "neutral",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "authority",
+        "urgency",
+        "assertiveness",
+        "leadership"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "palms"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 92,
+      "id": "urg-03",
+      "name": "Raised Hand - Classroom Style",
+      "category": "Urgency & Attention",
+      "file": "gesture_images/urgency-and-attention/urg-03-raised-hand-classroom-style.png",
+      "physical_description": "Raise one arm straight up with the palm open and fingers together; hold it steady above the head",
+      "intent": "Request a turn to speak or ask a question",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "eagerness",
+        "respect",
+        "curiosity",
+        "patience"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "arm",
+        "hand",
+        "shoulder"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 93,
+      "id": "urg-05",
+      "name": "Tapping Wrist - Hurry Up",
+      "category": "Urgency & Attention",
+      "file": "gesture_images/urgency-and-attention/urg-05-tapping-wrist-hurry-up.png",
+      "physical_description": "Tap the index finger of one hand repeatedly on the inside of the opposite wrist where a watch would be; eyebrows raised",
+      "intent": "Urge someone to hurry or signal that time is running out",
+      "emotional_state": "negative",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "impatience",
+        "urgency",
+        "anxiety",
+        "frustration"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "wrist"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 94,
+      "id": "urg-06",
+      "name": "Rapid Come-On Beckoning",
+      "category": "Urgency & Attention",
+      "file": "gesture_images/urgency-and-attention/urg-06-rapid-come-on-beckoning.png",
+      "physical_description": "Extend one hand forward and rapidly curl all fingers toward the palm in quick, repeated beckoning motions",
+      "intent": "Urgently beckon someone to follow or hurry over",
+      "emotional_state": "neutral",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "urgency",
+        "impatience",
+        "anticipation",
+        "assertiveness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "fingers",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 95,
+      "id": "urg-07",
+      "name": "Two Hands Complete Stop",
+      "category": "Urgency & Attention",
+      "file": "gesture_images/urgency-and-attention/urg-07-two-hands-complete-stop.png",
+      "physical_description": "Thrust both arms forward with palms flat and facing outward at shoulder height; fingers together and body braced",
+      "intent": "Command an immediate and total stop",
+      "emotional_state": "negative",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "authority",
+        "alarm",
+        "firmness",
+        "urgency",
+        "concern"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "arms",
+        "hands",
+        "palms",
+        "torso"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 96,
+      "id": "urg-08",
+      "name": "Timeout Crossed Hands",
+      "category": "Urgency & Attention",
+      "file": "gesture_images/urgency-and-attention/urg-08-timeout-crossed-hands.png",
+      "physical_description": "Form a T-shape by placing one flat hand horizontally on top of the fingertips of the other vertical hand at chest height",
+      "intent": "Request a pause or break in activity",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "composure",
+        "authority",
+        "need-for-rest",
+        "assertiveness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    },
+    {
+      "index": 97,
+      "id": "urg-09",
+      "name": "Two-Hand Finger Whistle",
+      "category": "Urgency & Attention",
+      "file": "gesture_images/urgency-and-attention/urg-09-two-hand-finger-whistle.png",
+      "physical_description": "Insert the thumb and index finger of each hand into the mouth, pressing against the tongue; blow sharply to produce a loud whistle",
+      "intent": "Get attention from a long distance with a piercing signal",
+      "emotional_state": "neutral",
+      "arousal": "high",
+      "emotional_adjectives": [
+        "urgency",
+        "excitement",
+        "assertiveness",
+        "alertness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hands",
+        "fingers",
+        "mouth"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 98,
+      "id": "wish-01",
+      "name": "Pinky Promise",
+      "category": "Wishful & Luck",
+      "file": "gesture_images/wishful-and-luck/wish-01-pinky-promise.png",
+      "physical_description": "Hook the pinky finger of one hand around the pinky finger of the other person's hand; shake gently up and down",
+      "intent": "Seal a solemn promise or pact between two people",
+      "emotional_state": "positive",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "trust",
+        "commitment",
+        "sincerity",
+        "hope",
+        "loyalty"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "pinky finger"
+      ],
+      "number_of_people": "2 person",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 99,
+      "id": "wish-02",
+      "name": "Crossed Fingers for Luck",
+      "category": "Wishful & Luck",
+      "file": "gesture_images/wishful-and-luck/wish-02-cross-fingers-luck.png",
+      "physical_description": "Cross the middle finger over the index finger on one hand and hold it up; sometimes hidden behind the back",
+      "intent": "Hope for good luck or a favorable outcome",
+      "emotional_state": "positive",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "hope",
+        "optimism",
+        "anticipation",
+        "anxiety",
+        "wishfulness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "middle finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "western"
+    }
+  ]
+}
