@@ -1,3 +1,5 @@
+![Open Gesture banner](banner.png)
+
 # Open Gesture Framework
 
 An open, structured dataset of **99 human gestures** across **21 categories**, annotated with research-backed metadata for computer vision, affective computing, and human-computer interaction applications.
