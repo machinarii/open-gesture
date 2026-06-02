@@ -73,6 +73,12 @@ and correctly detected.
 | `export_labels.py` | `manifest.json` | `labels/` | stdlib |
 | `generate_motion_specs.py` | `manifest.json` | `motion_specs/` | stdlib |
 | `generate_render_configs.py` | `motion_specs/` | `render_configs/` | stdlib |
+| `build_hand_presets.py` | `manifest.json` | `hand_presets/` | stdlib |
+| `smplx_capture.py` | posed rig | preset / keyframe | Blender (add-on) |
+| `import_interhand_hand.py` | InterHand MANO | `hand_presets/` | stdlib |
+| `import_amass_body.py` | AMASS `.npz` | a motion spec | numpy |
+| `apply_hand_presets.py` | `hand_presets/` | `motion_specs/` | stdlib |
+| `report_license_tiers.py` | `motion_specs/` | report | stdlib |
 | `render_clip.py` | config + spec | one clip | blenderproc (Blender) |
 | `run_render_batch.py` | `render_configs/` | clips | stdlib (calls blenderproc) |
 | `landmark_format.py` | — | (imported module) | stdlib |
@@ -98,7 +104,16 @@ python3 generate_motion_specs.py
 # Stage 0b — domain-randomization sweep: one render config per synthetic clip
 python3 generate_render_configs.py --variants 8
 
-# ... author the SMPL-X poses in motion_specs/*.json (the gating task) ...
+# Stage 0b' — source poses (two halves compose: arms from AMASS, fingers from
+#   InterHand; or capture either by hand). Both external sources are research-
+#   only and get tagged license_tier=non-commercial automatically.
+python3 build_hand_presets.py                       # preset vocabulary + suggestions
+python3 import_interhand_hand.py --mano MANO.json --capture C --frame F --preset ok_ring
+python3 apply_hand_presets.py                        # snap fingers onto keyframes
+python3 import_amass_body.py --npz SEQ.npz --spec motion_specs/greet-01.json   # arms
+python3 report_license_tiers.py                      # audit commercial/research split
+
+# ... or capture poses by hand on the rig (smplx_capture.py), clean-license ...
 
 # Stage 0c — BlenderProc render (needs blenderproc + an SMPL-X model + GPU)
 #   Dry run first: reports how many clips are blocked on unauthored poses.
