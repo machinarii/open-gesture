@@ -73,6 +73,8 @@ and correctly detected.
 | `export_labels.py` | `manifest.json` | `labels/` | stdlib |
 | `generate_motion_specs.py` | `manifest.json` | `motion_specs/` | stdlib |
 | `generate_render_configs.py` | `motion_specs/` | `render_configs/` | stdlib |
+| `render_clip.py` | config + spec | one clip | blenderproc (Blender) |
+| `run_render_batch.py` | `render_configs/` | clips | stdlib (calls blenderproc) |
 | `landmark_format.py` | — | (imported module) | stdlib |
 | `extract_landmarks.py` | clips + `labels/` | `sequences/` | mediapipe, opencv, numpy |
 | `train_classifier.py` | `sequences/` + `labels/` | `model/` | tensorflow, numpy |
@@ -96,7 +98,16 @@ python3 generate_motion_specs.py
 # Stage 0b — domain-randomization sweep: one render config per synthetic clip
 python3 generate_render_configs.py --variants 8
 
-# ... author motion_specs/*.json, render configs in BlenderProc, augment in Cosmos ...
+# ... author the SMPL-X poses in motion_specs/*.json (the gating task) ...
+
+# Stage 0c — BlenderProc render (needs blenderproc + an SMPL-X model + GPU)
+#   Dry run first: reports how many clips are blocked on unauthored poses.
+python3 run_render_batch.py --smplx-model /path/SMPLX_NEUTRAL.npz --out clips/
+#   Then render for real:
+python3 run_render_batch.py --smplx-model /path/SMPLX_NEUTRAL.npz --out clips/ \
+    --execute --skip-existing
+
+# ... augment clips/ in Cosmos Transfer ...
 
 # Stage 1 — MediaPipe extraction (run AFTER Cosmos; same path as real inference)
 python3 extract_landmarks.py --clips path/to/cosmos_clips/
@@ -124,3 +135,21 @@ python3 train_classifier.py --sequences sequences_smoke --epochs 4 --seq-len 48
 This produces `model/open_gesture_int8.tflite` (~180 KB, INT8 in/out, one head
 per metadata dimension). It proves the heads/losses/converter wire up; the
 accuracy is meaningless (the data is noise).
+
+### Authoring poses (the gating task)
+
+`render_clip.py` refuses to render until a gesture's keyframes have real poses.
+Each keyframe's `smplx_pose` must be filled with SMPL-X axis-angle params:
+
+```json
+"smplx_pose": {
+  "global_orient":   [0,0,0],          //  3
+  "body_pose":       [/* 63 */],       // 21 body joints × 3
+  "left_hand_pose":  [/* 45 */],       // 15 finger joints × 3
+  "right_hand_pose": [/* 45 */]
+}
+```
+
+These come from a rig tool, mocap, or a motion-synthesis model — not hand-typed.
+`render_clip.py`'s `load_avatar` / `apply_pose` are isolated so you can wire them
+to your SMPL-X integration; verify them on a machine with BlenderProc + a GPU.
