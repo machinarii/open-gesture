@@ -53,14 +53,31 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+POSE_FIELDS = ("global_orient", "body_pose", "left_hand_pose", "right_hand_pose")
+
+
 def require_authored_poses(spec: dict) -> None:
-    """Hard-stop if the motion spec's keyframes haven't been authored yet."""
-    missing = [kf for kf in spec["keyframes"] if kf.get("smplx_pose") is None]
-    if missing:
+    """Hard-stop unless every keyframe has all four pose fields filled.
+
+    Hands and arms are authored separately (presets vs. IK capture), so a
+    keyframe can be half-filled. Validate at the field level, not just whether
+    smplx_pose exists, or a missing-arm/missing-hand clip slips through and
+    poisons training data.
+    """
+    incomplete = []
+    for i, kf in enumerate(spec["keyframes"]):
+        pose = kf.get("smplx_pose")
+        missing = POSE_FIELDS if pose is None else [f for f in POSE_FIELDS if pose.get(f) is None]
+        if missing:
+            incomplete.append((i, list(missing)))
+    if incomplete:
+        detail = "; ".join(f"kf{i}: {', '.join(m)}" for i, m in incomplete[:4])
         raise SystemExit(
-            f"error: motion spec '{spec['id']}' has {len(missing)}/{len(spec['keyframes'])} "
-            f"keyframes with smplx_pose=null. Author the poses before rendering — "
-            f"rendering now would produce rest-pose clips and poison training data."
+            f"error: motion spec '{spec['id']}' has unfilled pose fields "
+            f"({len(incomplete)}/{len(spec['keyframes'])} keyframes): {detail}"
+            f"{' ...' if len(incomplete) > 4 else ''}. "
+            f"Apply hand presets (apply_hand_presets.py) and capture arm poses "
+            f"(smplx_capture.py) before rendering."
         )
 
 
