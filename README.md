@@ -158,6 +158,31 @@ For embodied agents, chatbots with avatars, or accessibility tools:
 - Use `emotional_adjectives` to match gestures to the agent's current emotional state
 - Use `number_of_people` to filter gestures appropriate for the interaction context (solo vs. dyadic)
 
+## Synthetic Training Data Pipeline
+
+The [`pipeline/`](pipeline/) directory contains an end-to-end system that turns
+this manifest into training data for an on-device, multi-head gesture
+classifier — without requiring real labeled footage. The flow:
+
+```
+manifest.json
+  → labels + SMPL-X motion stubs       (export_labels, generate_motion_specs)
+  → domain-randomization render sweep   (generate_render_configs)
+  → SMPL-X poses: arms from AMASS,       (import_amass_body, import_interhand_hand,
+    fingers from InterHand/hand presets   build/apply_hand_presets, smplx_capture)
+  → BlenderProc render                  (render_clip, run_render_batch)
+  → Cosmos Transfer photorealism        (generate_cosmos_jobs, run_cosmos_batch)
+  → MediaPipe landmark extraction       (extract_landmarks)
+  → multi-head INT8 TFLite classifier   (train_classifier)  → compile to Hailo HEF
+```
+
+Design notes: Cosmos runs **before** MediaPipe (landmarks are appearance-
+invariant, so photorealism only helps the detector); finger detail comes from
+SMPL-X's MANO hands; and any motion sourced from research-only datasets
+(InterHand2.6M, AMASS) auto-tags its outputs `non-commercial` so the commercial
+and research datasets stay separable. See [`pipeline/README.md`](pipeline/README.md)
+for the full stage-by-stage guide.
+
 ## Theoretical Framework
 
 This dataset's metadata schema synthesizes concepts from multiple research traditions:

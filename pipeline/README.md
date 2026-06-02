@@ -81,6 +81,8 @@ and correctly detected.
 | `report_license_tiers.py` | `motion_specs/` | report | stdlib |
 | `render_clip.py` | config + spec | one clip | blenderproc (Blender) |
 | `run_render_batch.py` | `render_configs/` | clips | stdlib (calls blenderproc) |
+| `generate_cosmos_jobs.py` | `render_configs/` | `cosmos_jobs/` | stdlib |
+| `run_cosmos_batch.py` | `cosmos_jobs/` | augmented clips | stdlib (calls Cosmos) |
 | `landmark_format.py` | — | (imported module) | stdlib |
 | `extract_landmarks.py` | clips + `labels/` | `sequences/` | mediapipe, opencv, numpy |
 | `train_classifier.py` | `sequences/` + `labels/` | `model/` | tensorflow, numpy |
@@ -122,10 +124,15 @@ python3 run_render_batch.py --smplx-model /path/SMPLX_NEUTRAL.npz --out clips/
 python3 run_render_batch.py --smplx-model /path/SMPLX_NEUTRAL.npz --out clips/ \
     --execute --skip-existing
 
-# ... augment clips/ in Cosmos Transfer ...
+# Stage 0d — Cosmos Transfer augmentation (RunPod GPU): photorealistic
+#   outdoor/industrial/AR variants, conditioned on the depth+seg BlenderProc
+#   emitted. Jobs inherit each clip's license tier; --tier renders one at a time.
+python3 generate_cosmos_jobs.py --variants outdoor industrial ar_indoor
+python3 run_cosmos_batch.py --out augmented/ --execute --skip-existing \
+    --cmd "python cosmos_transfer1/inference.py --spec {spec} --output {out}"
 
 # Stage 1 — MediaPipe extraction (run AFTER Cosmos; same path as real inference)
-python3 extract_landmarks.py --clips path/to/cosmos_clips/
+python3 extract_landmarks.py --clips augmented/
 
 # Stage 2 — train multi-head classifier + export INT8 TFLite
 python3 train_classifier.py
