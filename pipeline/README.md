@@ -72,6 +72,7 @@ and correctly detected.
 |--------|-------|--------|------|
 | `export_labels.py` | `manifest.json` | `labels/` | stdlib |
 | `generate_motion_specs.py` | `manifest.json` | `motion_specs/` | stdlib |
+| `generate_render_configs.py` | `motion_specs/` | `render_configs/` | stdlib |
 | `landmark_format.py` | — | (imported module) | stdlib |
 | `extract_landmarks.py` | clips + `labels/` | `sequences/` | mediapipe, opencv, numpy |
 | `train_classifier.py` | `sequences/` + `labels/` | `model/` | tensorflow, numpy |
@@ -92,7 +93,10 @@ pip install -r requirements.txt   # mediapipe, opencv, tensorflow, numpy
 python3 export_labels.py
 python3 generate_motion_specs.py
 
-# ... author motion_specs/*.json, render in BlenderProc, augment in Cosmos ...
+# Stage 0b — domain-randomization sweep: one render config per synthetic clip
+python3 generate_render_configs.py --variants 8
+
+# ... author motion_specs/*.json, render configs in BlenderProc, augment in Cosmos ...
 
 # Stage 1 — MediaPipe extraction (run AFTER Cosmos; same path as real inference)
 python3 extract_landmarks.py --clips path/to/cosmos_clips/
