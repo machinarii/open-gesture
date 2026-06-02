@@ -1,0 +1,24 @@
+{
+  "id": "prac-03",
+  "name": "Hand-as-Camera Framing",
+  "category": "Practical & Functional",
+  "source_physical_description": "Form an L-shape with each hand using the thumb and index finger; hold them together to create a rectangular frame and look through it",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "thumbs",
+    "index fingers"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "neg-08",
+  "name": "Dismissive Backhand Wave",
+  "category": "Negative & Disapproval",
+  "source_physical_description": "Flick the back of the hand outward and away from the body in a quick, careless sweeping motion at waist height",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "wrist",
+    "forearm"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

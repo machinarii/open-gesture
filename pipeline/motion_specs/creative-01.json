@@ -1,0 +1,24 @@
+{
+  "id": "creative-01",
+  "name": "About Yea Big - Framing",
+  "category": "Creative & Expressive",
+  "source_physical_description": "Hold both hands in front of the body with palms facing each other; adjust the distance between them to indicate approximate size",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "palms",
+    "arms"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

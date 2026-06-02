@@ -1,0 +1,24 @@
+{
+  "id": "wish-02",
+  "name": "Crossed Fingers for Luck",
+  "category": "Wishful & Luck",
+  "source_physical_description": "Cross the middle finger over the index finger on one hand and hold it up; sometimes hidden behind the back",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger",
+    "middle finger"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

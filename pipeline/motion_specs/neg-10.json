@@ -1,0 +1,25 @@
+{
+  "id": "neg-10",
+  "name": "D'oh Facepalm",
+  "category": "Negative & Disapproval",
+  "source_physical_description": "Slap the forehead with the heel of the palm while wincing and tilting the head back slightly; hand slides down the face",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "palm",
+    "forehead",
+    "face"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

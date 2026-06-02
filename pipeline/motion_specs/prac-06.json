@@ -1,0 +1,25 @@
+{
+  "id": "prac-06",
+  "name": "Shoulder Shrug Palms Up",
+  "category": "Practical & Functional",
+  "source_physical_description": "Raise both shoulders toward the ears while turning both palms upward at waist height; eyebrows lifted and mouth slightly downturned",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "shoulders",
+    "hands",
+    "palms",
+    "head"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

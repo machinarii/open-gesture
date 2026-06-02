@@ -1,0 +1,23 @@
+{
+  "id": "bicycle-02",
+  "name": "Right Turn Signal (Bicycle)",
+  "category": "Bicycle Signals",
+  "source_physical_description": "Extend the right arm straight out to the side at shoulder height, or bend the left arm upward at a 90-degree angle at the elbow",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "arm",
+    "hand"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

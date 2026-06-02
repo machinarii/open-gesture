@@ -1,0 +1,25 @@
+{
+  "id": "greet-10",
+  "name": "About to Hug",
+  "category": "Greetings & Farewells",
+  "source_physical_description": "Open both arms wide at shoulder height with palms facing inward; step forward slightly with a warm facial expression",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "2 person",
+  "body_parts": [
+    "arms",
+    "hands",
+    "torso",
+    "shoulders"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

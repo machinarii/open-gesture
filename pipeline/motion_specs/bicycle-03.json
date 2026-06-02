@@ -1,0 +1,24 @@
+{
+  "id": "bicycle-03",
+  "name": "Stop Signal (Bicycle)",
+  "category": "Bicycle Signals",
+  "source_physical_description": "Extend the left arm downward and to the side at a 45-degree angle with the palm open and facing backward",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "arm",
+    "hand",
+    "palm"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

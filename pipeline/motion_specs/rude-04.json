@@ -1,0 +1,37 @@
+{
+  "id": "rude-04",
+  "name": "Cuckoo Sign",
+  "category": "Rude & Offensive",
+  "source_physical_description": "Extend the index finger and rotate it in small circles next to the temple; eyebrows raised with a knowing look",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger",
+    "head",
+    "temple"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

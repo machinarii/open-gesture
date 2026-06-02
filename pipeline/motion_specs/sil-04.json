@@ -1,0 +1,24 @@
+{
+  "id": "sil-04",
+  "name": "Hands Over Mouth - Surprise",
+  "category": "Silence & Secrecy",
+  "source_physical_description": "Raise both hands and press them flat over the open mouth; eyes widen and body recoils slightly backward",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "mouth",
+    "face"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

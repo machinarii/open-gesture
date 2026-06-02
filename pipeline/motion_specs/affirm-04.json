@@ -1,0 +1,23 @@
+{
+  "id": "affirm-04",
+  "name": "Double Thumbs Up",
+  "category": "Affirmative & Positive",
+  "source_physical_description": "Make fists with both hands and extend both thumbs straight upward simultaneously; hold at chest or shoulder height",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "thumbs"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

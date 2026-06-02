@@ -1,0 +1,24 @@
+{
+  "id": "size-03",
+  "name": "Hands Apart for Height",
+  "category": "Size & Degree",
+  "source_physical_description": "Hold one hand flat and horizontal at a lower position and the other at a higher position; palms face downward to mark vertical distance",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "palms",
+    "arms"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

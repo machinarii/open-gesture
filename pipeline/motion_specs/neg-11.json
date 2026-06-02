@@ -1,0 +1,25 @@
+{
+  "id": "neg-11",
+  "name": "Tensed Fingers",
+  "category": "Negative & Disapproval",
+  "source_physical_description": "Hold both hands in front of the torso with fingers spread wide and curled like claws; muscles visibly tensed and body rigid",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "fingers",
+    "arms",
+    "torso"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

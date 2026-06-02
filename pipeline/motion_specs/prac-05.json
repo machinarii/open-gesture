@@ -1,0 +1,24 @@
+{
+  "id": "prac-05",
+  "name": "Hand Visor - Shading Eyes",
+  "category": "Practical & Functional",
+  "source_physical_description": "Place one flat hand horizontally above the eyebrows with palm facing downward; squint and look into the distance",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "forehead",
+    "eyes"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

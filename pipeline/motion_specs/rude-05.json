@@ -1,0 +1,25 @@
+{
+  "id": "rude-05",
+  "name": "Nose Thumb",
+  "category": "Rude & Offensive",
+  "source_physical_description": "Place the thumb on the tip of the nose with fingers spread wide and wiggle the fingers; optionally stack the second hand on top",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "thumb",
+    "fingers",
+    "nose"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

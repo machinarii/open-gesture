@@ -1,0 +1,24 @@
+{
+  "id": "neg-03",
+  "name": "X Formed with Forearms",
+  "category": "Negative & Disapproval",
+  "source_physical_description": "Cross both forearms in front of the chest forming an X-shape; hands flat or in fists, palms facing inward",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "forearms",
+    "arms",
+    "hands"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

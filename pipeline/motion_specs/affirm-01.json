@@ -1,0 +1,23 @@
+{
+  "id": "affirm-01",
+  "name": "Thumbs Up",
+  "category": "Affirmative & Positive",
+  "source_physical_description": "Make a fist and extend the thumb straight upward; arm can be at waist or raised for visibility",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "thumb"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

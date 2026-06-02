@@ -1,0 +1,35 @@
+{
+  "id": "urg-02",
+  "name": "Hand Clap for Attention",
+  "category": "Urgency & Attention",
+  "source_physical_description": "Clap both open palms together in one or two sharp, loud strikes at chest height; body oriented toward the group",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "palms"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

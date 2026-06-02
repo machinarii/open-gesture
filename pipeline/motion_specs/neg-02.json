@@ -1,0 +1,37 @@
+{
+  "id": "neg-02",
+  "name": "Head Shake with Wagging Finger",
+  "category": "Negative & Disapproval",
+  "source_physical_description": "Extend the index finger upward and wag it side to side while simultaneously shaking the head left and right",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "head",
+    "neck",
+    "hand",
+    "index finger"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

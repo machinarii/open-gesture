@@ -1,0 +1,23 @@
+{
+  "id": "neg-01",
+  "name": "Thumbs Down",
+  "category": "Negative & Disapproval",
+  "source_physical_description": "Make a fist and extend the thumb straight downward; arm held at chest height or lowered for emphasis",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "thumb"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}
