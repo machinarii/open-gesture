@@ -1,0 +1,25 @@
+{
+  "id": "neg-07",
+  "name": "Facepalm",
+  "category": "Negative & Disapproval",
+  "source_physical_description": "Raise one open hand and slap it flat against the forehead or upper face; hold briefly with eyes closed or looking down",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "palm",
+    "face",
+    "forehead"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

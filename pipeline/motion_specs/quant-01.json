@@ -1,0 +1,23 @@
+{
+  "id": "quant-01",
+  "name": "Counting One Through Five",
+  "category": "Quantity & Counting",
+  "source_physical_description": "Sequentially extend fingers starting from the index finger, adding one finger at a time until all five are shown on one hand",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "fingers"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

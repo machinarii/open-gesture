@@ -1,0 +1,36 @@
+{
+  "id": "dir-08",
+  "name": "Two-Handed Over Here Wave",
+  "category": "Directional & Wayfinding",
+  "source_physical_description": "Raise both arms above shoulder height and wave them simultaneously toward the body in large inward-sweeping arcs",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "arms",
+    "hands",
+    "shoulders"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

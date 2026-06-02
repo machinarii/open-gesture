@@ -1,0 +1,25 @@
+{
+  "id": "sport-02",
+  "name": "Muscle Flex",
+  "category": "Sports & Taunting",
+  "source_physical_description": "Bend one or both arms at the elbow and contract the biceps; fists clenched, arms pulled tight to the body",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "arms",
+    "biceps",
+    "fists",
+    "shoulders"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

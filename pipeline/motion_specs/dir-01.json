@@ -1,0 +1,24 @@
+{
+  "id": "dir-01",
+  "name": "Index Finger Point",
+  "category": "Directional & Wayfinding",
+  "source_physical_description": "Extend the index finger straight out while curling the remaining fingers into the palm; arm extends toward the target with the wrist aligned",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger",
+    "arm"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

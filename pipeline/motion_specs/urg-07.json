@@ -1,0 +1,25 @@
+{
+  "id": "urg-07",
+  "name": "Two Hands Complete Stop",
+  "category": "Urgency & Attention",
+  "source_physical_description": "Thrust both arms forward with palms flat and facing outward at shoulder height; fingers together and body braced",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "arms",
+    "hands",
+    "palms",
+    "torso"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "number-04",
+  "name": "Number Four",
+  "category": "Numbers",
+  "source_physical_description": "Extend all four fingers upward with the thumb folded across the palm; fingers together or slightly spread",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "fingers"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

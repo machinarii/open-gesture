@@ -1,0 +1,36 @@
+{
+  "id": "dir-06",
+  "name": "Beckoning with Full Hand Palm Up",
+  "category": "Directional & Wayfinding",
+  "source_physical_description": "Hold the hand out with palm facing upward and repeatedly curl all four fingers toward the body in a scooping motion",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "fingers",
+    "arm"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

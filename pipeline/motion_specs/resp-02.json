@@ -1,0 +1,24 @@
+{
+  "id": "resp-02",
+  "name": "Praying Hands",
+  "category": "Respect & Religious",
+  "source_physical_description": "Press both palms flat together with fingers pointing upward at chest or chin height; eyes may close and head may bow",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "palms",
+    "fingers"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

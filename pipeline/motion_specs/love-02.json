@@ -1,0 +1,24 @@
+{
+  "id": "love-02",
+  "name": "Blowing a Kiss",
+  "category": "Love & Affection",
+  "source_physical_description": "Place the fingertips of one open hand against the lips; extend the arm outward while opening the palm as if releasing the kiss into the air",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "lips",
+    "arm"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

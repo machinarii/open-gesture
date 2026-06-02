@@ -1,0 +1,35 @@
+{
+  "id": "prac-08",
+  "name": "Typing on Air Keyboard",
+  "category": "Practical & Functional",
+  "source_physical_description": "Hold both hands in front of the body at waist height with fingers curved and rapidly tap the fingers up and down as if typing on an invisible keyboard",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "fingers"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

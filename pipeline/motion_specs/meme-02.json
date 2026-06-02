@@ -1,0 +1,24 @@
+{
+  "id": "meme-02",
+  "name": "Evil Horns (Rock On)",
+  "category": "Meme & Fantasy",
+  "source_physical_description": "Extend the index and pinky fingers upward while curling the middle and ring fingers down with the thumb; hold the hand up",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger",
+    "pinky finger"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "money-02",
+  "name": "Palm-Up Hand Extension",
+  "category": "Money & Transaction",
+  "source_physical_description": "Extend one arm forward with the hand open and palm facing upward; hold steady at waist height",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "palm",
+    "arm"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}
