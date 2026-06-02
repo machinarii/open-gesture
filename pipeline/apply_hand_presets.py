@@ -47,7 +47,13 @@ def main() -> int:
         preset = library.get(preset_name)
         return preset.get(hand) if preset else None
 
-    updated, blocked = 0, {}  # blocked: preset_name -> set(hand) still uncaptured
+    def tier(preset_name: str, hand: str) -> str:
+        """License tier of a captured (preset, hand): non-commercial if its
+        provenance says so, else commercial. Drives spec-level tagging below."""
+        src = (library.get(preset_name) or {}).get("source", {}).get(hand)
+        return src.get("tier", "commercial") if src else "commercial"
+
+    updated, blocked, nc_specs = 0, {}, []
     targets = args.only or list(gesture_map.keys())
 
     for gid in targets:
@@ -66,6 +72,14 @@ def main() -> int:
         if left is None and right is None:
             continue
 
+        # Spec inherits the most restrictive tier of the hands actually applied.
+        tiers = set()
+        if left is not None:
+            tiers.add(tier(assignment["left_hand"], "left"))
+        if right is not None:
+            tiers.add(tier(assignment["right_hand"], "right"))
+        spec_tier = "non-commercial" if "non-commercial" in tiers else "commercial"
+
         spec = json.loads(spec_path.read_text())
         for kf in spec["keyframes"]:
             pose = kf.get("smplx_pose") or dict(EMPTY_POSE)
@@ -74,12 +88,21 @@ def main() -> int:
             if right is not None:
                 pose["right_hand_pose"] = right
             kf["smplx_pose"] = pose
+        # Never silently downgrade: an NC spec stays NC even if re-applied later.
+        if spec.get("license_tier") == "non-commercial" or spec_tier == "non-commercial":
+            spec["license_tier"] = "non-commercial"
+            nc_specs.append(gid)
+        else:
+            spec.setdefault("license_tier", "commercial")
         spec_path.write_text(json.dumps(spec, indent=2) + "\n")
         updated += 1
 
     print(f"Updated hand fields in {updated} motion specs.")
+    if nc_specs:
+        print(f"Tagged non-commercial (InterHand-derived): {len(nc_specs)} specs -> {', '.join(nc_specs[:8])}"
+              f"{' ...' if len(nc_specs) > 8 else ''}")
     if blocked:
-        print("Uncaptured presets (capture with smplx_capture.py before they apply):")
+        print("Uncaptured presets (capture with smplx_capture.py / import_interhand_hand.py first):")
         for name in sorted(blocked):
             print(f"  {name:16s} hands: {', '.join(sorted(blocked[name]))}")
     return 0
