@@ -68,14 +68,40 @@ and correctly detected.
 
 ## Tools
 
-| Script | Input | Output | Notes |
-|--------|-------|--------|-------|
-| `export_labels.py` | `manifest.json` | `labels/` | Deterministic class↔index maps. Re-run after any manifest change. |
-| `generate_motion_specs.py` | `manifest.json` | `motion_specs/` | Skips existing files (won't clobber hand-authored specs); `--force` to regenerate. |
+| Script | Input | Output | Deps |
+|--------|-------|--------|------|
+| `export_labels.py` | `manifest.json` | `labels/` | stdlib |
+| `generate_motion_specs.py` | `manifest.json` | `motion_specs/` | stdlib |
+| `landmark_format.py` | — | (imported module) | stdlib |
+| `extract_landmarks.py` | clips + `labels/` | `sequences/` | mediapipe, opencv, numpy |
+| `train_classifier.py` | `sequences/` + `labels/` | `model/` | tensorflow, numpy |
 
-Both are stdlib-only Python 3. Run from this directory:
+`export_labels.py` writes the class↔index contract; re-run after any manifest
+change. `generate_motion_specs.py` skips existing files so hand-authored specs
+survive (`--force` to regenerate). `landmark_format.py` is the shared per-frame
+feature layout (258-D: pose + both hands, face dropped) that the extractor and
+model both import — the landmark-space twin of `label_schema.json`.
+
+The first two stages are stdlib-only. The extraction and training stages need
+external packages:
 
 ```bash
+pip install -r requirements.txt   # mediapipe, opencv, tensorflow, numpy
+
+# Stage 0 — derive labels + motion stubs from the manifest (stdlib)
 python3 export_labels.py
 python3 generate_motion_specs.py
+
+# ... author motion_specs/*.json, render in BlenderProc, augment in Cosmos ...
+
+# Stage 1 — MediaPipe extraction (run AFTER Cosmos; same path as real inference)
+python3 extract_landmarks.py --clips path/to/cosmos_clips/
+
+# Stage 2 — train multi-head classifier + export INT8 TFLite
+python3 train_classifier.py
+#   then: TFLite/ONNX -> Hailo Dataflow Compiler -> .hef
 ```
+
+Clip filenames must encode the gesture id before a `__` separator, e.g.
+`affirm-01__lighting3_angle12.mp4`, so the extractor can join each clip to its
+labels.
