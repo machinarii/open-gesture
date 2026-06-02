@@ -105,3 +105,18 @@ python3 train_classifier.py
 Clip filenames must encode the gesture id before a `__` separator, e.g.
 `affirm-01__lighting3_angle12.mp4`, so the extractor can join each clip to its
 labels.
+
+### Smoke test (no video / no MediaPipe)
+
+To validate the training + INT8-export wiring before any rendering exists,
+`make_smoke_data.py` fabricates `sequences/`-format shards (random landmarks
+with a per-gesture bias) so `train_classifier.py` itself runs end to end:
+
+```bash
+python3 make_smoke_data.py
+python3 train_classifier.py --sequences sequences_smoke --epochs 4 --seq-len 48
+```
+
+This produces `model/open_gesture_int8.tflite` (~180 KB, INT8 in/out, one head
+per metadata dimension). It proves the heads/losses/converter wire up; the
+accuracy is meaningless (the data is noise).
