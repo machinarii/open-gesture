@@ -3,6 +3,9 @@
 
 # Generated pipeline artifacts (regenerable from the scripts)
 render_configs/
+cosmos_jobs/
+clips/
+augmented/
 sequences/
 sequences_smoke/
 model/
