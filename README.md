@@ -162,26 +162,86 @@ For embodied agents, chatbots with avatars, or accessibility tools:
 
 The [`pipeline/`](pipeline/) directory contains an end-to-end system that turns
 this manifest into training data for an on-device, multi-head gesture
-classifier — without requiring real labeled footage. The flow:
+classifier — **without requiring any real labeled footage**. Instead of
+collecting and annotating thousands of videos, it animates rigged avatars
+through each of the 99 gestures, renders them under heavy domain randomization,
+makes them photorealistic, and reduces every frame to the same landmark
+representation a live camera would produce.
+
+### The core idea
+
+At inference time the runtime is `RGB → MediaPipe Holistic → landmarks →
+classifier`. The pipeline trains on **synthetic landmark sequences produced by
+that exact same extraction path**. Because MediaPipe landmarks are largely
+invariant to appearance, a model trained on synthetic landmarks transfers to
+real humans — the landmark layer absorbs the sim-to-real gap. The metadata in
+`manifest.json` (gesture ID, valence, arousal, McNeill type, cultural context)
+becomes the multi-head training labels.
+
+### Stages
 
 ```
 manifest.json
-  → labels + SMPL-X motion stubs       (export_labels, generate_motion_specs)
-  → domain-randomization render sweep   (generate_render_configs)
-  → SMPL-X poses: arms from AMASS,       (import_amass_body, import_interhand_hand,
-    fingers from InterHand/hand presets   build/apply_hand_presets, smplx_capture)
-  → BlenderProc render                  (render_clip, run_render_batch)
-  → Cosmos Transfer photorealism        (generate_cosmos_jobs, run_cosmos_batch)
-  → MediaPipe landmark extraction       (extract_landmarks)
-  → multi-head INT8 TFLite classifier   (train_classifier)  → compile to Hailo HEF
+  │
+  ├─▶ Labels            export_labels.py — deterministic class↔index maps for 6
+  │                     prediction heads; the contract shared by trainer + device.
+  │
+  ├─▶ Motion specs      generate_motion_specs.py — per-gesture temporal stubs
+  │                     (the manifest describes end poses; gestures need motion).
+  │
+  ├─▶ Render sweep      generate_render_configs.py — one job per synthetic clip,
+  │                     randomizing lighting, background, camera, occlusion, body.
+  │
+  ├─▶ Pose sourcing     Two halves compose per gesture:
+  │                       • arms ← AMASS mocap            (import_amass_body.py)
+  │                       • fingers ← InterHand2.6M MANO  (import_interhand_hand.py)
+  │                         or a captured hand-preset library
+  │                         (build_/apply_hand_presets.py, smplx_capture.py)
+  │
+  ├─▶ Render            render_clip.py / run_render_batch.py — BlenderProc drives
+  │                     SMPL-X avatars through the motion; RGB + depth + seg out.
+  │
+  ├─▶ Photorealism      generate_cosmos_jobs.py / run_cosmos_batch.py — Cosmos
+  │                     Transfer restyles each clip into outdoor / industrial /
+  │                     AR environments, conditioned on the depth+seg controls.
+  │
+  ├─▶ Extraction        extract_landmarks.py — MediaPipe Holistic → landmark
+  │                     sequences, joined to labels. Same path as real inference.
+  │
+  └─▶ Train             train_classifier.py — temporal-CNN, one softmax head per
+                        metadata dimension → full-integer INT8 TFLite
+                        → compile to a Hailo-8L HEF.
 ```
 
-Design notes: Cosmos runs **before** MediaPipe (landmarks are appearance-
-invariant, so photorealism only helps the detector); finger detail comes from
-SMPL-X's MANO hands; and any motion sourced from research-only datasets
-(InterHand2.6M, AMASS) auto-tags its outputs `non-commercial` so the commercial
-and research datasets stay separable. See [`pipeline/README.md`](pipeline/README.md)
-for the full stage-by-stage guide.
+### Key design decisions
+
+- **Cosmos runs *before* MediaPipe, not after.** Landmarks are appearance-
+  invariant, so photorealism applied *after* extraction is wasted. Its real
+  value is making MediaPipe (trained on real footage) detect reliably on
+  otherwise-synthetic frames — so it belongs at the extraction step.
+- **Fingers come from SMPL-X's MANO hands.** Many of these 99 gestures (the OK
+  sign, the finger counts, rude gestures) *are* the finger configuration. SMPL-X
+  carries full per-finger articulation, and IK rigs make only the *arm* fast to
+  pose — the two are authored separately and composed.
+- **License tiering is automatic.** Motion sourced from research-only datasets
+  (InterHand2.6M is CC-BY-NC, AMASS is research-only) auto-tags its outputs
+  `non-commercial`, and that tag propagates through every downstream stage. A
+  `--tier` filter lets you build the commercial dataset without ever touching
+  research-only clips, keeping the two cleanly separable.
+
+### Status
+
+Every stage that runs without external inputs is implemented and verified
+(labels, motion specs, render configs, hand presets, both mocap importers, the
+license audit, and a smoke-tested training run that exports a ~180 KB INT8
+model). The stages that need your own hardware or licensed data — BlenderProc
+rendering (GPU + SMPL-X model), Cosmos Transfer (RunPod), and the mocap imports
+(InterHand2.6M / AMASS downloads) — are written against documented APIs with
+verify-on-rig notes in each script. The one inherently manual step is authoring
+the SMPL-X poses; everything downstream refuses to render until they exist.
+
+See [`pipeline/README.md`](pipeline/README.md) for the full stage-by-stage guide,
+commands, and the feature-layout / label-schema contracts.
 
 ## Theoretical Framework
 
