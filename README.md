@@ -132,7 +132,7 @@ Stage 1: Body Part Detection
 
 Stage 2: Pose Estimation
   Map detected parts to the `physical_description` using
-  skeletal models (MediaPipe, OpenPose)
+  skeletal models (MediaPipe, MMPose/RTMW)
 
 Stage 3: Gesture Classification
   Match estimated pose against gesture templates
