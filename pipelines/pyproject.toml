@@ -9,7 +9,25 @@ dependencies = ["numpy>=1.24", "opencv-python>=4.8"]
 face      = ["uniface[cpu]>=4.0.0"]
 aus       = ["py-feat>=0.6"]
 va        = ["hsemotion>=0.3"]
-pose      = ["mediapipe>=0.10"]
+# mediapipe 1.0.0/1.0.1 aborts on macOS/arm64 with "Check failed: service_ Service
+# is unavailable" inside TensorsToDetectionsCalculator's Metal helper when creating
+# a HandLandmarker via the Tasks API -- a native crash unrelated to this project's
+# code (Task 10, 2026-08-25). Pinned below 1.0 until that regression is fixed
+# upstream; mediapipe 0.10.35 creates both landmarkers cleanly on CPU.
+#
+# mediapipe also declares opencv-contrib-python as a dependency, which installs
+# into the same `cv2/` package directory as this project's own opencv-python
+# dependency (150+ overlapping files) and silently overwrites it. The two
+# distributions are not meant to coexist; having both installed caused a
+# `libc++abi ... recursive_mutex lock failed` abort at interpreter shutdown
+# during the full test run (Task 10, 2026-08-25), unrelated to any single test's
+# pass/fail. After installing this extra, run:
+#     pip uninstall -y opencv-contrib-python opencv-python
+#     pip install --force-reinstall --no-deps "opencv-python>=4.8"
+# to leave only opencv-python's files in place. `pip check` will then report
+# mediapipe's opencv-contrib-python requirement as unmet -- that is expected and
+# safe to ignore; mediapipe's hand/pose landmarker tasks use only plain cv2.
+pose      = ["mediapipe>=0.10,<1.0"]
 embed     = ["open_clip_torch>=2.24", "torch>=2.0"]
 wholebody = ["mmpose>=1.3", "mmcv>=2.1", "mmengine>=0.10", "mmdet>=3.2"]
 dev       = ["pytest>=8.0", "pytest-cov"]
