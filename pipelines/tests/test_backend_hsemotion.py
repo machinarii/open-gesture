@@ -157,6 +157,27 @@ def test_available_is_true_and_falls_back_per_image_when_faces_json_has_zero_fac
     assert crop is image
 
 
+def test_run_backend_reports_unavailable_for_an_out_dir_with_no_faces_json(gestures, image_root, tmp_path):
+    """Ordering regression: runner.run_backend must call set_output_dir BEFORE
+    available(), not after. If it called available() first, `va`'s check would
+    consult repo_root()/annotations/faces.json (which exists in this real
+    repo checkout) instead of `tmp_path` (this run's --out, which has no
+    faces.json at all), report itself available, and then silently degrade
+    every one of the 99 records to full-image inference during annotate() --
+    exactly the failure Fix 4 exists to prevent. With the hook called first,
+    `available()` sees the real --out directory and refuses up front.
+    """
+    from open_gesture_annotate.runner import run_backend
+
+    backend = HSEmotionBackend()
+    summary = run_backend(backend, gestures, image_root, tmp_path)
+
+    assert summary.unavailable is not None
+    assert "faces.json" in summary.unavailable
+    assert "face" in summary.unavailable
+    assert (summary.ok, summary.errors, summary.skipped) == (0, 0, 0)
+
+
 def test_crop_uses_uniface_bbox_when_face_record_exists(tmp_path, monkeypatch):
     """CONTROLLER RULING addition: when Task 7's faces.json has a face for this
     gesture, crop to its (expanded, clamped) bbox and set face_source='uniface'.

@@ -31,11 +31,14 @@ class Backend(Protocol):
         """Annotate one BGR image. Raise on failure; the runner isolates it."""
 
     # Optional: a backend MAY implement `set_output_dir(self, out_dir: Path) -> None`.
-    # If present, `runner.run_backend` calls it once, after the availability check
+    # If present, `runner.run_backend` calls it once, BEFORE calling `available()`
     # and before the annotation loop, passing the actual `--out` directory the run
     # is using. This lets a backend that reads another backend's sidecar (e.g. `va`
     # reading `face`'s faces.json) resolve that sidecar beneath the same output
     # directory instead of hard-coding `repo_root() / "annotations"` -- which would
-    # silently diverge from a non-default `--out`. Backends that do not read another
+    # silently diverge from a non-default `--out`. It must run before `available()`
+    # so that an availability check depending on the output directory (e.g. `va`
+    # refusing when `faces.json` is wholly missing) inspects the directory this run
+    # is actually using, not the default. Backends that do not read another
     # backend's output need not implement this; the runner's `getattr(backend,
     # "set_output_dir", None)` lookup makes it a no-op for them.
