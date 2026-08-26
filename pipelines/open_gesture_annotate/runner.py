@@ -44,14 +44,22 @@ def run_backend(
     """
     summary = RunSummary(backend=backend.name)
 
+    # Tell the backend which output directory this run is actually using
+    # BEFORE asking whether it can run at all. A backend's `available()` may
+    # need to inspect that directory (e.g. `va` checking for `faces.json`
+    # beneath it) -- calling the hook after available() would make that check
+    # consult the wrong (default) location whenever `--out` overrides it,
+    # silently defeating the very unavailability check it exists to make
+    # possible. The hook has no side effects beyond storing a path, so calling
+    # it unconditionally, before availability is known, is safe.
+    set_output_dir = getattr(backend, "set_output_dir", None)
+    if set_output_dir is not None:
+        set_output_dir(out_dir)
+
     is_available, reason = backend.available()
     if not is_available:
         summary.unavailable = reason
         return summary
-
-    set_output_dir = getattr(backend, "set_output_dir", None)
-    if set_output_dir is not None:
-        set_output_dir(out_dir)
 
     path = sidecar_path(out_dir, backend)
     data = read_sidecar(path, backend)
