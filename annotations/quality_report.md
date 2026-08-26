@@ -5,6 +5,10 @@ predictions under `annotations/`. A disagreement is a prompt for human review,
 not a verdict: either side may be wrong. Nothing here has been applied to
 `manifest.json`.
 
+## How to read this report
+
+Several checks below compare a model's incidental proxy for a curated label against a purpose-built one, and the proxy's blind spots matter more than the raw numbers. This dataset is largely close-up, hand-first gesture crops, so **facial affect is a weak proxy for gesture affect here** -- 78/93 (84%) of detected faces read as Neutral, while the curated `emotional_state` label is `neutral` for only 49/99 gestures: the emotion is carried by hands and posture, not facial expression. Likewise, detected face count is a proxy for curated person count and fails exactly where a gesture is framed hand-first (no face visible) or where a multi-person scene only yields one clearly detected face. CLIP image-to-intent similarity scores are only meaningful relative to each other within this run, not as an absolute threshold. None of this is a verdict on the curated data -- it is context for reading the disagreements below.
+
 **49 finding(s)** across 99 gestures.
 
 | Severity | Check | Gesture | Curated | Predicted | Image |
@@ -61,7 +65,12 @@ not a verdict: either side may be wrong. Nothing here has been applied to
 
 ## Notes
 
-- **arousal** — curated arousal bucket sits at the opposite extreme of the predicted tercile
-- **emotional_state** — predicted facial valence sign contradicts the curated label
-- **intent_similarity** — image-to-intent similarity is in the bottom decile; possible weak or mislabelled image
-- **number_of_people** — detected face count disagrees with the curated participant bucket
+- **number_of_people** -- 11 finding(s) across 99 gesture(s) considered. Detected face count (uniface) is a proxy for the curated participant-count bucket (single -> 1, '2 person' -> 2, '3 or more' -> 3+). It fails on hand-first crops in both directions: zero faces does not mean zero people (no face is visible in a hand-only framing), and a multi-person scene often yields only one detected face (e.g. a high-five or a hug). Read a disagreement as a proxy limitation unless the image genuinely shows a different number of people than faces detected.
+- **body_parts** -- 0 finding(s) across 96 gesture(s) considered. MediaPipe hand detection is checked only in the claims-a-hand-but-none-detected direction (the reverse -- a detected hand the curator did not list -- is not checked, since curated body_parts can legitimately omit incidental parts). Zero findings here is a genuine result: MediaPipe agreed with all 96 curated hand claims evaluated in this run, not a sign the check did not run.
+- **emotional_state** -- 9 finding(s) across 50 gesture(s) considered. HSEmotion facial valence is a proxy for the curated emotional_state label; a finding fires only when the predicted sign is confident (|valence| >= 0.15). In this dataset facial affect is a weak proxy for gesture affect: emotion is largely carried by hands and posture rather than facial expression, so most detected faces read as Neutral regardless of the curated label. A contradiction is informative only when the detected face is visibly expressive; it is not evidence the curated label is wrong on its own.
+- **arousal** -- 20 finding(s) across 99 gesture(s) considered. Predicted arousal terciles (low/medium/high, ranked within this run's scored gestures) are compared against the curated low/medium/high bucket; only opposite-extreme disagreements (curated low vs. predicted high, or vice versa) are flagged -- a low/medium or medium/high difference is too coarse a boundary to be informative. Terciles are relative to this run, not an absolute arousal scale.
+- **intent_similarity** -- 9 finding(s) across 99 gesture(s) considered. CLIP image-to-intent cosine similarity is reported for the bottom decile of this run. CLIP has a well-known image-text modality gap, so raw scores are only meaningful relative to each other within this dataset, not as an absolute quality threshold -- a low score flags a candidate for human review, not a confirmed mislabel.
+
+## Dataset notes
+
+- `sport-01`, `team-02` share a byte-identical source image (the same gesture cross-listed across categories); they share this finding because their embeddings are identical -- a dataset property, not an anomaly.
