@@ -1,0 +1,12 @@
+.DS_Store
+pipelines/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Machine-generated annotations: bulky, regenerable.
+# _meta.json and quality_report.md are the reviewable artifacts and ARE committed.
+annotations/*.json
+annotations/*.npz
+!annotations/_meta.json
