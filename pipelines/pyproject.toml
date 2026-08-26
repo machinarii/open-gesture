@@ -33,7 +33,7 @@ wholebody = ["mmpose>=1.3", "mmcv>=2.1", "mmengine>=0.10", "mmdet>=3.2"]
 dev       = ["pytest>=8.0", "pytest-cov"]
 
 [project.scripts]
-og-annotate = "open_gesture_annotate.cli:main"
+og-annotate = "open_gesture_annotate.cli:console_main"
 
 [build-system]
 requires = ["setuptools>=68"]

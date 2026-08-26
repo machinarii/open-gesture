@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -102,6 +103,21 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "export-npz":
         return _cmd_export_npz(args)
     return 2
+
+
+def console_main() -> None:
+    """Console-script entry point.
+
+    Terminates via os._exit after flushing, deliberately skipping interpreter
+    finalization: MediaPipe's and torch's native static destructors race at
+    teardown and abort the process (SIGABRT) even though all work has completed
+    and every file has been written. Safe here because main() has returned, so
+    all output is flushed and all sidecars are closed.
+    """
+    code = main()
+    sys.stdout.flush()
+    sys.stderr.flush()
+    os._exit(code)
 
 
 if __name__ == "__main__":

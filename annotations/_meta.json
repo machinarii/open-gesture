@@ -158,14 +158,37 @@
       "reason": "hsemotion 0.3.0 (enet_b0_8_va_mtl)",
       "sidecar": "valence_arousal.json",
       "version": "0.3.0"
+    },
+    "wholebody": {
+      "available": false,
+      "name": "rtmw-wholebody",
+      "provenance": {
+        "library": {
+          "license": "Apache-2.0",
+          "name": "mmpose",
+          "version": "unknown"
+        },
+        "models": [
+          {
+            "keypoints": 133,
+            "license": "unspecified",
+            "name": "RTMW wholebody (cocktail14)",
+            "note": "OpenMMLab does not publish a separate licence for this checkpoint. Trained on cocktail14, a mix of 14 datasets, some under research-only/non-commercial licences (e.g. AI Challenger, InterHand2.6M, Human-Art). mmpose's Apache-2.0 covers the code that loads it, not necessarily the weights. Verify before commercial use."
+          }
+        ]
+      },
+      "reason": "mmpose not usable (ModuleNotFoundError: No module named 'mmpose'); pip install -e '.[wholebody]' \u2014 this stack pins hard and may not install",
+      "sidecar": "wholebody.json",
+      "version": "unknown"
     }
   },
-  "generated_at": "2026-08-26T02:43:55.622344+00:00",
+  "generated_at": "2026-08-26T03:25:23.910951+00:00",
   "licence_warnings": [
+    "aus: model 'mobilefacenet' has licence 'unknown -- upstream repo carries no LICENSE file' \u2014 verify before commercial redistribution",
+    "aus: model 'xgb' has licence \"MIT (covered by py-feat's own licence)\" \u2014 verify before commercial redistribution",
     "face: model 'Landmark106 (2d_106)' has licence 'check upstream weight licence' \u2014 verify before commercial redistribution",
     "face: model 'HeadPose (ResNet-18, 6D rotation)' has licence 'check upstream weight licence' \u2014 verify before commercial redistribution",
     "face: model 'FairFace' has licence 'CC BY 4.0' \u2014 verify before commercial redistribution",
-    "aus: model 'mobilefacenet' has licence 'unknown -- upstream repo carries no LICENSE file' \u2014 verify before commercial redistribution",
-    "aus: model 'xgb' has licence \"MIT (covered by py-feat's own licence)\" \u2014 verify before commercial redistribution"
+    "wholebody: model 'RTMW wholebody (cocktail14)' has licence 'unspecified' \u2014 verify before commercial redistribution"
   ]
 }
