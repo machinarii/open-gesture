@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -65,6 +66,13 @@ def _cmd_run(args) -> int:
         else:
             print(f"  {key:<12} {summary.ok} ok, {summary.errors} errors, "
                   f"{summary.skipped} skipped")
+
+    from open_gesture_annotate.provenance import licence_warnings, write_meta
+
+    meta_path = write_meta(out_dir, keys)
+    print(f"wrote {meta_path}")
+    for warning in licence_warnings(json.loads(meta_path.read_text(encoding="utf-8"))):
+        print(f"  LICENCE: {warning}", file=sys.stderr)
     return 0
 
 
