@@ -1,7 +1,10 @@
+import subprocess
+import sys
+
 import pytest
 
 from open_gesture_annotate import registry
-from open_gesture_annotate.cli import main
+from open_gesture_annotate.cli import console_main, main
 from tests.conftest import FakeBackend
 
 
@@ -47,3 +50,30 @@ def test_limit_is_passed_through(capsys, image_root, tmp_path, gestures, monkeyp
     monkeypatch.setattr("open_gesture_annotate.cli.repo_root", lambda: image_root)
     main(["run", "--backends", "cli-fake", "--out", str(tmp_path), "--limit", "2"])
     assert "2 ok" in capsys.readouterr().out
+
+
+def test_main_returns_an_int_rather_than_exiting():
+    # main() must stay a pure, testable function: no os._exit, no SystemExit.
+    # console_main() is the only place that terminates the process, and it must
+    # never be called in-process from a test (see test_console_main_exits_zero,
+    # which runs it in a subprocess instead).
+    result = main(["list"])
+    assert isinstance(result, int)
+    assert not isinstance(result, bool)
+
+
+def test_console_main_exists_and_is_callable():
+    assert callable(console_main)
+
+
+def test_console_main_exits_zero_in_a_subprocess():
+    # console_main() calls os._exit(), which would kill the pytest process if
+    # invoked in-process -- always exercise it out-of-process.
+    proc = subprocess.run(
+        [sys.executable, "-c",
+         "import sys; sys.argv = ['og-annotate', 'list']; "
+         "from open_gesture_annotate.cli import console_main; console_main()"],
+        capture_output=True, text=True, timeout=60,
+    )
+    assert proc.returncode == 0
+    assert "list" not in proc.stderr  # sanity: no traceback dumped to stderr
