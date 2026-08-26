@@ -49,6 +49,10 @@ def run_backend(
         summary.unavailable = reason
         return summary
 
+    set_output_dir = getattr(backend, "set_output_dir", None)
+    if set_output_dir is not None:
+        set_output_dir(out_dir)
+
     path = sidecar_path(out_dir, backend)
     data = read_sidecar(path, backend)
     done = set() if force else completed_ids(data)

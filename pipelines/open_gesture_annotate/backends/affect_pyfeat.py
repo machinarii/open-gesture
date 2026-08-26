@@ -86,7 +86,8 @@ class PyFeatBackend:
                     "name": "xgb",
                     "role": "action units",
                     "source": "py-feat's own trained weights (Cheong et al.), not third-party",
-                    "license": "MIT (covered by py-feat's own licence)",
+                    "license": "MIT",
+                    "note": "covered by py-feat's own licence, not a third-party weight",
                 },
                 {
                     "name": "resmasknet",

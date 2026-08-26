@@ -199,12 +199,16 @@ class UniFaceBackend:
             if crop is not None:
                 try:
                     hp = headpose.estimate(crop)
-                    head_pose = {"pitch": hp.pitch, "yaw": hp.yaw, "roll": hp.roll}
+                    head_pose = {
+                        "pitch": _as_list(hp.pitch),
+                        "yaw": _as_list(hp.yaw),
+                        "roll": _as_list(hp.roll),
+                    }
                 except Exception:
                     head_pose = None
                 try:
                     gz = gaze.estimate(crop)
-                    gaze_out = {"pitch": gz.pitch, "yaw": gz.yaw}
+                    gaze_out = {"pitch": _as_list(gz.pitch), "yaw": _as_list(gz.yaw)}
                 except Exception:
                     gaze_out = None
 

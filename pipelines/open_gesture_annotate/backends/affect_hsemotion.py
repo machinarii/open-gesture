@@ -105,12 +105,13 @@ def _build_recognizer():
     return fer
 
 
-def _load_faces_index(root: Path) -> dict:
-    """Read annotations/faces.json (Task 7) read-only. Never raises -- any
-    problem (missing file, bad JSON, unexpected shape) yields an empty index,
-    which makes every gesture fall back to the full image.
+def _load_faces_index(path: Path) -> dict:
+    """Read a faces.json sidecar (Task 7) read-only, given its full path.
+    Never raises -- any problem (missing file, bad JSON, unexpected shape)
+    yields an empty index, which makes every gesture fall back to the full
+    image.
     """
-    path = Path(root) / "annotations" / "faces.json"
+    path = Path(path)
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
         records = data.get("records", {})
@@ -145,6 +146,7 @@ class HSEmotionBackend:
     def __init__(self) -> None:
         self._impl = None
         self._faces_index: dict | None = None
+        self._output_dir: Path | None = None
 
     @property
     def version(self) -> str:
@@ -155,11 +157,38 @@ class HSEmotionBackend:
         except Exception:
             return "unknown"
 
+    def set_output_dir(self, out_dir: Path) -> None:
+        """Optional Backend-protocol hook (see base.Backend). Point subsequent
+        faces.json reads at `out_dir` instead of the default
+        repo_root()/annotations, so this backend stays in step with whatever
+        `--out` directory the runner is actually using for this run -- rather
+        than reading a missing or stale faces.json from the default location.
+        Invalidates the cached index so the next read reflects the new path.
+        """
+        self._output_dir = Path(out_dir)
+        self._faces_index = None
+
+    def _annotations_dir(self) -> Path:
+        """The directory to read faces.json from: the directory `set_output_dir`
+        was called with, or repo_root()/annotations if it was never called
+        (e.g. a direct annotate() call, as the golden tests make).
+        """
+        return self._output_dir if self._output_dir is not None else repo_root() / "annotations"
+
+    def _faces_path(self) -> Path:
+        return self._annotations_dir() / "faces.json"
+
     def available(self) -> tuple[bool, str]:
         try:
             from hsemotion.facial_emotions import HSEmotionRecognizer  # noqa: F401
         except ImportError as exc:
             return False, f"hsemotion not installed ({exc}); pip install -e '.[va]'"
+        if not self._faces_path().is_file():
+            return (
+                False,
+                "requires annotations/faces.json — run the face backend first: "
+                "og-annotate run --backends face",
+            )
         return True, f"hsemotion {self.version} ({MODEL_NAME})"
 
     def _recognizer(self):
@@ -168,11 +197,11 @@ class HSEmotionBackend:
         return self._impl
 
     def _faces(self) -> dict:
-        """Load annotations/faces.json once and cache it for the lifetime of
-        this backend instance -- not re-read per image.
+        """Load faces.json once and cache it for the lifetime of this backend
+        instance -- not re-read per image.
         """
         if self._faces_index is None:
-            self._faces_index = _load_faces_index(repo_root())
+            self._faces_index = _load_faces_index(self._faces_path())
         return self._faces_index
 
     def provenance(self) -> dict:
