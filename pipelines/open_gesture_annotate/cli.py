@@ -27,6 +27,9 @@ def build_parser() -> argparse.ArgumentParser:
     report = sub.add_parser("report", help="regenerate annotations/quality_report.md")
     report.add_argument("--out", default=None, help="annotations directory")
 
+    export = sub.add_parser("export-npz", help="derive annotations/embeddings.npz")
+    export.add_argument("--out", default=None, help="annotations directory")
+
     return parser
 
 
@@ -73,6 +76,13 @@ def _cmd_report(args) -> int:
     return 0
 
 
+def _cmd_export_npz(args) -> int:
+    from open_gesture_annotate.backends.embed_clip import export_npz
+
+    print(f"wrote {export_npz(_resolve_out(args.out))}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "list":
@@ -81,6 +91,8 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_run(args)
     if args.command == "report":
         return _cmd_report(args)
+    if args.command == "export-npz":
+        return _cmd_export_npz(args)
     return 2
 
 
