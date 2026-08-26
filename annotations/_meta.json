@@ -1,0 +1,171 @@
+{
+  "backends": {
+    "aus": {
+      "available": true,
+      "name": "pyfeat-au",
+      "provenance": {
+        "library": {
+          "license": "MIT",
+          "name": "py-feat",
+          "version": "2.1.1"
+        },
+        "models": [
+          {
+            "license": "MIT",
+            "name": "retinaface",
+            "role": "detection",
+            "source": "biubug6/Pytorch_Retinaface (mobilenet0.25_Final.pth)"
+          },
+          {
+            "license": "unknown -- upstream repo carries no LICENSE file",
+            "name": "mobilefacenet",
+            "role": "landmarks",
+            "source": "cunjian/pytorch_face_landmark (mobilefacenet_model_best.pth.tar)"
+          },
+          {
+            "license": "MIT (covered by py-feat's own licence)",
+            "name": "xgb",
+            "role": "action units",
+            "source": "py-feat's own trained weights (Cheong et al.), not third-party"
+          },
+          {
+            "license": "MIT",
+            "name": "resmasknet",
+            "role": "emotion",
+            "source": "phamquiluan/ResidualMaskingNetwork (ResMaskNet_Z_resmasking_dropout1_rot30.pth)"
+          }
+        ],
+        "warning": "py-feat's own bundled LICENSE links model provenance per-weight rather than asserting one blanket licence; verified independently against each upstream repo on 2026-08-25. retinaface (biubug6/Pytorch_Retinaface) carries an explicit LICENSE.MIT. mobilefacenet's landmark weights come from cunjian/pytorch_face_landmark, which has NO LICENSE file at all -- do not assume MIT for it; treat as all-rights-reserved until the upstream author clarifies. resmasknet's source repo (phamquiluan/ResidualMaskingNetwork) added a formal MIT LICENSE file in 2021; note py-feat's own LICENSE instead points to a 2020-2021 GitHub issue where the author gave only an informal 'free to use for research' reply before that file existed -- the current MIT LICENSE file is the more authoritative source and is what is recorded here. xgb is py-feat's own trained AU classifier (not a third-party model), so it is covered by py-feat's own MIT licence."
+      },
+      "reason": "py-feat 2.1.1",
+      "sidecar": "action_units.json",
+      "version": "2.1.1"
+    },
+    "embed": {
+      "available": true,
+      "name": "clip-embed",
+      "provenance": {
+        "library": {
+          "license": "Apache-2.0 / MIT",
+          "name": "open_clip_torch",
+          "version": "3.3.0"
+        },
+        "models": [
+          {
+            "license": "MIT",
+            "name": "ViT-B-32",
+            "pretrained": "laion2b_s34b_b79k"
+          }
+        ]
+      },
+      "reason": "open_clip 3.3.0 (ViT-B-32/laion2b_s34b_b79k)",
+      "sidecar": "embeddings.json",
+      "version": "3.3.0"
+    },
+    "face": {
+      "available": true,
+      "name": "uniface-face",
+      "provenance": {
+        "library": {
+          "license": "MIT",
+          "name": "uniface",
+          "version": "4.0.0"
+        },
+        "models": [
+          {
+            "license": "MIT",
+            "name": "SCRFD (detector, SCRFD_500M_KPS)",
+            "role": "detection",
+            "source": "InsightFace"
+          },
+          {
+            "license": "check upstream weight licence",
+            "name": "Landmark106 (2d_106)",
+            "role": "landmarks",
+            "source": "InsightFace alignment/coordinate_reg"
+          },
+          {
+            "license": "check upstream weight licence",
+            "name": "HeadPose (ResNet-18, 6D rotation)",
+            "role": "head_pose",
+            "source": "yakhyo/head-pose-estimation"
+          },
+          {
+            "license": "MIT",
+            "name": "MobileGaze (ResNet-34)",
+            "role": "gaze",
+            "source": "yakhyo/gaze-estimation"
+          },
+          {
+            "license": "CC BY 4.0",
+            "name": "FairFace",
+            "role": "demographics",
+            "source": "yakhyo/fairface-onnx"
+          }
+        ],
+        "warning": "uniface's own README states some pretrained weights are not MIT; see https://yakhyo.github.io/uniface/license-attribution/ for the maintained table. FairFace is CC BY 4.0, not MIT -- do not assume MIT for it. Landmark106 and HeadPose weights are not listed on that page at all; confirm their licence with the upstream repos above before commercial redistribution. The Emotion (AffectNet7) predictor requires the optional 'torch' dependency, which this project's `face` extra (uniface[cpu]) does not install, so it is never loaded and its weight is not listed here."
+      },
+      "reason": "uniface 4.0.0",
+      "sidecar": "faces.json",
+      "version": "4.0.0"
+    },
+    "pose": {
+      "available": true,
+      "name": "mediapipe-pose",
+      "provenance": {
+        "library": {
+          "license": "Apache-2.0",
+          "name": "mediapipe",
+          "version": "0.10.35"
+        },
+        "models": [
+          {
+            "license": "Apache-2.0",
+            "name": "hand_landmarker",
+            "url": "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task"
+          },
+          {
+            "license": "Apache-2.0",
+            "name": "pose_landmarker",
+            "url": "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task"
+          }
+        ]
+      },
+      "reason": "mediapipe 0.10.35",
+      "sidecar": "pose.json",
+      "version": "0.10.35"
+    },
+    "va": {
+      "available": true,
+      "name": "hsemotion-va",
+      "provenance": {
+        "library": {
+          "license": "Apache-2.0",
+          "name": "hsemotion",
+          "version": "0.3.0"
+        },
+        "models": [
+          {
+            "license": "Apache-2.0",
+            "name": "enet_b0_8_va_mtl",
+            "role": "emotion + valence/arousal",
+            "source": "HSE-asavchenko/face-emotion-recognition (models/affectnet_emotions/enet_b0_8_va_mtl.pt)"
+          }
+        ],
+        "note": "valence/arousal read from scores[-2:]; layout is undocumented and asserted at runtime by split_scores(). Verified the HSE-asavchenko/face-emotion-recognition repository (which hosts the enet_b0_8_va_mtl weights this backend downloads) carries an Apache-2.0 LICENSE file at its root, same as the hsemotion PyPI package itself -- unlike Task 7's FairFace (CC BY 4.0) and Task 8's mobilefacenet (no LICENSE at all), this weight's licence does match the library's.",
+        "warning": "This installation works around a torch/timm version skew: hsemotion 0.3.0 unpickles the va_mtl checkpoint with torch.load(weights_only=True) unavailable (torch >=2.6 default), so this backend loads it with weights_only=False and patches attributes newer timm added after the checkpoint was pickled. See the module docstring and _build_recognizer() for detail."
+      },
+      "reason": "hsemotion 0.3.0 (enet_b0_8_va_mtl)",
+      "sidecar": "valence_arousal.json",
+      "version": "0.3.0"
+    }
+  },
+  "generated_at": "2026-08-26T02:43:55.622344+00:00",
+  "licence_warnings": [
+    "face: model 'Landmark106 (2d_106)' has licence 'check upstream weight licence' \u2014 verify before commercial redistribution",
+    "face: model 'HeadPose (ResNet-18, 6D rotation)' has licence 'check upstream weight licence' \u2014 verify before commercial redistribution",
+    "face: model 'FairFace' has licence 'CC BY 4.0' \u2014 verify before commercial redistribution",
+    "aus: model 'mobilefacenet' has licence 'unknown -- upstream repo carries no LICENSE file' \u2014 verify before commercial redistribution",
+    "aus: model 'xgb' has licence \"MIT (covered by py-feat's own licence)\" \u2014 verify before commercial redistribution"
+  ]
+}
