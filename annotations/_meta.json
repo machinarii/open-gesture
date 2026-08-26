@@ -23,8 +23,9 @@
             "source": "cunjian/pytorch_face_landmark (mobilefacenet_model_best.pth.tar)"
           },
           {
-            "license": "MIT (covered by py-feat's own licence)",
+            "license": "MIT",
             "name": "xgb",
+            "note": "covered by py-feat's own licence, not a third-party weight",
             "role": "action units",
             "source": "py-feat's own trained weights (Cheong et al.), not third-party"
           },
@@ -182,10 +183,9 @@
       "version": "unknown"
     }
   },
-  "generated_at": "2026-08-26T03:25:23.910951+00:00",
+  "generated_at": "2026-08-26T04:47:19.277034+00:00",
   "licence_warnings": [
     "aus: model 'mobilefacenet' has licence 'unknown -- upstream repo carries no LICENSE file' \u2014 verify before commercial redistribution",
-    "aus: model 'xgb' has licence \"MIT (covered by py-feat's own licence)\" \u2014 verify before commercial redistribution",
     "face: model 'Landmark106 (2d_106)' has licence 'check upstream weight licence' \u2014 verify before commercial redistribution",
     "face: model 'HeadPose (ResNet-18, 6D rotation)' has licence 'check upstream weight licence' \u2014 verify before commercial redistribution",
     "face: model 'FairFace' has licence 'CC BY 4.0' \u2014 verify before commercial redistribution",

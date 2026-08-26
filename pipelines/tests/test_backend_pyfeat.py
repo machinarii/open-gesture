@@ -34,6 +34,28 @@ def test_provenance_names_py_feat_as_mit():
     assert PyFeatBackend().provenance()["library"]["license"] == "MIT"
 
 
+def test_provenance_records_mobilefacenet_licence_as_unknown():
+    """Guard against a silent regression to 'MIT': mobilefacenet's landmark
+    weights come from cunjian/pytorch_face_landmark, whose upstream repo
+    carries no LICENSE file at all. Do not assume MIT for it.
+    """
+    models = {m["name"]: m for m in PyFeatBackend().provenance()["models"]}
+    licence = models["mobilefacenet"]["license"]
+    assert licence != "MIT"
+    assert "unknown" in licence.lower()
+
+
+def test_provenance_records_xgb_licence_as_bare_mit_with_note():
+    """xgb is py-feat's own trained AU classifier, covered by py-feat's own
+    MIT licence -- the explanatory prose belongs in a separate key, not the
+    licence field itself (a licence field must hold a licence, not prose that
+    would defeat exact-match checking in provenance.is_permissive).
+    """
+    models = {m["name"]: m for m in PyFeatBackend().provenance()["models"]}
+    assert models["xgb"]["license"] == "MIT"
+    assert "py-feat" in models["xgb"]["note"]
+
+
 @pytest.mark.slow
 def test_annotates_a_real_image():
     b = PyFeatBackend()

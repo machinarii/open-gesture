@@ -13,11 +13,39 @@ python3.12 -m venv .venv
 .venv/bin/python -m pip install -e ".[dev,face,aus,va,pose,embed]"
 ```
 
-MediaPipe needs two task bundles downloaded into `.models/` — see `MODEL_URLS` in
-`open_gesture_annotate/backends/pose_mediapipe.py`.
+MediaPipe needs two task bundles downloaded into `.models/`. The URLs below are
+copied verbatim from `MODEL_URLS` in `open_gesture_annotate/backends/pose_mediapipe.py`
+— one of them was corrected during implementation (see that module's docstring),
+so copy from source rather than retyping from memory if it ever changes:
+
+```bash
+mkdir -p .models
+curl -L -o .models/hand_landmarker.task \
+  "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task"
+curl -L -o .models/pose_landmarker_lite.task \
+  "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task"
+```
 
 The `[wholebody]` extra (RTMW/mmpose) is optional and pins hard. If it fails to
 install, every other backend still works.
+
+### Where the other backends cache their weights
+
+Unlike `pose`, the other backends download their weights automatically on
+first use, via each library's own cache directory — no manual step needed, but
+worth knowing about before a fresh install, both for disk budgeting and
+because these are outside `.venv/` and outside this repo:
+
+| Backend | Cache location | Approx. size |
+|---|---|---|
+| `face` (uniface) | `~/.uniface/models/` | ~240 MB |
+| `aus` (py-feat) | inside the installed `feat` package (`site-packages/feat/resources/`) | ~850 MB |
+| `va` (hsemotion) | `~/.hsemotion/` | ~15 MB |
+| `embed` (open_clip) | `~/.cache/huggingface/hub/` (HF Hub) | ~580 MB |
+| `pose` (mediapipe) | `.models/` (this repo, manual download above) | ~10 MB |
+
+Budget roughly 1.7 GB of disk outside the repo for a full first run of every
+backend.
 
 ### macOS: `libomp` is required
 

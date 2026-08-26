@@ -15,8 +15,16 @@ def test_backend_identity():
     assert b.sidecar == "embeddings.json"
 
 
-def test_provenance_names_an_apache_licence():
+def test_provenance_names_the_library_licence_as_apache():
+    """This asserts the *library* (open_clip_torch) licence field, not the
+    ViT-B-32/laion2b_s34b_b79k checkpoint's licence -- that weight is recorded
+    as MIT (see the module docstring and `test_provenance_names_the_checkpoint_as_mit`).
+    """
     assert "Apache" in ClipEmbedBackend().provenance()["library"]["license"]
+
+
+def test_provenance_names_the_checkpoint_as_mit():
+    assert ClipEmbedBackend().provenance()["models"][0]["license"] == "MIT"
 
 
 def test_export_npz_stacks_records_into_arrays(tmp_path):

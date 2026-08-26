@@ -77,3 +77,19 @@ def test_console_main_exits_zero_in_a_subprocess():
     )
     assert proc.returncode == 0
     assert "list" not in proc.stderr  # sanity: no traceback dumped to stderr
+
+
+def test_console_main_exits_two_for_an_unknown_backend_in_a_subprocess():
+    # Regression: changing os._exit(code) to os._exit(0) in console_main would
+    # silently swallow the 2 that `main()` returns for an unknown backend, and
+    # test_console_main_exits_zero_in_a_subprocess alone cannot catch that --
+    # it only ever asserts the zero case. Always exercised out-of-process,
+    # same reason as the zero-case test above.
+    proc = subprocess.run(
+        [sys.executable, "-c",
+         "import sys; sys.argv = ['og-annotate', 'run', '--backends', 'nope']; "
+         "from open_gesture_annotate.cli import console_main; console_main()"],
+        capture_output=True, text=True, timeout=60,
+    )
+    assert proc.returncode == 2
+    assert "unknown backend" in proc.stderr

@@ -29,3 +29,13 @@ class Backend(Protocol):
 
     def annotate(self, image: np.ndarray, gesture: Gesture) -> dict:
         """Annotate one BGR image. Raise on failure; the runner isolates it."""
+
+    # Optional: a backend MAY implement `set_output_dir(self, out_dir: Path) -> None`.
+    # If present, `runner.run_backend` calls it once, after the availability check
+    # and before the annotation loop, passing the actual `--out` directory the run
+    # is using. This lets a backend that reads another backend's sidecar (e.g. `va`
+    # reading `face`'s faces.json) resolve that sidecar beneath the same output
+    # directory instead of hard-coding `repo_root() / "annotations"` -- which would
+    # silently diverge from a non-default `--out`. Backends that do not read another
+    # backend's output need not implement this; the runner's `getattr(backend,
+    # "set_output_dir", None)` lookup makes it a no-op for them.
