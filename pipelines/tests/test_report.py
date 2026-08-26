@@ -1,3 +1,5 @@
+import json
+
 import pytest
 
 from open_gesture_annotate.io import Gesture
@@ -156,3 +158,82 @@ def test_write_report_never_touches_the_manifest(tmp_path, monkeypatch):
     monkeypatch.setattr("open_gesture_annotate.report.load_manifest", lambda root: [])
     write_report(tmp_path, tmp_path)
     assert (repo_root() / "manifest.json").read_bytes() == before
+
+
+# --- interpretation notes (fix round 1) ---
+
+
+def test_write_report_reports_zero_finding_check_coverage(tmp_path, monkeypatch):
+    """A check that agrees on everything must say so, with its coverage -- not go silent."""
+    gestures = [
+        _gesture("a", body_parts=["hand"]),
+        _gesture("b", body_parts=["hand", "thumb"]),
+    ]
+    monkeypatch.setattr("open_gesture_annotate.report.load_manifest", lambda root: gestures)
+    pose = {
+        "records": {
+            "a": {"status": "ok", "hand_count": 1, "body_detected": True},
+            "b": {"status": "ok", "hand_count": 2, "body_detected": True},
+        }
+    }
+    (tmp_path / "pose.json").write_text(json.dumps(pose), encoding="utf-8")
+
+    text = write_report(tmp_path, tmp_path).read_text(encoding="utf-8")
+    assert "0 finding(s) across 2 gesture(s) considered" in text
+    assert "body_parts" in text
+
+
+def test_write_report_explains_the_facial_affect_proxy_limitation(tmp_path, monkeypatch):
+    """The framing must read 'weak proxy', never imply the curated label is wrong."""
+    gestures = [_gesture("a", emotional_state="neutral")]
+    monkeypatch.setattr("open_gesture_annotate.report.load_manifest", lambda root: gestures)
+    faces = {
+        "records": {
+            "a": {"status": "ok", "face_count": 1, "faces": [{"emotion": {"label": "Neutral"}}]},
+        }
+    }
+    (tmp_path / "faces.json").write_text(json.dumps(faces), encoding="utf-8")
+
+    text = write_report(tmp_path, tmp_path).read_text(encoding="utf-8")
+    assert "How to read this report" in text
+    assert "weak proxy for gesture affect" in text
+    assert "1/1 (100%) of detected faces read as Neutral" in text
+    # The report may discuss the concept, but must always explicitly disclaim it --
+    # never assert as fact that the curated label is the one that's wrong.
+    assert "not evidence the curated label is wrong" in text
+    assert "the curated data is wrong" not in text.lower()
+    assert "the curated labels are wrong" not in text.lower()
+    assert "the manifest is wrong" not in text.lower()
+
+
+def test_write_report_notes_a_surfaced_duplicate_image_pair(tmp_path, monkeypatch):
+    """Two gestures sharing a byte-identical image must be explained, not left as a mystery."""
+    n = 20
+    gestures = [_gesture(f"g{i}") for i in range(n)]
+    monkeypatch.setattr("open_gesture_annotate.report.load_manifest", lambda root: gestures)
+
+    records = {}
+    for i in range(n):
+        if i < 2:
+            vec = [1.0, 2.0]  # g0 and g1 share an identical embedding (duplicate image)
+        else:
+            vec = [float(i), float(i)]
+        records[f"g{i}"] = {
+            "status": "ok",
+            "similarity_intent": i / n,
+            "image": vec,
+        }
+    embeddings = {"records": records}
+    (tmp_path / "embeddings.json").write_text(json.dumps(embeddings), encoding="utf-8")
+
+    text = write_report(tmp_path, tmp_path).read_text(encoding="utf-8")
+    assert "## Dataset notes" in text
+    assert "`g0`" in text and "`g1`" in text
+    assert "dataset property, not an anomaly" in text
+
+
+def test_write_report_omits_dataset_notes_when_no_duplicate_is_flagged(tmp_path, monkeypatch):
+    gestures = [_gesture("a", emotional_state="neutral")]
+    monkeypatch.setattr("open_gesture_annotate.report.load_manifest", lambda root: gestures)
+    text = write_report(tmp_path, tmp_path).read_text(encoding="utf-8")
+    assert "## Dataset notes" not in text
