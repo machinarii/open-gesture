@@ -1,6 +1,6 @@
 .DS_Store
-pipelines/.venv/
-pipelines/.models/
+annotate/.venv/
+annotate/.models/
 __pycache__/
 *.pyc
 .pytest_cache/

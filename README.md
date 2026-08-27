@@ -34,12 +34,12 @@ gesture_images/
   greetings-and-farewells/
   negative-disapproval/
   ... (21 category folders)
-annotations/               # Machine-generated, produced by pipelines/
+annotations/               # Machine-generated, produced by annotate/
   quality_report.md        # Curated-vs-predicted disagreements
   _meta.json                # Model versions and per-weight licences
   faces.json, action_units.json, valence_arousal.json,
   pose.json, embeddings.json           # gitignored; regenerate locally
-pipelines/                 # The annotation pipeline (see pipelines/README.md)
+annotate/                  # The annotation pipeline (see annotate/README.md)
 ```
 
 ## Categories
@@ -106,12 +106,12 @@ Every gesture entry in `manifest.json` includes the following fields:
 
 ## Machine Annotations
 
-`pipelines/` is a Python package (`og-annotate`) that runs six ML backends over
+`annotate/` is a Python package (`og-annotate`) that runs six ML backends over
 all 99 gesture images and writes their predictions to `annotations/`, so the
 curated metadata can be checked against independent models rather than taken
 on faith. `manifest.json` is never modified by the pipeline -- it remains the
 hand-curated ground truth, and the pipeline exists to check it, not to correct
-it. See [`pipelines/README.md`](pipelines/README.md) for full setup, backend
+it. See [`annotate/README.md`](annotate/README.md) for full setup, backend
 details, and known platform quirks.
 
 **Backends**: `face` (uniface -- bbox, 106 landmarks, head pose, gaze, emotion,
