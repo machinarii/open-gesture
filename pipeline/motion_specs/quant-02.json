@@ -1,0 +1,23 @@
+{
+  "id": "quant-02",
+  "name": "Counting Six Through Ten",
+  "category": "Quantity & Counting",
+  "source_physical_description": "Use both hands, starting with five fingers on one hand and extending fingers on the second hand from one to five",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "fingers"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

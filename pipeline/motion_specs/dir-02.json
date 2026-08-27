@@ -1,0 +1,24 @@
+{
+  "id": "dir-02",
+  "name": "Open Palm Point",
+  "category": "Directional & Wayfinding",
+  "source_physical_description": "Extend the arm toward the target with all fingers together and palm facing upward or sideways; wrist relaxed and fingers straight",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "palm",
+    "arm"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

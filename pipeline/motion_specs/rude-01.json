@@ -1,0 +1,23 @@
+{
+  "id": "rude-01",
+  "name": "Middle Finger",
+  "category": "Rude & Offensive",
+  "source_physical_description": "Extend the middle finger straight up from a closed fist with the back of the hand facing the recipient",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "middle finger"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

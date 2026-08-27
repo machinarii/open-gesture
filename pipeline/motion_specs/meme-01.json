@@ -1,0 +1,24 @@
+{
+  "id": "meme-01",
+  "name": "Dab Pose",
+  "category": "Meme & Fantasy",
+  "source_physical_description": "Drop the head into the crook of one bent arm while simultaneously extending the other arm out diagonally in the opposite direction",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "arms",
+    "head",
+    "torso"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

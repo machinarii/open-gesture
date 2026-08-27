@@ -1,0 +1,24 @@
+{
+  "id": "dir-09",
+  "name": "Palm-Out Push Gesture",
+  "category": "Directional & Wayfinding",
+  "source_physical_description": "Extend one or both arms forward with palms facing outward and fingers together; push slightly away from the body",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "palm",
+    "arm"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

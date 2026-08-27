@@ -1,0 +1,36 @@
+{
+  "id": "conv-02",
+  "name": "Finger Wag - Scolding",
+  "category": "Conversational Emphasis",
+  "source_physical_description": "Extend the index finger upward and swing it side to side in a pendulum motion at face height; facial expression stern",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger",
+    "wrist"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

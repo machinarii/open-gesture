@@ -1,0 +1,25 @@
+{
+  "id": "rude-02",
+  "name": "Talk to the Hand",
+  "category": "Rude & Offensive",
+  "source_physical_description": "Thrust one arm forward with the palm flat and facing the other person; fingers together, head turned away dismissively",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "palm",
+    "arm",
+    "head"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

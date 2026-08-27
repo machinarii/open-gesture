@@ -1,0 +1,25 @@
+{
+  "id": "greet-05",
+  "name": "High Five",
+  "category": "Greetings & Farewells",
+  "source_physical_description": "Raise one hand above head height with palm facing the other person; slap palms together with the partner at the peak of the reach",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "2 person",
+  "body_parts": [
+    "hand",
+    "palm",
+    "arm",
+    "shoulder"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

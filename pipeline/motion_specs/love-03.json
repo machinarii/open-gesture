@@ -1,0 +1,24 @@
+{
+  "id": "love-03",
+  "name": "Two Hands Heart",
+  "category": "Love & Affection",
+  "source_physical_description": "Curve both hands symmetrically with fingertips touching at top and thumb-bases meeting at bottom to form a large heart shape; hold at chest level",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "fingers",
+    "thumbs"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

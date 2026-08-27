@@ -1,0 +1,36 @@
+{
+  "id": "dir-07",
+  "name": "Waving Arm Overhead",
+  "category": "Directional & Wayfinding",
+  "source_physical_description": "Raise one arm fully above the head and wave it side to side in broad sweeping arcs; hand open with fingers spread",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "arm",
+    "hand",
+    "shoulder"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

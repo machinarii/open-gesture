@@ -1,0 +1,24 @@
+{
+  "id": "urg-09",
+  "name": "Two-Hand Finger Whistle",
+  "category": "Urgency & Attention",
+  "source_physical_description": "Insert the thumb and index finger of each hand into the mouth, pressing against the tongue; blow sharply to produce a loud whistle",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "fingers",
+    "mouth"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

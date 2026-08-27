@@ -1,0 +1,23 @@
+{
+  "id": "prac-01",
+  "name": "Hitchhiker's Thumb",
+  "category": "Practical & Functional",
+  "source_physical_description": "Make a loose fist and extend the thumb outward, jerking it over the shoulder or pointing it in the direction of travel",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "thumb"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

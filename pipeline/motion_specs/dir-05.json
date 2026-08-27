@@ -1,0 +1,35 @@
+{
+  "id": "dir-05",
+  "name": "Beckoning with Index Finger",
+  "category": "Directional & Wayfinding",
+  "source_physical_description": "Curl the index finger repeatedly toward the body in a hooking motion while the hand is held at chest height, palm facing inward",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

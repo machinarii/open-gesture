@@ -1,0 +1,35 @@
+{
+  "id": "conv-04",
+  "name": "Hand Chop into Palm",
+  "category": "Conversational Emphasis",
+  "source_physical_description": "Strike the edge of one flattened hand into the open palm of the other in repeated downward chops, emphasizing each point",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "palms"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

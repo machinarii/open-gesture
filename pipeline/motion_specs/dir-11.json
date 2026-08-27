@@ -1,0 +1,37 @@
+{
+  "id": "dir-11",
+  "name": "After You Open Palm Sweep",
+  "category": "Directional & Wayfinding",
+  "source_physical_description": "Extend one arm to the side with palm facing upward and sweep it forward in a smooth arc, gesturing toward the path ahead",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "2 person",
+  "body_parts": [
+    "arm",
+    "hand",
+    "palm",
+    "torso"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

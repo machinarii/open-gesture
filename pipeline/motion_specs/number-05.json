@@ -1,0 +1,24 @@
+{
+  "id": "number-05",
+  "name": "Number Five",
+  "category": "Numbers",
+  "source_physical_description": "Open the hand fully with all five fingers spread apart and palm facing outward; hold at face height",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "fingers",
+    "palm"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

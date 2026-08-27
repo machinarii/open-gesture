@@ -1,0 +1,24 @@
+{
+  "id": "conv-06",
+  "name": "Mind-Blown Gesture",
+  "category": "Conversational Emphasis",
+  "source_physical_description": "Place both hands on either side of the head with fingers together, then fling them outward while spreading fingers wide, mimicking an explosion",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "fingers",
+    "head"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

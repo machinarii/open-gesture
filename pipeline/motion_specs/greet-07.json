@@ -1,0 +1,24 @@
+{
+  "id": "greet-07",
+  "name": "Salute",
+  "category": "Greetings & Farewells",
+  "source_physical_description": "Bring the right hand sharply to the right brow with fingers together and palm tilted slightly downward; elbow raised to shoulder height",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "arm",
+    "forehead"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

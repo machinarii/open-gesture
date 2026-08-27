@@ -1,0 +1,24 @@
+{
+  "id": "affirm-02",
+  "name": "OK Sign",
+  "category": "Affirmative & Positive",
+  "source_physical_description": "Touch the tip of the index finger to the tip of the thumb forming a circle; remaining three fingers extend upward and slightly apart",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger",
+    "thumb"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

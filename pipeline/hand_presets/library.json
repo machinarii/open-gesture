@@ -1,0 +1,74 @@
+{
+  "mano_layout": {
+    "left_hand_pose": 45,
+    "right_hand_pose": 45,
+    "note": "15 joints \u00d7 3 axis-angle, PCA OFF"
+  },
+  "presets": {
+    "relaxed": {
+      "description": "Neutral resting hand; fingers gently curled. Default when hands aren't the focus.",
+      "left": null,
+      "right": null
+    },
+    "flat_open": {
+      "description": "Open palm, fingers extended and together. Waves, stop, high-five, push.",
+      "left": null,
+      "right": null
+    },
+    "five_spread": {
+      "description": "Open hand, all five fingers spread apart. Number five/ten, splayed displays.",
+      "left": null,
+      "right": null
+    },
+    "fist": {
+      "description": "Fully closed fist. Solidarity, knock, resolve.",
+      "left": null,
+      "right": null
+    },
+    "thumb_up": {
+      "description": "Closed fist with thumb extended upward. Thumbs up / approval.",
+      "left": null,
+      "right": null
+    },
+    "ok_ring": {
+      "description": "Thumb and index tips touching in a ring, other three fingers extended. OK sign.",
+      "left": null,
+      "right": null
+    },
+    "point_index": {
+      "description": "Index extended, remaining fingers curled into the palm. Pointing, number one, beckon.",
+      "left": null,
+      "right": null
+    },
+    "two_v": {
+      "description": "Index and middle extended in a V, others curled. Number two, victory/peace.",
+      "left": null,
+      "right": null
+    },
+    "three_fingers": {
+      "description": "Index, middle, ring extended; thumb holds pinky. Number three.",
+      "left": null,
+      "right": null
+    },
+    "four_fingers": {
+      "description": "All four fingers extended, thumb folded across palm. Number four.",
+      "left": null,
+      "right": null
+    },
+    "pinch": {
+      "description": "Thumb and index tips nearly touching, small gap. Money rub, small-size, precision.",
+      "left": null,
+      "right": null
+    },
+    "crossed_fingers": {
+      "description": "Index and middle crossed. Luck / promise.",
+      "left": null,
+      "right": null
+    },
+    "finger_gun": {
+      "description": "Index extended forward, thumb up, others curled. Finger gun / playful point.",
+      "left": null,
+      "right": null
+    }
+  }
+}

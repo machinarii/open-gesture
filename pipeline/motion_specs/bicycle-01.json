@@ -1,0 +1,23 @@
+{
+  "id": "bicycle-01",
+  "name": "Left Turn Signal (Bicycle)",
+  "category": "Bicycle Signals",
+  "source_physical_description": "Extend the left arm straight out to the side at shoulder height with palm facing downward or forward; hold steady while riding",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "arm",
+    "hand"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

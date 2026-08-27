@@ -1,0 +1,24 @@
+{
+  "id": "neg-05",
+  "name": "Palm-Out Stop Hand",
+  "category": "Negative & Disapproval",
+  "source_physical_description": "Raise one hand to head height with palm flat and facing outward; fingers together and arm fully extended",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "palm",
+    "arm"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

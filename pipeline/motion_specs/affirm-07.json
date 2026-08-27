@@ -1,0 +1,25 @@
+{
+  "id": "affirm-07",
+  "name": "Arms Raised in V - Victory",
+  "category": "Affirmative & Positive",
+  "source_physical_description": "Raise both arms above the head in a wide V-shape with hands open or in fists; head tilted back slightly",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "arms",
+    "hands",
+    "shoulders",
+    "torso"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

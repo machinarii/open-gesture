@@ -1,0 +1,24 @@
+{
+  "id": "sil-01",
+  "name": "Finger to Lips - Shh",
+  "category": "Silence & Secrecy",
+  "source_physical_description": "Place the extended index finger vertically against closed lips; other fingers curled into the palm, eyes widened slightly",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger",
+    "lips"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}
