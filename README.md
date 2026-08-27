@@ -23,9 +23,9 @@ Open Gesture bridges this gap by pairing reference images with a multi-dimension
 ## Dataset Structure
 
 ```
+manifest.json             # Machine-readable metadata for all 99 gestures
+manifest.md               # Human-readable reference guide
 gesture_images/
-  manifest.json          # Machine-readable metadata for all gestures
-  manifest.md            # Human-readable reference guide
   affirmative-and-positive/
     affirm-01-thumbs-up.png
     affirm-02-ok-sign.png
@@ -34,6 +34,12 @@ gesture_images/
   greetings-and-farewells/
   negative-disapproval/
   ... (21 category folders)
+annotations/               # Machine-generated, produced by pipelines/
+  quality_report.md        # Curated-vs-predicted disagreements
+  _meta.json                # Model versions and per-weight licences
+  faces.json, action_units.json, valence_arousal.json,
+  pose.json, embeddings.json           # gitignored; regenerate locally
+pipelines/                 # The annotation pipeline (see pipelines/README.md)
 ```
 
 ## Categories
@@ -97,6 +103,75 @@ Every gesture entry in `manifest.json` includes the following fields:
 | Arousal | Low: 52, Medium: 26, High: 21 |
 | Cultural context | Universal: 63, Western: 35, Southern European: 1 |
 | Participants | Single: 94, 2-person: 4, 3+: 1 |
+
+## Machine Annotations
+
+`pipelines/` is a Python package (`og-annotate`) that runs six ML backends over
+all 99 gesture images and writes their predictions to `annotations/`, so the
+curated metadata can be checked against independent models rather than taken
+on faith. `manifest.json` is never modified by the pipeline -- it remains the
+hand-curated ground truth, and the pipeline exists to check it, not to correct
+it. See [`pipelines/README.md`](pipelines/README.md) for full setup, backend
+details, and known platform quirks.
+
+**Backends**: `face` (uniface -- bbox, 106 landmarks, head pose, gaze, emotion,
+demographics), `aus` (py-feat -- 20 FACS Action Units, emotion, 3D head pose),
+`va` (HSEmotion -- continuous valence/arousal), `pose` (MediaPipe -- 21
+landmarks per hand, 33 body landmarks), `embed` (CLIP ViT-B-32 -- image and
+text embeddings), and `wholebody` (RTMW -- optional, not installed by
+default).
+
+```bash
+og-annotate list          # backends and availability
+og-annotate run           # run all available backends
+og-annotate report        # regenerate quality_report.md
+og-annotate export-npz    # derive embeddings.npz
+```
+
+**Results.** `annotations/quality_report.md` records **49 findings across the
+99 gestures**: 11 `number_of_people`, 20 `arousal`, 9 `emotional_state`, 9
+`intent_similarity`, and **0 `body_parts`**.
+
+The `body_parts` result is the headline: MediaPipe independently detected a
+hand in every one of the 96 gestures whose curated `body_parts` claims one --
+100% recall, zero disagreements.
+
+Facial affect turns out to be a weak proxy for gesture affect in this dataset:
+78 of 93 detected faces (84%) read as Neutral, while only 49 of the 99 curated
+`emotional_state` labels are `neutral`. This is not a defect in the labels --
+it is empirical support for the project's own premise, that gesture carries
+meaning the face alone does not. The emotion here is carried by the hands and
+posture, not the face.
+
+Most `number_of_people` findings are a proxy limitation rather than a labeling
+error: detected face count is not the same as person count, and six of the
+gestures are framed hand-first with no face visible at all.
+
+Two dataset-level observations surfaced along the way: `sport-01` and
+`team-02` share a byte-identical source image (the same gesture cross-listed
+under two categories), and `meme-01` (dab pose) has a hand that MediaPipe
+detects but that its curated `body_parts` does not list.
+
+### Model weight licensing
+
+The libraries above are all permissively licensed, but a library's licence
+does not cover the pretrained weights it loads -- and since this repo
+promises commercial use, that distinction matters for anyone redistributing
+work built on these annotations (it does not affect the dataset's own
+MIT / CC BY 4.0 terms; see License below). `annotations/_meta.json` records
+every weight's licence per backend and `og-annotate run` warns on any that
+isn't known-permissive. Four verified divergences from the libraries' own
+licences:
+
+- uniface's **FairFace** weights are **CC BY 4.0** (attribution required),
+  not the library's MIT.
+- py-feat's **mobilefacenet** landmark weights come from an upstream
+  repository with **no LICENSE file at all**.
+- open_clip's **`laion2b_s34b_b79k`** checkpoint is **MIT**, not the
+  Apache-2.0 commonly assumed from the library's own licence.
+- **RTMW**'s checkpoint licence is **unspecified**, and it is trained partly
+  on non-commercial datasets -- which is why `wholebody` is optional and not
+  installed by default.
 
 ## Applying This Framework to CV Gesture Recognition
 
@@ -219,3 +294,5 @@ Dual-licensed. See [LICENSE.md](LICENSE.md) for full terms.
 | Images | CC BY 4.0 | Yes | Yes |
 
 All images are **AI-generated** (OpenAI `gpt-image-1`) and provided as visual references only. Use is subject to [OpenAI's Usage Policies](https://openai.com/policies/usage-policies). You must disclose AI generation when redistributing.
+
+The `annotations/` directory is machine-generated and not covered by the table above -- it is subject to the per-weight model licences described under Model Weight Licensing.
