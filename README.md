@@ -34,12 +34,13 @@ gesture_images/
   greetings-and-farewells/
   negative-disapproval/
   ... (21 category folders)
-annotations/               # Machine-generated, produced by annotate/
-  quality_report.md        # Curated-vs-predicted disagreements
-  _meta.json                # Model versions and per-weight licences
+annotations/              # Machine-generated, produced by annotate/
+  quality_report.md       # Curated-vs-predicted disagreements
+  _meta.json              # Model versions and per-weight licences
   faces.json, action_units.json, valence_arousal.json,
-  pose.json, embeddings.json           # gitignored; regenerate locally
-annotate/                  # The annotation pipeline (see annotate/README.md)
+  pose.json, embeddings.json          # gitignored; regenerate locally
+annotate/                 # Annotation pipeline (see annotate/README.md)
+pipeline/                 # Synthetic training-data pipeline (see below)
 ```
 
 ## Categories
