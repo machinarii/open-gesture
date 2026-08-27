@@ -123,11 +123,19 @@ text embeddings), and `wholebody` (RTMW -- optional, not installed by
 default).
 
 ```bash
-og-annotate list          # backends and availability
-og-annotate run           # run all available backends
-og-annotate report        # regenerate quality_report.md
-og-annotate export-npz    # derive embeddings.npz
+og-annotate list                       # backends and availability
+og-annotate run                        # run all available backends
+og-annotate run --backends face,pose   # a subset
+og-annotate run --force --limit 5      # re-run a sample
+og-annotate report                     # regenerate quality_report.md
+og-annotate export-npz                 # derive embeddings.npz
 ```
+
+Runs are idempotent and resumable: completed records are skipped, previous
+errors retried, and a backend that will not import is skipped with a reason
+rather than failing the run. One ordering note: `va` crops faces using the
+boxes `face` writes, so it reports itself unavailable until `face` has run.
+Plain `og-annotate run` handles that for you.
 
 **Results.** `annotations/quality_report.md` records **49 findings across the
 99 gestures**: 11 `number_of_people`, 20 `arousal`, 9 `emotional_state`, 9

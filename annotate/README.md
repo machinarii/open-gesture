@@ -117,6 +117,35 @@ reason, and `run`/`report` skip it cleanly.
 Runs are idempotent and resumable: successful records are skipped, previous errors
 are retried. A backend that will not import is skipped with a reason, never fatally.
 
+### `va` depends on `face` — run order matters
+
+`va` (HSEmotion) crops each face before inference, using the bounding boxes
+`face` writes to `faces.json`. Feeding it a whole gesture photo instead would
+resize the entire frame to the model input and yield near-meaningless
+valence/arousal — and those values are exactly what `report.py` checks the
+curated `emotional_state` and `arousal` labels against.
+
+So `va` reports itself **unavailable** when `faces.json` is absent, rather than
+silently degrading:
+
+```
+va   unavailable: requires annotations/faces.json — run the face backend first:
+                  og-annotate run --backends face
+```
+
+Plain `og-annotate run` handles this on its own (backends run in sorted order, and
+`face` precedes `va`), but an explicit `--backends va` on a fresh checkout will not.
+Run `face` first, or just let `run` do everything.
+
+This is a *whole-file* check. A `faces.json` that exists but records `face_count: 0`
+for a given gesture is fine — that image falls back to full-image inference and is
+still annotated successfully. Six gestures are framed hand-first with no face at all
+and take that path every run.
+
+`--out` is honoured throughout: `va` reads `faces.json` from the same directory the
+run is writing to, not from the repo default, so a run into a scratch directory never
+silently crops using a previous run's boxes.
+
 `og-annotate` (the console entry point) terminates via `os._exit` after flushing
 stdout/stderr, deliberately skipping normal interpreter finalisation. This is
 intentional, not a bug: MediaPipe's and torch's native static destructors race
