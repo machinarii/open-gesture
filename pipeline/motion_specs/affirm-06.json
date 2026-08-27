@@ -1,0 +1,25 @@
+{
+  "id": "affirm-06",
+  "name": "Raised Fist - Solidarity",
+  "category": "Affirmative & Positive",
+  "source_physical_description": "Clench one hand into a tight fist and raise the arm straight overhead; body upright and chest open",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "fist",
+    "arm",
+    "shoulder"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

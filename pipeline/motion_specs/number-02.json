@@ -1,0 +1,24 @@
+{
+  "id": "number-02",
+  "name": "Number Two",
+  "category": "Numbers",
+  "source_physical_description": "Extend the index and middle fingers upward in a V-shape from a closed fist; palm facing outward",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger",
+    "middle finger"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

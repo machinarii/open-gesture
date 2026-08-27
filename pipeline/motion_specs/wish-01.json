@@ -1,0 +1,35 @@
+{
+  "id": "wish-01",
+  "name": "Pinky Promise",
+  "category": "Wishful & Luck",
+  "source_physical_description": "Hook the pinky finger of one hand around the pinky finger of the other person's hand; shake gently up and down",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "2 person",
+  "body_parts": [
+    "hand",
+    "pinky finger"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

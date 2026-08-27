@@ -1,0 +1,23 @@
+{
+  "id": "team-01",
+  "name": "Team Chant Hands",
+  "category": "Team Building",
+  "source_physical_description": "All members extend one hand into the center of a circle, stacking hands on top of each other; raise and release together on a chant",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "3 or more",
+  "body_parts": [
+    "hands",
+    "arms"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

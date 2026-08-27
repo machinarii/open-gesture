@@ -1,0 +1,24 @@
+{
+  "id": "sport-01",
+  "name": "Timeout T-Shape (Sports)",
+  "category": "Sports & Taunting",
+  "source_physical_description": "Form a T-shape by placing one flat hand horizontally on top of the fingertips of the other vertical hand; raise above head for referee visibility",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "fingers",
+    "arms"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

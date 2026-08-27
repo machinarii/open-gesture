@@ -1,0 +1,23 @@
+{
+  "id": "number-07",
+  "name": "Number Seven",
+  "category": "Numbers",
+  "source_physical_description": "Show five fingers on one hand and extend the index and middle fingers on the other hand",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "fingers"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

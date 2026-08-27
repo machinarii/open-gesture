@@ -1,0 +1,36 @@
+{
+  "id": "urg-05",
+  "name": "Tapping Wrist - Hurry Up",
+  "category": "Urgency & Attention",
+  "source_physical_description": "Tap the index finger of one hand repeatedly on the inside of the opposite wrist where a watch would be; eyebrows raised",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger",
+    "wrist"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

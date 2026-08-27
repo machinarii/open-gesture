@@ -1,0 +1,24 @@
+{
+  "id": "urg-03",
+  "name": "Raised Hand - Classroom Style",
+  "category": "Urgency & Attention",
+  "source_physical_description": "Raise one arm straight up with the palm open and fingers together; hold it steady above the head",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "arm",
+    "hand",
+    "shoulder"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

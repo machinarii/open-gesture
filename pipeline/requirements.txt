@@ -1,0 +1,16 @@
+# Synthetic data pipeline dependencies.
+#
+# export_labels.py and generate_motion_specs.py are stdlib-only (no install).
+# The extraction and training stages need these:
+
+# extract_landmarks.py
+mediapipe>=0.10
+opencv-python>=4.8
+numpy>=1.24
+
+# train_classifier.py
+tensorflow>=2.15        # provides tf.lite INT8 conversion
+# numpy already pinned above
+
+# Hailo-8L deployment (not pip-installable here): the Hailo Dataflow Compiler
+# compiles the exported .tflite/ONNX to a .hef. Install from Hailo's SDK.

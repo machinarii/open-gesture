@@ -1,0 +1,16 @@
+# Virtual environment
+.venv/
+
+# Generated pipeline artifacts (regenerable from the scripts)
+render_configs/
+cosmos_jobs/
+clips/
+augmented/
+sequences/
+sequences_smoke/
+model/
+__pycache__/
+*.pyc
+
+# Note: labels/ and motion_specs/ are intentionally committed --
+# labels/ is the training contract; motion_specs/ are hand-authored seeds.

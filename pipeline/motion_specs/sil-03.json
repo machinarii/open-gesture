@@ -1,0 +1,24 @@
+{
+  "id": "sil-03",
+  "name": "Hand Cupped Behind Ear",
+  "category": "Silence & Secrecy",
+  "source_physical_description": "Cup one hand and place it behind the ear, tilting the head toward the speaker; lean the body slightly forward",
+  "dynamic": false,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "ear",
+    "head"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

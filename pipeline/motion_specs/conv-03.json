@@ -1,0 +1,35 @@
+{
+  "id": "conv-03",
+  "name": "Counting Off Points on Fingers",
+  "category": "Conversational Emphasis",
+  "source_physical_description": "Hold one hand up and use the index finger of the other hand to tap or grasp each finger in sequence while listing items",
+  "dynamic": true,
+  "dynamic_source": "heuristic",
+  "suggested_duration_s": 2.0,
+  "loop": true,
+  "participants": "single",
+  "body_parts": [
+    "hands",
+    "fingers"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

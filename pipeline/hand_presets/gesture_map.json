@@ -1,0 +1,497 @@
+{
+  "affirm-01": {
+    "right_hand": "thumb_up",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "affirm-02": {
+    "right_hand": "ok_ring",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "affirm-03": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "affirm-04": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "affirm-06": {
+    "right_hand": "fist",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "affirm-07": {
+    "right_hand": "two_v",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "affirm-08": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "bicycle-01": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "bicycle-02": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "bicycle-03": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "conv-01": {
+    "right_hand": "two_v",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "conv-02": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "conv-03": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "conv-04": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "conv-05": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "conv-06": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "conv-07": {
+    "right_hand": "five_spread",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "creative-01": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "dir-01": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "dir-02": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "dir-05": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "dir-06": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "dir-07": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "dir-08": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "dir-09": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "dir-11": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "greet-01": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "greet-02": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "greet-05": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "greet-06": {
+    "right_hand": "two_v",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "greet-07": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "greet-08": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "greet-09": {
+    "right_hand": "pinch",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "greet-10": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "love-01": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "love-02": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "love-03": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "meme-01": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "meme-02": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "meme-03": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "money-01": {
+    "right_hand": "pinch",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "money-02": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "neg-01": {
+    "right_hand": "fist",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "neg-02": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "neg-03": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "neg-05": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "neg-06": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "neg-07": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "neg-08": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "neg-09": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "neg-10": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "neg-11": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "number-01": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "number-02": {
+    "right_hand": "two_v",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "number-03": {
+    "right_hand": "three_fingers",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "number-04": {
+    "right_hand": "four_fingers",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "number-05": {
+    "right_hand": "five_spread",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "number-06": {
+    "right_hand": "five_spread",
+    "left_hand": "point_index",
+    "review": true
+  },
+  "number-07": {
+    "right_hand": "five_spread",
+    "left_hand": "two_v",
+    "review": true
+  },
+  "number-08": {
+    "right_hand": "five_spread",
+    "left_hand": "three_fingers",
+    "review": true
+  },
+  "number-09": {
+    "right_hand": "five_spread",
+    "left_hand": "four_fingers",
+    "review": true
+  },
+  "number-10": {
+    "right_hand": "five_spread",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "prac-01": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "prac-02": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "prac-03": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "prac-05": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "prac-06": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "prac-07": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "prac-08": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "prac-09": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "quant-01": {
+    "right_hand": "five_spread",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "quant-02": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "quant-03": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "resp-02": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "rude-01": {
+    "right_hand": "fist",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "rude-02": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "rude-03": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "rude-04": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "rude-05": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "sil-01": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "sil-02": {
+    "right_hand": "crossed_fingers",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "sil-03": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "sil-04": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "size-01": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "size-03": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "sport-01": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "sport-02": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "team-01": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "team-02": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "urg-01": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "urg-02": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "urg-03": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "urg-05": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "urg-06": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "urg-07": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "urg-08": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "urg-09": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "wish-01": {
+    "right_hand": "relaxed",
+    "left_hand": "relaxed",
+    "review": true
+  },
+  "wish-02": {
+    "right_hand": "crossed_fingers",
+    "left_hand": "relaxed",
+    "review": false
+  }
+}
