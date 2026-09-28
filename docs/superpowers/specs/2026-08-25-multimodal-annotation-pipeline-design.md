@@ -343,3 +343,49 @@ Test-driven, with the fast layer fully decoupled from model weights.
 - Benchmarking against HaGRID's 33 gesture classes.
 - Aligning `emotional_state`/`arousal` scales to EMOTIC and BoLD VAD annotations.
 - Emotion-LLaMA (BSD-3) for generated `emotional_adjectives` and `intent` prose.
+
+## Amendments
+
+The design above is kept as approved. This section records what changed after it.
+
+### 2026-09-27 — `relations` backend (RelateAnything / relsgg)
+
+A seventh backend scores open-vocabulary relations between body regions. The
+regions are derived from the `pose` landmarks, since relsgg detects nothing
+itself, so `relations` depends on `pose` the way `va` depends on `face`. It
+adds a `self_contact` report check: `gesture_type: adaptor` is defined as
+self-touching, so an adaptor with no predicted hand-to-body contact is flagged.
+All five adaptors agree. Two constraints were learned by measuring. The
+checkpoint's shipped calibration does not survive a custom vocabulary (median
+score 0.027), so contact is read from the per-pair argmax, not a threshold. And
+predict() returns one predicate per pair, which makes the vocabulary a design
+decision. The weights are DINOv3-licensed rather than Apache-2.0, so the extra
+is optional. Detail: `annotate/open_gesture_annotate/backends/relations_relsgg.py`.
+
+### 2026-09-27 — `speech` backend and image + speech fusion
+
+The voice channel. It is new scope: the design above is image-only. Each
+gesture gets one utterance, which is synthesised (SpeechT5), mixed with noise
+from clean to −5 dB SNR, and transcribed with Whisper. `og-annotate fusion`
+writes `annotations/fusion_report.md`, comparing image-only, speech-only and
+fused intent retrieval and emotion valence, with paired significance tests.
+Result: speech significantly improves intent recognition with clear audio,
+and fusion falls back to image-level accuracy in heavy noise. The failure that
+does hurt is fluent speech about something else. The spec's licensing rule
+decided the TTS: piper-tts is GPL-3.0-or-later and was excluded like the AGPL
+tools above, and every weight used is MIT or Apache-2.0. Detail:
+`backends/speech_whisper.py`, `fusion.py`.
+
+### Where the implementation differs from this spec
+
+Found by the recognition acceptance tests (`tests/test_recognition.py`) on
+2026-09-27:
+
+| Spec | Implementation | Status |
+|---|---|---|
+| Quality report checks `intent` **and** `physical_description` via CLIP similarity | Only `intent` is checked. `similarity_description` is computed and valid but unused, and it is the stronger signal (37% vs 23% top-5 retrieval) | Open gap |
+| `emotional_state` checked against "HSEmotion valence sign; **py-feat emotion**" | HSEmotion valence only. py-feat emotions are extracted but unused by the report | Open gap |
+| `arousal` flagged when "outside the predicted tercile" | Flagged only at opposite extremes (curated low vs predicted high, or the reverse) | Deliberate; explained in the report |
+| `clip-embed` writes `embeddings.npz` | Writes `embeddings.json`; `og-annotate export-npz` derives the `.npz` | Deliberate |
+| Golden tests use "tolerance-based numeric comparison" | Numbers within tolerance, plus every categorical output exactly. The top-level-only check had never compared uniface's nested emotion label | Extended |
+| Environment: "a dedicated venv under `pipelines/`" | The package directory was renamed `annotate/` (commit 6be06f0) | Renamed |
