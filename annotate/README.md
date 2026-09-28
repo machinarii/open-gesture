@@ -13,6 +13,16 @@ python3.12 -m venv .venv
 .venv/bin/python -m pip install -e ".[dev,face,aus,va,pose,embed]"
 ```
 
+Two optional extras are not installed by default. `relations` needs Python
+>=3.12, installs `relsgg` from git, and carries DINOv3-licensed weights. `speech`
+needs `embed` too, since it reuses the CLIP text tower. Both are described
+under Usage below:
+
+```bash
+.venv/bin/python -m pip install -e ".[relations,speech]"
+# relations pulls opencv-python-headless: repeat the opencv cleanup below afterwards
+```
+
 MediaPipe needs two task bundles downloaded into `.models/`. The URLs below are
 copied verbatim from `MODEL_URLS` in `open_gesture_annotate/backends/pose_mediapipe.py`
 — one of them was corrected during implementation (see that module's docstring),
@@ -43,9 +53,11 @@ because these are outside `.venv/` and outside this repo:
 | `va` (hsemotion) | `~/.hsemotion/` | ~15 MB |
 | `embed` (open_clip) | `~/.cache/huggingface/hub/` (HF Hub) | ~580 MB |
 | `pose` (mediapipe) | `.models/` (this repo, manual download above) | ~10 MB |
+| `relations` (relsgg, optional) | `~/.cache/huggingface/hub/` (HF Hub) | ~310 MB |
+| `speech` (optional): SpeechT5 1.1 GB, Whisper `base.en` 140 MB, DistilBERT 260 MB, HiFi-GAN 100 MB, x-vectors 18 MB | `~/.cache/huggingface/hub/` (HF Hub) | ~1.6 GB |
 
-Budget roughly 1.7 GB of disk outside the repo for a full first run of every
-backend.
+Budget roughly 1.7 GB of disk outside the repo for a first run of the six core
+backends, or about 3.6 GB with `relations` and `speech` as well.
 
 ### macOS: `libomp` is required
 
@@ -151,7 +163,7 @@ Ultralytics. SpeechT5 works from characters, needs no phonemiser, and is MIT.
 Every weight in the chain is MIT or Apache-2.0: SpeechT5 + HiFi-GAN, CMU ARCTIC
 x-vectors, Whisper `base.en` (faster-whisper) and DistilBERT SST-2.
 
-Install with `.[embed,speech]`. First run downloads roughly 1 GB of weights into
+Install with `.[embed,speech]`. First run downloads roughly 1.6 GB of weights into
 `~/.cache/huggingface/`. TTS is autoregressive on CPU, so a full run takes tens
 of minutes; transcription is well under a second per clip.
 
@@ -335,7 +347,10 @@ weights.
 `annotations/quality_report.md` is the point of all this: it flags where curated
 metadata and model predictions disagree. It reports, it never corrects.
 `annotations/_meta.json` records every model version and weight licence, and warns
-about any that is not permissive.
+about any that is not permissive. `annotations/fusion_report.md` (`og-annotate
+fusion`) is the voice-channel counterpart: whether image + speech beats either
+alone, and how that holds up as speech degrades. Its results are summarised
+under `speech` in Usage above.
 
 From the real run over all 99 gestures: `quality_report.md` currently records
 49 findings across six checks. Three results stand out:
@@ -376,6 +391,41 @@ From the real run over all 99 gestures: `quality_report.md` currently records
 .venv/bin/python -m pytest -m slow      # real inference against real weights
 ```
 
+The fast layer needs no weights and no network. It covers the registry, runner,
+sidecar I/O, report and fusion logic, the relations region geometry, and the
+speech helpers (noise at a target SNR, WER, confidence), all on synthetic data.
+
+The slow layer adds three things:
+
+- **Backend smoke and golden-file tests** (`test_backend_*`, `test_golden.py`)
+  run the real models on three representative images. Golden files compare
+  numbers within a tolerance and every categorical output (emotion labels,
+  handedness, ...) exactly. **Known:** on Linux/aarch64 three golden cases
+  (`aus` and `face` on the clear-face and multi-person images) fail on
+  sub-pixel landmark drift of up to 0.13 px, which carries into py-feat AUs
+  (up to 0.026). Every categorical output still matches. The golden files were
+  generated on a different platform and library stack. They are deliberately
+  left unregenerated rather than tuned to one machine.
+- **`test_recognition.py`**, an acceptance test for the spec's intent and
+  emotion claims, run against the real sidecars (it skips until `og-annotate
+  run` has produced them). It checks conformance (every face has an emotion
+  label, HSEmotion crops from uniface's box, the 20 planned AUs) and
+  recognition beyond chance (image-to-text retrieval against a binomial null
+  with a shuffled control, valence ordering and separation, arousal
+  correlation, agreement between py-feat and HSEmotion by kappa rather than
+  raw agreement). Thresholds are "better than chance" at conventional alphas,
+  set up front; a mutation check confirmed each test fails on deliberately
+  broken data.
+- Measured on the current sidecars: image-to-intent top-5 retrieval 23% and
+  image-to-description 37% (chance 5%); valence separates curated positive
+  from negative at AUC 0.74 (p = 0.003); arousal Spearman +0.26 (p = 0.01);
+  uniface and HSEmotion labels agree at kappa 0.65.
+
 ## Design
 
-See `../docs/superpowers/specs/2026-08-25-multimodal-annotation-pipeline-design.md`.
+See `../docs/superpowers/specs/2026-08-25-multimodal-annotation-pipeline-design.md`
+for the original six-backend design. Its "Amendments" section records what came
+after: the `relations` and `speech` backends, the fusion evaluation, and the
+places where the implementation deliberately differs from the spec. The
+rationale for each later backend lives in its module docstring
+(`backends/relations_relsgg.py`, `backends/speech_whisper.py`, `fusion.py`).
