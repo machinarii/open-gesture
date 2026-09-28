@@ -7,7 +7,7 @@
         "library": {
           "license": "MIT",
           "name": "py-feat",
-          "version": "2.1.1"
+          "version": "2.1.3"
         },
         "models": [
           {
@@ -38,9 +38,9 @@
         ],
         "warning": "py-feat's own bundled LICENSE links model provenance per-weight rather than asserting one blanket licence; verified independently against each upstream repo on 2026-08-25. retinaface (biubug6/Pytorch_Retinaface) carries an explicit LICENSE.MIT. mobilefacenet's landmark weights come from cunjian/pytorch_face_landmark, which has NO LICENSE file at all -- do not assume MIT for it; treat as all-rights-reserved until the upstream author clarifies. resmasknet's source repo (phamquiluan/ResidualMaskingNetwork) added a formal MIT LICENSE file in 2021; note py-feat's own LICENSE instead points to a 2020-2021 GitHub issue where the author gave only an informal 'free to use for research' reply before that file existed -- the current MIT LICENSE file is the more authoritative source and is what is recorded here. xgb is py-feat's own trained AU classifier (not a third-party model), so it is covered by py-feat's own MIT licence."
       },
-      "reason": "py-feat 2.1.1",
+      "reason": "py-feat 2.1.3",
       "sidecar": "action_units.json",
-      "version": "2.1.1"
+      "version": "2.1.3"
     },
     "embed": {
       "available": true,
@@ -117,7 +117,7 @@
         "library": {
           "license": "Apache-2.0",
           "name": "mediapipe",
-          "version": "0.10.35"
+          "version": "0.10.14"
         },
         "models": [
           {
@@ -132,9 +132,33 @@
           }
         ]
       },
-      "reason": "mediapipe 0.10.35",
+      "reason": "mediapipe 0.10.14",
       "sidecar": "pose.json",
-      "version": "0.10.35"
+      "version": "0.10.14"
+    },
+    "relations": {
+      "available": true,
+      "name": "relsgg-relations",
+      "provenance": {
+        "library": {
+          "license": "Apache-2.0",
+          "name": "relsgg",
+          "version": "1.0.0"
+        },
+        "models": [
+          {
+            "license": "DINOv3 License",
+            "name": "maelic/relsgg-vits16plus",
+            "role": "open-vocabulary relation prediction over supplied regions",
+            "source": "https://github.com/Maelic/RelateAnything"
+          }
+        ],
+        "note": "Regions are NOT detected by this model \u2014 they are derived from the MediaPipe landmarks in pose.json (hands, head, torso, arms). The predicate vocabulary is supplied at inference time (GESTURE_PREDICATES) rather than trained in, so triplets are only as meaningful as those strings. Scores use the checkpoint's shipped calibration, fitted on adjudicated negatives.",
+        "warning": "relsgg checkpoints are derivatives of Meta DINOv3 weights and carry the DINOv3 License, not the library's Apache-2.0 \u2014 see RelateAnything's THIRD_PARTY_NOTICES.md. Verify those terms before redistributing any work derived from relations.json. relsgg's [detector] extra is AGPL-3.0 and is not used here; this backend supplies its own regions."
+      },
+      "reason": "relsgg 1.0.0 (maelic/relsgg-vits16plus, cpu)",
+      "sidecar": "relations.json",
+      "version": "1.0.0"
     },
     "va": {
       "available": true,
@@ -183,12 +207,13 @@
       "version": "unknown"
     }
   },
-  "generated_at": "2026-08-26T04:47:19.277034+00:00",
+  "generated_at": "2026-09-28T00:06:23.977600+00:00",
   "licence_warnings": [
     "aus: model 'mobilefacenet' has licence 'unknown -- upstream repo carries no LICENSE file' \u2014 verify before commercial redistribution",
     "face: model 'Landmark106 (2d_106)' has licence 'check upstream weight licence' \u2014 verify before commercial redistribution",
     "face: model 'HeadPose (ResNet-18, 6D rotation)' has licence 'check upstream weight licence' \u2014 verify before commercial redistribution",
     "face: model 'FairFace' has licence 'CC BY 4.0' \u2014 verify before commercial redistribution",
+    "relations: model 'maelic/relsgg-vits16plus' has licence 'DINOv3 License' \u2014 verify before commercial redistribution",
     "wholebody: model 'RTMW wholebody (cocktail14)' has licence 'unspecified' \u2014 verify before commercial redistribution"
   ]
 }

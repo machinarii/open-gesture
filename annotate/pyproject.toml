@@ -30,6 +30,28 @@ va        = ["hsemotion>=0.3"]
 pose      = ["mediapipe>=0.10,<1.0"]
 embed     = ["open_clip_torch>=2.24", "torch>=2.0"]
 wholebody = ["mmpose>=1.3", "mmcv>=2.1", "mmengine>=0.10", "mmdet>=3.2"]
+# RelateAnything (relsgg) -- open-vocabulary relation prediction over the regions
+# the `pose` backend already produces. NOT installed by default, for two reasons:
+#
+# 1. Licence. relsgg's code is Apache-2.0 but its checkpoints are Meta DINOv3
+#    derivatives under the DINOv3 License, the strictest weight terms in this
+#    pipeline (see backends/relations_relsgg.py and annotations/_meta.json).
+# 2. opencv. relsgg depends on opencv-python-headless~=5.0, which installs into
+#    the same cv2/ directory as this project's opencv-python -- the exact
+#    conflict documented above for the `pose` extra, with the same
+#    `libc++abi ... recursive_mutex lock failed` failure mode. Prefer a separate
+#    environment; if installing here anyway, repeat the one-distribution cleanup:
+#        pip uninstall -y opencv-python-headless opencv-python
+#        pip install --force-reinstall --no-deps "opencv-python>=4.8"
+#
+# relsgg also requires Python >=3.12, narrower than this package's >=3.10, and
+# is NOT published on PyPI (pypi.org/pypi/relsgg/json returns 404) -- it installs
+# from source only, hence the git URL. huggingface_hub is relsgg's own [hub]
+# extra, required by RelateAnything.from_pretrained().
+relations = [
+    "relsgg @ git+https://github.com/Maelic/RelateAnything.git",
+    "huggingface_hub>=1.0",
+]
 dev       = ["pytest>=8.0", "pytest-cov"]
 
 [project.scripts]
