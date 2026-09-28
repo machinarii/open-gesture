@@ -52,6 +52,7 @@ def _register_builtin_backends() -> None:
     register("embed", _lazy(f"{pkg}.embed_clip", "ClipEmbedBackend"))
     register("wholebody", _lazy(f"{pkg}.wholebody_rtmw", "RTMWBackend"))
     register("relations", _lazy(f"{pkg}.relations_relsgg", "RelSGGBackend"))
+    register("speech", _lazy(f"{pkg}.speech_whisper", "SpeechBackend"))
 
 
 _register_builtin_backends()

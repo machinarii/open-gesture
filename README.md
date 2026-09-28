@@ -36,9 +36,10 @@ gesture_images/
   ... (21 category folders)
 annotations/              # Machine-generated, produced by annotate/
   quality_report.md       # Curated-vs-predicted disagreements
+  fusion_report.md        # Image + speech: does voice help, does it fail safe?
   _meta.json              # Model versions and per-weight licences
-  faces.json, action_units.json, valence_arousal.json,
-  pose.json, embeddings.json, relations.json   # gitignored; regenerate locally
+  faces.json, action_units.json, valence_arousal.json, pose.json,
+  embeddings.json, relations.json, speech.json   # gitignored; regenerate locally
 annotate/                 # Annotation pipeline (see annotate/README.md)
 pipeline/                 # Synthetic training-data pipeline (see below)
 ```
@@ -107,7 +108,7 @@ Every gesture entry in `manifest.json` includes the following fields:
 
 ## Machine Annotations
 
-`annotate/` is a Python package (`og-annotate`) that runs seven ML backends over
+`annotate/` is a Python package (`og-annotate`) that runs eight ML backends over
 all 99 gesture images and writes their predictions to `annotations/`, so the
 curated metadata can be checked against independent models rather than taken
 on faith. `manifest.json` is never modified by the pipeline -- it remains the
@@ -120,8 +121,9 @@ demographics), `aus` (py-feat -- 20 FACS Action Units, emotion, 3D head pose),
 `va` (HSEmotion -- continuous valence/arousal), `pose` (MediaPipe -- 21
 landmarks per hand, 33 body landmarks), `embed` (CLIP ViT-B-32 -- image and
 text embeddings), `relations` (RelateAnything/relsgg -- open-vocabulary
-relations between body regions), and `wholebody` (RTMW). The last two are
-optional and not installed by default.
+relations between body regions), `speech` (SpeechT5 TTS -> noise -> Whisper
+speech-to-text -- the voice channel), and `wholebody` (RTMW). `relations`,
+`speech` and `wholebody` are optional and not installed by default.
 
 ```bash
 og-annotate list                       # backends and availability
@@ -130,6 +132,7 @@ og-annotate run --backends face,pose   # a subset
 og-annotate run --force --limit 5      # re-run a sample
 og-annotate report                     # regenerate quality_report.md
 og-annotate export-npz                 # derive embeddings.npz
+og-annotate fusion                     # image + speech -> fusion_report.md
 ```
 
 Runs are idempotent and resumable: completed records are skipped, previous
@@ -169,6 +172,22 @@ median triplet score is 0.027, and an initial 0.5 threshold called 3 of the 5
 adaptors non-contact -- all three wrongly. The check therefore uses the model's
 per-pair argmax and no fitted constant, and `top_contact_score` is recorded per
 gesture so strength stays visible.
+
+**Voice.** The premise above is that voice fails exactly when a machine needs
+it -- in noise, at distance -- so the pipeline also tests image + speech
+together. There is no audio in the dataset, so `speech` synthesises one
+plausible utterance per gesture ("Stop! Don't come any closer!" for the
+two-hands stop), mixes in noise from clean to -5 dB, and transcribes it with
+Whisper. `og-annotate fusion` then asks whether adding the transcript helps.
+With clear speech it does: fusion finds the right `intent` in the top 5 for 15
+gestures the image alone missed and loses 4 (paired test, p = 0.02), lifting
+top-5 accuracy from 23% to 34%. At -5 dB, where Whisper gets 74% of words
+wrong, fusion falls back to image-level accuracy rather than below it. The
+failure that does hurt is fluent speech about something else -- a bystander,
+not noise -- and no speech-recognition confidence can flag that. Every weight
+in this chain is MIT or Apache-2.0; Piper, the usual offline TTS, is GPL and
+was excluded. Full numbers, with the caveats of synthetic speech, are in
+`annotations/fusion_report.md`.
 
 **Results.** `annotations/quality_report.md` records **49 findings across the
 99 gestures**: 11 `number_of_people`, 20 `arousal`, 9 `emotional_state`, 9

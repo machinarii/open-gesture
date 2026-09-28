@@ -29,6 +29,9 @@ def build_parser() -> argparse.ArgumentParser:
     report = sub.add_parser("report", help="regenerate annotations/quality_report.md")
     report.add_argument("--out", default=None, help="annotations directory")
 
+    fusion = sub.add_parser("fusion", help="write annotations/fusion_report.md (image + speech)")
+    fusion.add_argument("--out", default=None, help="annotations directory")
+
     export = sub.add_parser("export-npz", help="derive annotations/embeddings.npz")
     export.add_argument("--out", default=None, help="annotations directory")
 
@@ -85,6 +88,13 @@ def _cmd_report(args) -> int:
     return 0
 
 
+def _cmd_fusion(args) -> int:
+    from open_gesture_annotate.fusion import write_fusion_report
+
+    print(f"wrote {write_fusion_report(repo_root(), _resolve_out(args.out))}")
+    return 0
+
+
 def _cmd_export_npz(args) -> int:
     from open_gesture_annotate.backends.embed_clip import export_npz
 
@@ -100,6 +110,8 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_run(args)
     if args.command == "report":
         return _cmd_report(args)
+    if args.command == "fusion":
+        return _cmd_fusion(args)
     if args.command == "export-npz":
         return _cmd_export_npz(args)
     return 2

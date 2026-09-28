@@ -112,10 +112,81 @@ reason, and `run`/`report` skip it cleanly.
 .venv/bin/og-annotate run --force --limit 5       # re-run a sample
 .venv/bin/og-annotate report                      # regenerate quality_report.md
 .venv/bin/og-annotate export-npz                  # derive embeddings.npz
+.venv/bin/og-annotate fusion                      # image + speech: fusion_report.md
 ```
 
 Runs are idempotent and resumable: successful records are skipped, previous errors
 are retried. A backend that will not import is skipped with a reason, never fatally.
+
+### `speech` — the voice channel
+
+The rest of the pipeline is image-only, but the project's premise is that
+machines need more than one channel, and that voice is the one that fails in
+noise. `speech` adds it so that `og-annotate fusion` can measure whether image +
+speech beats either alone, and whether fusion fails safe as speech degrades.
+
+There is no audio in this dataset, so the speech is **synthesised**. Each gesture
+has one utterance in `open_gesture_annotate/utterances.json` — what a person
+might say while making it (two are performed silently). The utterances were
+written from gesture names *without reading the curated `intent` text*, so the
+speech channel is not a paraphrase of the label it is scored against, and
+`fusion_report.md` measures the residual word overlap. Per gesture the backend
+synthesises the utterance once, mixes in white noise at clean / +10 / 0 / −5 dB
+SNR, and transcribes each mix with Whisper — real STT on real audio, so
+recognition errors propagate the way they would live. Each transcript is then
+embedded with the **same** CLIP text tower `embed` uses for the intents, and
+scored for sentiment as a signed valence on HSEmotion's [−1, 1] scale.
+
+`og-annotate fusion` reads `embeddings.json`, `valence_arousal.json` and
+`speech.json` and writes `fusion_report.md`. Fusion is late and parameter-free:
+each query's scores are z-scored per channel and averaged, because image→text
+and text→text cosines sit on different scales. A silent gesture, or a transcript
+lost to noise, falls back to image-only. No weight is fitted, since tuning one on
+99 gestures would report the tuning rather than the method. A shuffled-transcript
+control shows whether any gain comes from *matched* speech.
+
+**Licensing.** Piper, the usual offline TTS, is GPL-3.0-or-later and phonemises
+with espeak-ng (also GPL), so it is excluded, just as the spec excluded AGPL
+Ultralytics. SpeechT5 works from characters, needs no phonemiser, and is MIT.
+Every weight in the chain is MIT or Apache-2.0: SpeechT5 + HiFi-GAN, CMU ARCTIC
+x-vectors, Whisper `base.en` (faster-whisper) and DistilBERT SST-2.
+
+Install with `.[embed,speech]`. First run downloads roughly 1 GB of weights into
+`~/.cache/huggingface/`. TTS is autoregressive on CPU, so a full run takes tens
+of minutes; transcription is well under a second per clip.
+
+**Results** (`annotations/fusion_report.md`, 99 gestures, 97 with speech). Every
+comparison below is a paired exact sign test on the same gestures, because with
+99 gestures a few points is only a few gestures.
+
+- **Speech adds real information to the image.** With clean or +10 dB speech,
+  fusion finds the right `intent` in the top 5 for 15 gestures the image alone
+  missed, and loses 4 (p = 0.02). Top-5 accuracy goes from 23% to 34%, against
+  a chance rate of 5%.
+- **It fails safe under noise.** At −5 dB Whisper gets 74% of words wrong, and
+  fusion becomes statistically indistinguishable from image-only (9 gained,
+  8 lost) — no better, but not worse. Garbled transcripts become semantically
+  diffuse and stop pointing anywhere in particular.
+- **The danger is fluent speech about something else, not noise.** Pairing each
+  image with another gesture's transcript loses top-5 hits against image-only at
+  every noise level (significant at 0 dB, a trend elsewhere). That's the
+  bystander case, and no STT confidence can catch it, because Whisper is rightly
+  confident about clearly heard speech.
+- **Weighting speech by Whisper's own confidence measured no better than equal
+  weighting** at any noise level (p ≥ 0.35). The confidence does track errors
+  (Spearman −0.53 against WER), but it's also low for short correct answers like
+  "Ten." (about 0.4), so it underweights them. Both variants are reported.
+- **Emotion:** fused face + speech valence separates curated-positive from
+  curated-negative gestures at AUC 0.94, against 0.74 for the face alone. The
+  speech share of that is inflated by authorship — each utterance was written
+  knowing its gesture — so it shows sentiment surviving TTS → noise → STT, not
+  how often real speech matches gesture affect.
+
+**Measurement note.** Whisper writes numbers as digits ("Ten." → "10."). WER
+spells digits out before scoring; before that fix, 11 of the 20 "errors" on
+clean speech were formatting, and clean WER read 16% instead of 8%. Transcripts
+themselves are left exactly as Whisper produced them, since the fusion has to
+face the digits too.
 
 ### `relations` depends on `pose` — run order matters
 
@@ -219,6 +290,7 @@ finalisation.
 | `embed` | CLIP ViT-B-32 — image and text embeddings | `embeddings.json` | Apache-2.0 |
 | `wholebody` | RTMW — 133 COCO-WholeBody keypoints (optional, unavailable by default) | `wholebody.json` | Apache-2.0 |
 | `relations` | RelateAnything (relsgg) — open-vocabulary relations between body regions (optional, not installed by default) | `relations.json` | Apache-2.0 (weights: **DINOv3 License**) |
+| `speech` | SpeechT5 TTS → noise → Whisper STT; transcript CLIP embedding and valence (optional) | `speech.json` | MIT / Apache-2.0 (every weight) |
 
 ## Weight licences are not library licences
 
