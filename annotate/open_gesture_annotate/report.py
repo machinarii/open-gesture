@@ -119,6 +119,39 @@ def check_body_parts(gestures: list[Gesture], pose: dict) -> list[Finding]:
     return findings
 
 
+def check_self_contact(gestures: list[Gesture], relations: dict) -> list[Finding]:
+    """Adaptors are defined by self-touch; check the relation model agrees.
+
+    McNeill/Ekman adaptors are "self-touching or body-manipulating" gestures --
+    the one gesture_type whose definition makes a falsifiable spatial claim.
+    RelateAnything scores hand-to-body contact over the regions derived from
+    pose landmarks, so this is the first check in the pipeline that tests a
+    `physical_description`-level configuration rather than mere part presence.
+
+    Checked in one direction only, like check_body_parts: a curated adaptor with
+    no predicted contact is flagged; predicted contact in a non-adaptor gesture
+    is not, since plenty of emblems (a salute, a facepalm-adjacent thinking pose)
+    touch the body incidentally without being adaptors.
+    """
+    findings = []
+    for g in gestures:
+        rec = relations.get(g.id)
+        if not rec or rec.get("status") != "ok":
+            continue
+        if g.raw.get("gesture_type") != "adaptor":
+            continue
+        if rec.get("self_contact"):
+            continue
+        if len(rec.get("regions") or []) < 2:
+            continue  # nothing to relate; not evidence of absent contact
+        findings.append(Finding(
+            g.id, "self_contact", "medium", "adaptor", "no hand-body contact",
+            "curated gesture_type is adaptor (self-touching) but no hand-to-body "
+            "contact relation scored above threshold",
+        ))
+    return findings
+
+
 def check_similarity(gestures: list[Gesture], embeddings: dict) -> list[Finding]:
     """Flag the bottom decile of image-to-intent similarity."""
     scored = [(g, float(embeddings[g.id]["similarity_intent"]))
@@ -143,12 +176,14 @@ def build_findings(root: Path, out_dir: Path) -> list[Finding]:
     va = _ok_records(out_dir / "valence_arousal.json")
     pose = _ok_records(out_dir / "pose.json")
     embeddings = _ok_records(out_dir / "embeddings.json")
+    relations = _ok_records(out_dir / "relations.json")
 
     findings = (
         check_people_count(gestures, faces)
         + check_body_parts(gestures, pose)
         + check_valence(gestures, va)
         + check_arousal(gestures, va)
+        + check_self_contact(gestures, relations)
         + check_similarity(gestures, embeddings)
     )
     order = {"high": 0, "medium": 1, "low": 2}
@@ -216,6 +251,7 @@ def _check_summaries(
     va: dict,
     pose: dict,
     embeddings: dict,
+    relations: dict,
 ) -> list[tuple[str, int, int, str]]:
     """(check, gestures considered, findings, how-to-read explanation) for every check.
 
@@ -240,6 +276,9 @@ def _check_summaries(
         1 for g in gestures if g.id in va and g.raw.get("arousal") in ("low", "medium", "high")
     )
     similarity_n = sum(1 for g in gestures if g.id in embeddings)
+    contact_n = sum(
+        1 for g in gestures if g.id in relations and g.raw.get("gesture_type") == "adaptor"
+    )
 
     return [
         (
@@ -282,6 +321,25 @@ def _check_summaries(
             "an absolute arousal scale.",
         ),
         (
+            "self_contact", contact_n, counts.get("self_contact", 0),
+            "RelateAnything scores relations over regions derived from MediaPipe "
+            "landmarks (hands, head, torso, arms), not from a detector -- a region "
+            "MediaPipe missed is a region the relation model never sees. Only gestures "
+            "curated as gesture_type `adaptor` are checked, and only in the "
+            "claims-self-touch-but-none-predicted direction. The model returns one "
+            "predicate per region pair, so a contact answer means contact beat every "
+            "alternative in the vocabulary for that pair, `beside` included. There is "
+            "deliberately no score threshold: the checkpoint's calibration belongs to "
+            "its own vocabulary, and against the custom one used here the median "
+            "triplet score is 0.027, so a probability-shaped gate would discard real "
+            "contact. Read a pass as weak evidence on its own -- 79 of 99 gestures "
+            "read as self-contact under this rule, so agreement is cheap; the "
+            "informative signal is the ranking, where the strongest contact scores "
+            "belong to hand-to-face gestures (Nose Thumb, Facepalm, Zipped Lips, "
+            "Salute) across several gesture_types. `top_contact_score` in "
+            "relations.json carries that strength per gesture.",
+        ),
+        (
             "intent_similarity", similarity_n, counts.get("intent_similarity", 0),
             "CLIP image-to-intent cosine similarity is reported for the bottom decile "
             "of this run. CLIP has a well-known image-text modality gap, so raw scores "
@@ -302,6 +360,7 @@ def write_report(root: Path, out_dir: Path) -> Path:
     va = _ok_records(out_dir / "valence_arousal.json")
     pose = _ok_records(out_dir / "pose.json")
     embeddings = _ok_records(out_dir / "embeddings.json")
+    relations = _ok_records(out_dir / "relations.json")
 
     lines = [
         "# Annotation Quality Report",
@@ -338,7 +397,7 @@ def write_report(root: Path, out_dir: Path) -> Path:
 
     lines += ["## Notes", ""]
     for check, coverage, count, explanation in _check_summaries(
-        gestures_list, findings, faces, va, pose, embeddings
+        gestures_list, findings, faces, va, pose, embeddings, relations
     ):
         lines.append(
             f"- **{check}** -- {count} finding(s) across {coverage} gesture(s) "

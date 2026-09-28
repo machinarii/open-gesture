@@ -117,6 +117,60 @@ reason, and `run`/`report` skip it cleanly.
 Runs are idempotent and resumable: successful records are skipped, previous errors
 are retried. A backend that will not import is skipped with a reason, never fatally.
 
+### `relations` depends on `pose` — run order matters
+
+Same shape as the `va`/`face` dependency below, for the same reason. The
+RelateAnything model scores relations between regions *you* supply; it detects
+nothing itself. Those regions come from the MediaPipe landmarks in `pose.json`
+— hand boxes from the 21 hand landmarks, and head, torso and arm boxes from the
+visible subset of the 33 body landmarks. Handing it whole-image boxes instead
+would yield confident triplets about nothing, so it reports itself
+**unavailable** when `pose.json` is absent rather than degrading silently:
+
+```
+relations  unavailable: requires annotations/pose.json — run the pose backend first:
+                        og-annotate run --backends pose
+```
+
+Plain `og-annotate run` handles this (backends run in sorted order and `pose`
+precedes `relations`); an explicit `--backends relations` on a fresh checkout
+will not. `--out` is honoured the same way `va` honours it.
+
+Read the triplets with one constraint in mind: relsgg returns **one predicate
+per region pair** — the argmax over the supplied vocabulary — so `relations.json`
+holds the model's best single answer for each pair, not a ranked set of
+everything true of it. The vocabulary in `GESTURE_PREDICATES` is picked around
+that: strings that would be true *simultaneously* with contact (`near`,
+`in front of`) are left out, because they would take the slot without
+contradicting contact, while strings that are a real alternative claim
+(`beside`, `above`) are kept, because the model preferring one of those *is* the
+answer the `self_contact` check wants.
+
+A gesture that yields fewer than two regions — a hand-first crop with no visible
+body, of which this dataset has several — records a successful empty result, not
+an error. One region cannot form a pair.
+
+Installing this extra needs care: `relsgg` requires Python >=3.12, is not on
+PyPI (the extra installs it from git), and depends on `opencv-python-headless`,
+which lands in the same `cv2/` directory as this project's `opencv-python` —
+the identical conflict the `pose` extra causes with `opencv-contrib-python`.
+
+Verified on Linux/aarch64, Python 3.12: installing it into the same venv as the
+other five backends works, provided you repeat the one-distribution cleanup
+afterwards, which leaves all six backends available at once:
+
+```bash
+uv pip install -e ".[relations]"
+uv pip uninstall opencv-python-headless opencv-python
+uv pip install --no-deps --reinstall "opencv-python>=4.8"
+```
+
+A separate environment also works and sidesteps the conflict entirely, at one
+cost worth knowing: `_meta.json` records the availability of every backend *as
+seen by the environment that wrote it*, so a split install makes it report
+`relations` unavailable even when `relations.json` was just produced. Running
+everything from one environment keeps that record truthful.
+
 ### `va` depends on `face` — run order matters
 
 `va` (HSEmotion) crops each face before inference, using the bounding boxes
@@ -164,13 +218,14 @@ finalisation.
 | `pose` | MediaPipe — 21x2 hand + 33 body landmarks | `pose.json` | Apache-2.0 |
 | `embed` | CLIP ViT-B-32 — image and text embeddings | `embeddings.json` | Apache-2.0 |
 | `wholebody` | RTMW — 133 COCO-WholeBody keypoints (optional, unavailable by default) | `wholebody.json` | Apache-2.0 |
+| `relations` | RelateAnything (relsgg) — open-vocabulary relations between body regions (optional, not installed by default) | `relations.json` | Apache-2.0 (weights: **DINOv3 License**) |
 
 ## Weight licences are not library licences
 
 The table above states each backend *library's* licence, and every one is
 permissive. That is not the whole story: a library's licence does not
 automatically cover the pretrained weights it loads, and this pipeline's own
-provenance checks found four places where the two diverge. Given this repo
+provenance checks found five places where the two diverge. Given this repo
 promises commercial use, this is the single most consequential thing a
 downstream user needs to know before shipping anything built on these
 annotations:
@@ -184,6 +239,12 @@ annotations:
 - **open_clip's `ViT-B-32`/`laion2b_s34b_b79k` checkpoint is MIT**, not
   Apache-2.0 as is commonly assumed by association with the Apache-2.0
   `open_clip_torch` library.
+- **RelateAnything's checkpoints are under the DINOv3 License**, not the
+  Apache-2.0 of the `relsgg` library. They are derivatives of Meta's DINOv3
+  pretrained weights (vision backbone *and* the distilled predicate text
+  student), and RelateAnything's own `THIRD_PARTY_NOTICES.md` says so
+  explicitly. These are the strictest weight terms in this pipeline, which is
+  why `relations` is optional and off by default.
 - **RTMW's checkpoint licence is unspecified.** mmpose's code is Apache-2.0,
   but the RTMW "cocktail14" checkpoint was trained partly on datasets
   published under research-only/non-commercial licences (e.g. AI Challenger,
@@ -205,13 +266,30 @@ metadata and model predictions disagree. It reports, it never corrects.
 about any that is not permissive.
 
 From the real run over all 99 gestures: `quality_report.md` currently records
-49 findings. Two results stand out:
+49 findings across six checks. Three results stand out:
 
 - **`body_parts` produced zero findings.** MediaPipe's hand detection agreed
   with all 96 curated hand claims checked in this run — 100% recall on the
   one direction the check covers (a curated hand claim with no hand detected).
   Zero findings here is a genuine, verified result, not a sign the check
   didn't run.
+- **`self_contact` produced zero findings too.** All five curated `adaptor`
+  gestures predict `right hand -> touching -> head`, which is correct for every
+  one of them (Facepalm, D'oh Facepalm, Tensed Fingers, Hand Visor, Hands Over
+  Mouth). Ranking all 99 gestures by their strongest hand-to-body contact score
+  puts hand-to-face gestures at the top — Nose Thumb, Facepalm, Zipped Lips,
+  Hat Tip, Salute, Cuckoo Sign, Finger to Lips — across five different curated
+  `gesture_type`s, so the score is a real signal even though its absolute scale
+  is not (see below).
+- **Score calibration does not survive a vocabulary swap.** This one cost a
+  wrong answer before it was caught. The checkpoint ships a Platt map that makes
+  a score read as a probability, but that fit belongs to the released
+  vocabulary; against the custom one used here the median triplet score is
+  0.027. An initial 0.5 threshold called 3 of the 5 adaptors non-contact — all
+  three wrongly. The check now uses the model's per-pair argmax with no fitted
+  constant, and records `top_contact_score` so strength stays inspectable.
+  Fitting a threshold to the adaptor labels was rejected deliberately: it would
+  make the check agree with the labels it exists to question.
 - **Facial affect is a weak proxy for gesture affect.** 78 of 93 detected
   faces (84%) read as Neutral, while the curated `emotional_state` label is
   `neutral` for only 49 of 99 gestures. In this largely hand-first, close-up
