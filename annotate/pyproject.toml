@@ -52,6 +52,12 @@ relations = [
     "relsgg @ git+https://github.com/Maelic/RelateAnything.git",
     "huggingface_hub>=1.0",
 ]
+# The voice channel: TTS -> noise -> Whisper round-trip (see backends/speech_whisper.py).
+# Needs [embed] too -- transcripts are embedded with the same CLIP text tower as the
+# intents. Every weight is MIT or Apache-2.0. piper-tts, the usual offline TTS, is
+# GPL-3.0-or-later and phonemises with GPL espeak-ng, so it is deliberately absent.
+speech    = ["faster-whisper>=1.0", "transformers>=4.40", "sentencepiece>=0.2",
+             "huggingface_hub>=0.20"]
 dev       = ["pytest>=8.0", "pytest-cov"]
 
 [project.scripts]
@@ -63,6 +69,9 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["open_gesture_annotate*"]
+
+[tool.setuptools.package-data]
+open_gesture_annotate = ["utterances.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

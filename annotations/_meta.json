@@ -160,6 +160,49 @@
       "sidecar": "relations.json",
       "version": "1.0.0"
     },
+    "speech": {
+      "available": true,
+      "name": "speech-roundtrip",
+      "provenance": {
+        "excluded": "piper-tts (GPL-3.0-or-later) and its espeak-ng phonemiser (GPL-3.0); cardiffnlp/twitter-roberta-base-sentiment-latest (CC-BY-4.0, tweet-trained); j-hartmann/emotion-english-distilroberta-base (no licence stated).",
+        "library": {
+          "license": "MIT / Apache-2.0",
+          "name": "faster-whisper + transformers",
+          "version": "faster-whisper 1.2.1, transformers 5.17.0"
+        },
+        "models": [
+          {
+            "license": "MIT",
+            "name": "microsoft/speecht5_tts",
+            "role": "text-to-speech"
+          },
+          {
+            "license": "MIT",
+            "name": "microsoft/speecht5_hifigan",
+            "role": "vocoder"
+          },
+          {
+            "license": "MIT",
+            "name": "Matthijs/cmu-arctic-xvectors (spkrec-xvect/cmu_us_slt_arctic-*)",
+            "role": "TTS speaker x-vector"
+          },
+          {
+            "license": "MIT",
+            "name": "Systran/faster-whisper-base.en",
+            "role": "speech-to-text"
+          },
+          {
+            "license": "Apache-2.0",
+            "name": "distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+            "role": "transcript valence"
+          }
+        ],
+        "note": "Speech is synthesised, not recorded: utterances.json -> SpeechT5 -> white noise at ['clean', 'snr10', 'snr0', 'snr-5'] -> Whisper. The x-vectors are MIT on the Hub; they derive from CMU ARCTIC, whose licence permits commercial use provided its copyright notice is retained. Transcripts are embedded with the embed backend's CLIP model, recorded under that backend."
+      },
+      "reason": "SpeechT5 -> Whisper base.en, 4 noise conditions",
+      "sidecar": "speech.json",
+      "version": "faster-whisper 1.2.1, transformers 5.17.0"
+    },
     "va": {
       "available": true,
       "name": "hsemotion-va",
@@ -207,7 +250,7 @@
       "version": "unknown"
     }
   },
-  "generated_at": "2026-09-28T00:06:23.977600+00:00",
+  "generated_at": "2026-09-28T01:19:45.249814+00:00",
   "licence_warnings": [
     "aus: model 'mobilefacenet' has licence 'unknown -- upstream repo carries no LICENSE file' \u2014 verify before commercial redistribution",
     "face: model 'Landmark106 (2d_106)' has licence 'check upstream weight licence' \u2014 verify before commercial redistribution",
