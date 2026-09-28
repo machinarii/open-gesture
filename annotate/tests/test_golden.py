@@ -60,6 +60,25 @@ def numeric_leaves(obj, prefix="") -> dict:
     return out
 
 
+def string_leaves(obj, prefix="") -> dict:
+    """Flatten every string in a record to a dotted path, for exact comparison.
+
+    STRUCTURAL only covers top-level keys, which misses categorical outputs
+    nested inside lists -- notably uniface's per-face `faces[i].emotion.label`,
+    the face backend's only emotion output, which would otherwise go unchecked.
+    """
+    out = {}
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            out.update(string_leaves(v, f"{prefix}.{k}" if prefix else str(k)))
+    elif isinstance(obj, (list, tuple)):
+        for i, v in enumerate(obj):
+            out.update(string_leaves(v, f"{prefix}[{i}]"))
+    elif isinstance(obj, str):
+        out[prefix] = obj
+    return out
+
+
 def _load_backend(key):
     import importlib
 
@@ -98,6 +117,11 @@ def test_matches_golden(case, gesture_id, backend_key):
     for key in STRUCTURAL:
         if key in expected:
             assert actual.get(key) == expected[key], f"{key} changed"
+
+    # Categorical leaves (emotion labels, handedness, ...) must match exactly.
+    exp_strs, act_strs = string_leaves(expected), string_leaves(actual)
+    changed = {k: (v, act_strs.get(k)) for k, v in exp_strs.items() if act_strs.get(k) != v}
+    assert not changed, f"categorical output changed: {changed}"
 
     # Numeric leaves must match within tolerance, with the same shape.
     exp_nums, act_nums = numeric_leaves(expected), numeric_leaves(actual)
