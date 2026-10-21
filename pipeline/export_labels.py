@@ -18,6 +18,13 @@ The heads mirror the README's multi-label design (gesture ID + emotional
 state + arousal + gesture type + cultural context), with `category` added as
 a coarse grouping head.
 
+The `none` class. Every head ends with NONE ("no gesture"), appended after
+the sorted manifest vocabulary so adding it moved no existing index. Without
+it a classifier must call every relaxed hand one of the 99 gestures. Its
+training samples come from real data (HaGRID's no_gesture; see
+import_hagrid.py), and labels.jsonl carries one `none` record so extractors
+can attach it like any gesture.
+
 Note on PAD: the manifest carries valence (`emotional_state`) and `arousal`
 but NOT dominance, so this exports PA, not full PAD. Add a `dominance` field
 to the manifest if you want the third head.
@@ -43,6 +50,7 @@ HEADS = [
     ("gesture_type", "gesture_type"),
     ("cultural_context", "cultural_context"),
 ]
+NONE = "none"
 
 
 def build_vocab(gestures: list[dict], field: str) -> dict[str, int]:
@@ -53,7 +61,9 @@ def build_vocab(gestures: list[dict], field: str) -> dict[str, int]:
     a model's head silently points at the wrong classes.
     """
     values = sorted({str(g[field]) for g in gestures})
-    return {value: idx for idx, value in enumerate(values)}
+    if NONE in values:
+        raise SystemExit(f"error: manifest field {field!r} already uses the reserved value {NONE!r}")
+    return {value: idx for idx, value in enumerate(values + [NONE])}
 
 
 def main() -> int:
@@ -116,9 +126,17 @@ def main() -> int:
                 },
             }
             fh.write(json.dumps(record) + "\n")
+        none_record = {
+            "id": NONE,
+            "name": "No gesture",
+            "file": None,
+            "labels": {out_key: vocabs[out_key][NONE] for _, out_key in HEADS},
+            "meta": {},
+        }
+        fh.write(json.dumps(none_record) + "\n")
 
     print(f"Wrote {schema_path}")
-    print(f"Wrote {labels_path}  ({len(gestures)} records)")
+    print(f"Wrote {labels_path}  ({len(gestures)} gestures + 1 `{NONE}` record)")
     print("\nHeads:")
     for _, out_key in HEADS:
         print(f"  {out_key:18s} {len(vocabs[out_key]):3d} classes")

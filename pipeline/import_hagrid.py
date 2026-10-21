@@ -17,8 +17,14 @@ real clips by their length alone.
 Labels: HaGRID classes map to gestures via hagrid_hands.HAGRID_TO_GESTURES.
 Where one hand shape maps to several gestures (e.g. `stop` -> neg-05, greet-02),
 the sample is labelled with the FIRST id: no still image can separate them, so
-score predictions by group (eval_curated.py does). HaGRID's `no_gesture` is not
-imported -- label_schema.json has no "none" class.
+score predictions by group (eval_curated.py does). HaGRID's `no_gesture` images
+become the `none` class (export_labels.NONE).
+
+Resumable: each finished image is logged to <out>/index.partial.jsonl as it
+completes, and a re-run skips what the log already holds -- so an interrupted
+import picks up where it stopped, and raising --per-class only fetches the new
+images (the per-class sample order is fixed by --seed). Fetch failures are not
+logged, so they are retried. index.json is written at the end from the log.
 
 --curated writes the 99 curated images through the same extraction instead,
 as the held-out test set for eval_curated.py. Never mix those into training.
@@ -156,50 +162,86 @@ def extract(image_bytes: bytes) -> tuple[list[float], float] | None:
     return lf.frame_features(results), image.shape[1] / image.shape[0]
 
 
+# Training label per HaGRID class: the first gesture of each shape group, and
+# `none` for HaGRID's no_gesture.
+CLASS_TO_GESTURE = {cls: gestures[0] for cls, gestures in HAGRID_TO_GESTURES.items()}
+CLASS_TO_GESTURE["no_gesture"] = "none"
+
+
 def select(annotations: Path, split: str, per_class: int, rng) -> list[tuple[str, str]]:
-    """(HaGRID class, image id) pairs: up to per_class images per mapped class."""
+    """(HaGRID class, image id) pairs: up to per_class images per mapped class.
+
+    Each class's full permutation is drawn before slicing, so the first N
+    picks are the same for any per_class >= N -- what makes raising
+    --per-class a resume rather than a different sample.
+    """
     z = zipfile.ZipFile(annotations)
     picked = []
-    for cls in sorted(HAGRID_TO_GESTURES):
+    # no_gesture last: adding it must not shift the draws of the gesture classes.
+    for cls in sorted(HAGRID_TO_GESTURES) + ["no_gesture"]:
         ids = sorted(json.loads(z.read(f"annotations/{split}/{cls}.json")))
         picked += [(cls, ids[i]) for i in rng.permutation(len(ids))[:per_class]]
     return picked
 
 
-def write_shards(items, out: Path, lookup, head_order, frames: int, workers: int) -> None:
-    """items: (gesture_id, shard stem, zero-arg callable returning image bytes)."""
+def write_shards(items, out: Path, lookup, head_order, frames: int, workers: int,
+                 resume: bool = True, batch: int = 2000) -> None:
+    """items: (gesture_id, shard stem, zero-arg callable returning image bytes).
+
+    Works in batches so at most `batch` encoded images are in memory, and logs
+    each outcome to index.partial.jsonl as it lands (see module docstring).
+    """
     out.mkdir(parents=True, exist_ok=True)
-    index = {"head_order": head_order, "feature_dim": lf.FEATURE_DIM, "shards": []}
-    kept = dropped = failed = 0
-    with ThreadPoolExecutor(workers * 4) as fetchers, ProcessPoolExecutor(workers) as extractors:
-        downloads = [(gid, stem, fetchers.submit(load)) for gid, stem, load in items]
-        jobs = []
-        for gid, stem, dl in downloads:
-            try:
-                jobs.append((gid, stem, extractors.submit(extract, dl.result())))
-            except Exception as exc:  # one bad download must not sink the run
-                print(f"  fetch failed {stem}: {exc}")
-                failed += 1
-        for n, (gid, stem, job) in enumerate(jobs, 1):
-            result = job.result()
-            if result is None:
-                dropped += 1
-            else:
-                feats, aspect = result
-                shard = out / f"{stem}.npz"
-                np.savez_compressed(
-                    shard,
-                    sequence=np.tile(np.asarray(feats, dtype=np.float32), (frames, 1)),
-                    labels=np.asarray(lookup[gid], dtype=np.int32),
-                    gesture_id=gid,
-                    aspect=np.float32(aspect),
-                )
-                index["shards"].append({"file": shard.name, "gesture_id": gid, "frames": frames})
-                kept += 1
-            if n % 500 == 0:
-                print(f"  {n}/{len(jobs)} extracted", flush=True)
+    log_path = out / "index.partial.jsonl"
+    if not resume:
+        log_path.unlink(missing_ok=True)
+    done = {}
+    if log_path.is_file():
+        for line in log_path.read_text().splitlines():
+            rec = json.loads(line)
+            done[rec["stem"]] = rec
+    todo = [item for item in items if item[1] not in done]
+    if done:
+        print(f"Resuming: {len(items) - len(todo)} of {len(items)} already done")
+    failed = 0
+    with ThreadPoolExecutor(workers * 4) as fetchers, ProcessPoolExecutor(workers) as extractors, \
+            log_path.open("a") as log:
+        for start in range(0, len(todo), batch):
+            downloads = [(gid, stem, fetchers.submit(load)) for gid, stem, load in todo[start : start + batch]]
+            jobs = []
+            for gid, stem, dl in downloads:
+                try:
+                    jobs.append((gid, stem, extractors.submit(extract, dl.result())))
+                except Exception as exc:  # one bad download must not sink the run
+                    print(f"  fetch failed {stem}: {exc}")
+                    failed += 1
+            for gid, stem, job in jobs:
+                result = job.result()
+                if result is None:
+                    rec = {"stem": stem, "dropped": True}
+                else:
+                    feats, aspect = result
+                    np.savez_compressed(
+                        out / f"{stem}.npz",
+                        sequence=np.tile(np.asarray(feats, dtype=np.float32), (frames, 1)),
+                        labels=np.asarray(lookup[gid], dtype=np.int32),
+                        gesture_id=gid,
+                        aspect=np.float32(aspect),
+                    )
+                    rec = {"stem": stem, "file": f"{stem}.npz", "gesture_id": gid, "frames": frames}
+                log.write(json.dumps(rec) + "\n")
+                log.flush()
+                done[stem] = rec
+            print(f"  {min(start + batch, len(todo))}/{len(todo)} processed", flush=True)
+
+    # Only this run's selection, in selection order: a smaller --per-class
+    # after a bigger one must not drag the extra shards back in.
+    shards = [done[stem] for _, stem, _ in items if stem in done and not done[stem].get("dropped")]
+    index = {"head_order": head_order, "feature_dim": lf.FEATURE_DIM,
+             "shards": [{k: s[k] for k in ("file", "gesture_id", "frames")} for s in shards]}
     (out / "index.json").write_text(json.dumps(index, indent=2) + "\n")
-    print(f"\nKept {kept}, dropped {dropped} (no hand detected), fetch failures {failed}.")
+    dropped = sum(1 for _, stem, _ in items if done.get(stem, {}).get("dropped"))
+    print(f"\nKept {len(shards)}, dropped {dropped} (no hand detected), fetch failures {failed} (retried on re-run).")
     print(f"Index: {out / 'index.json'}")
 
 
@@ -221,7 +263,8 @@ def main() -> int:
     if args.curated:
         gestures = json.loads((REPO / "manifest.json").read_text())["gestures"]
         items = [(g["id"], g["id"], (REPO / g["file"]).read_bytes) for g in gestures]
-        write_shards(items, args.out or HERE / "sequences_curated", lookup, head_order, args.frames, args.workers)
+        write_shards(items, args.out or HERE / "sequences_curated", lookup, head_order, args.frames, args.workers,
+                     resume=False)  # 99 local images: always re-extract
         return 0
 
     if not args.annotations:
@@ -235,7 +278,7 @@ def main() -> int:
             print(f"  not in image zip: {name}")
             continue
         offset, size = index[name]
-        gid = HAGRID_TO_GESTURES[cls][0]
+        gid = CLASS_TO_GESTURE[cls]
         items.append((gid, f"{gid}__hagrid_{cls}_{image_id}", lambda n=name, o=offset, s=size: fetch_member(n, o, s)))
     print(f"Fetching and extracting {len(items)} images ({args.split})...")
     write_shards(items, args.out or HERE / f"sequences_hagrid_{args.split}", lookup, head_order,

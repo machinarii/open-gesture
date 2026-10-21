@@ -5,7 +5,7 @@
   "heads": {
     "gesture_id": {
       "source_field": "id",
-      "num_classes": 99,
+      "num_classes": 100,
       "classes": {
         "affirm-01": 0,
         "affirm-02": 1,
@@ -105,12 +105,13 @@
         "urg-08": 95,
         "urg-09": 96,
         "wish-01": 97,
-        "wish-02": 98
+        "wish-02": 98,
+        "none": 99
       }
     },
     "category": {
       "source_field": "category",
-      "num_classes": 21,
+      "num_classes": 22,
       "classes": {
         "Affirmative & Positive": 0,
         "Bicycle Signals": 1,
@@ -132,46 +133,51 @@
         "Sports & Taunting": 17,
         "Team Building": 18,
         "Urgency & Attention": 19,
-        "Wishful & Luck": 20
+        "Wishful & Luck": 20,
+        "none": 21
       }
     },
     "emotional_state": {
       "source_field": "emotional_state",
-      "num_classes": 3,
+      "num_classes": 4,
       "classes": {
         "negative": 0,
         "neutral": 1,
-        "positive": 2
+        "positive": 2,
+        "none": 3
       }
     },
     "arousal": {
       "source_field": "arousal",
-      "num_classes": 3,
+      "num_classes": 4,
       "classes": {
         "high": 0,
         "low": 1,
-        "medium": 2
+        "medium": 2,
+        "none": 3
       }
     },
     "gesture_type": {
       "source_field": "gesture_type",
-      "num_classes": 6,
+      "num_classes": 7,
       "classes": {
         "adaptor": 0,
         "emblem": 1,
         "illustrator-beat": 2,
         "illustrator-deictic": 3,
         "illustrator-iconic": 4,
-        "illustrator-metaphoric": 5
+        "illustrator-metaphoric": 5,
+        "none": 6
       }
     },
     "cultural_context": {
       "source_field": "cultural_context",
-      "num_classes": 3,
+      "num_classes": 4,
       "classes": {
         "southern-european": 0,
         "universal": 1,
-        "western": 2
+        "western": 2,
+        "none": 3
       }
     }
   },

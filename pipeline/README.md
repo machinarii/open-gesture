@@ -166,10 +166,10 @@ python3 hagrid_hands.py eval
 
 # Full: sampled images -> Holistic -> 258-D shards for train_classifier.py.
 #   Images are range-read out of the 119 GB 512px zip; nothing else downloads.
-python3 import_hagrid.py --annotations /path/to/annotations.zip --per-class 1000
+python3 import_hagrid.py --annotations /path/to/annotations.zip --per-class 3000
 python3 import_hagrid.py --curated
-python3 train_classifier.py --sequences sequences_hagrid_train --batch 128 --mirror
-python3 eval_curated.py
+python3 train_classifier.py --sequences sequences_hagrid_train --batch 128 --mirror --seq-len 32
+python3 eval_curated.py --seq-len 32
 ```
 
 Results (2026-10-20), on the 25 curated gestures HaGRID directly matches.
@@ -180,11 +180,26 @@ variants) count as one answer:
 |---|---|---|---|
 | Fast | 2D hand landmarks, ≤20k/class + `no_gesture` | 99.1% (person split) | 24/25 |
 | Full | 18,286 images → Holistic, `--mirror` | 92–97% (random split) | 20–22/25 over 3 seeds |
+| Full | 56,280 images (~3k/class + 1,378 `none`) | 96% (random split) | 21–22/25 over 2 seeds |
 
 The fast model's one miss is Evil Horns read as `one`, which the full
 model misses too. With 25 test gestures, one gesture is 4 points: treat
-differences of a gesture or two as noise. The full model trails mainly
-because it gets ~18x less data per class and has no `no_gesture` class.
+differences of a gesture or two as noise.
+
+Tripling the data and adding `none` did not move the full model, and the
+gap to the fast model is mostly that noise: run on Holistic's hand
+landmarks instead of HandLandmarker's, the fast model scores 23/25. The
+remaining misses are index-finger shapes (point, horns) read as `mute` and
+crossed forearms read as praying hands. More signal now needs a bigger
+test set, not more HaGRID.
+
+`--seq-len 32` because 56k samples x 64 frames does not fit in 32 GB once
+mirrored; a HaGRID sample is one frame tiled, so 32 loses nothing.
+`import_hagrid.py` is resumable -- re-run the same command after an
+interruption.
+
+The `none` class (export_labels.NONE) is appended to every head, so no
+existing class index moved.
 
 Per-frame CPU cost (one thread, 640px frame): MediaPipe HandLandmarker
 23 ms, Holistic 37 ms, full INT8 TFLite classifier 0.04 ms per 64-frame
