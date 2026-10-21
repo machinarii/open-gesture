@@ -8,6 +8,10 @@ clips/
 augmented/
 sequences/
 sequences_smoke/
+# HaGRID-derived (share-alike; never bundled -- see import_hagrid.py)
+sequences_hagrid_*/
+sequences_curated/
+.cache/
 model/
 __pycache__/
 *.pyc

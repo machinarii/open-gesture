@@ -17,6 +17,7 @@ via landmark_format.frame_features (the shared layout), and saved as one .npz:
     labels    int32   [num_heads]        from labels/label_schema.json, in a
                                           fixed head order recorded in the index
     gesture_id str                       source gesture
+    aspect    float32                    frame width / height (landmark_format.normalize)
 
 An index.json ties the shards together and records the head order so the
 trainer reads labels positionally without guessing.
@@ -109,6 +110,7 @@ def main() -> int:
             continue
 
         cap = cv2.VideoCapture(str(clip))
+        aspect = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / max(cap.get(cv2.CAP_PROP_FRAME_HEIGHT), 1.0)
         frames, detected = [], 0
         while True:
             ok, frame = cap.read()
@@ -132,6 +134,7 @@ def main() -> int:
             sequence=np.asarray(frames, dtype=np.float32),
             labels=np.asarray(lookup[gesture_id], dtype=np.int32),
             gesture_id=gesture_id,
+            aspect=np.float32(aspect),
         )
         index["shards"].append({"file": shard.name, "gesture_id": gesture_id, "frames": len(frames)})
         kept += 1

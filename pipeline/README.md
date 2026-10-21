@@ -86,6 +86,9 @@ and correctly detected.
 | `landmark_format.py` | — | (imported module) | stdlib |
 | `extract_landmarks.py` | clips + `labels/` | `sequences/` | mediapipe, opencv, numpy |
 | `train_classifier.py` | `sequences/` + `labels/` | `model/` | tensorflow, numpy |
+| `hagrid_hands.py` | HaGRID `annotations.zip` | `model/hagrid_hands.pt` | torch, numpy |
+| `import_hagrid.py` | HaGRID images (remote) / curated images | `sequences_hagrid_*/`, `sequences_curated/` | mediapipe, opencv, numpy |
+| `eval_curated.py` | `model/` + `sequences_curated/` | score on the 99 curated images | tensorflow, numpy |
 
 `export_labels.py` writes the class↔index contract; re-run after any manifest
 change. `generate_motion_specs.py` skips existing files so hand-authored specs
@@ -142,6 +145,72 @@ python3 train_classifier.py
 Clip filenames must encode the gesture id before a `__` separator, e.g.
 `affirm-01__lighting3_angle12.mp4`, so the extractor can join each clip to its
 labels.
+
+### Real data: HaGRID v2
+
+[HaGRID v2](https://github.com/hukenovs/hagrid) is 1.09M photos of ~34 static
+hand gestures by thousands of people. It directly matches 25 of the 99
+gestures (`hagrid_hands.HAGRID_TO_GESTURES`); arm, body, motion and
+hand-to-face gestures it does not cover. Its licence is HaGRID's own rework
+of CC BY-SA 4.0: commercial use allowed, attribution and share-alike apply,
+portrait rights not granted. Per the design spec it is never bundled here --
+its annotations live outside the repo and everything derived from it is
+gitignored.
+
+Two paths, both scored on the 99 curated images, which neither trains on:
+
+```bash
+# Fast: HaGRID's own 2D hand landmarks (719 MB annotation zip, no images)
+python3 hagrid_hands.py train --annotations /path/to/annotations.zip
+python3 hagrid_hands.py eval
+
+# Full: sampled images -> Holistic -> 258-D shards for train_classifier.py.
+#   Images are range-read out of the 119 GB 512px zip; nothing else downloads.
+python3 import_hagrid.py --annotations /path/to/annotations.zip --per-class 3000
+python3 import_hagrid.py --curated
+python3 train_classifier.py --sequences sequences_hagrid_train --batch 128 --mirror --seq-len 32
+python3 eval_curated.py --seq-len 32
+```
+
+Results (2026-10-20), on the 25 curated gestures HaGRID directly matches.
+Groups of gestures that share one hand shape (e.g. the three timeout
+variants) count as one answer:
+
+| Model | Training data | HaGRID held-out | Curated |
+|---|---|---|---|
+| Fast | 2D hand landmarks, ≤20k/class + `no_gesture` | 99.1% (person split) | 24/25 |
+| Full | 18,286 images → Holistic, `--mirror` | 92–97% (random split) | 20–22/25 over 3 seeds |
+| Full | 56,280 images (~3k/class + 1,378 `none`) | 96% (random split) | 21–22/25 over 2 seeds |
+
+The fast model's one miss is Evil Horns read as `one`, which the full
+model misses too. With 25 test gestures, one gesture is 4 points: treat
+differences of a gesture or two as noise.
+
+Tripling the data and adding `none` did not move the full model, and the
+gap to the fast model is mostly that noise: run on Holistic's hand
+landmarks instead of HandLandmarker's, the fast model scores 23/25. The
+remaining misses are index-finger shapes (point, horns) read as `mute` and
+crossed forearms read as praying hands. More signal now needs a bigger
+test set, not more HaGRID.
+
+`--seq-len 32` because 56k samples x 64 frames does not fit in 32 GB once
+mirrored; a HaGRID sample is one frame tiled, so 32 loses nothing.
+`import_hagrid.py` is resumable -- re-run the same command after an
+interruption.
+
+The `none` class (export_labels.NONE) is appended to every head, so no
+existing class index moved.
+
+Per-frame CPU cost (one thread, 640px frame): MediaPipe HandLandmarker
+23 ms, Holistic 37 ms, full INT8 TFLite classifier 0.04 ms per 64-frame
+window. Landmark extraction is the whole cost; the classifiers are noise.
+
+`--mirror` adds left-right mirrored copies. Leave it off once direction-
+sensitive gestures (the bicycle turn signals) are in the training set.
+
+`train_classifier.py` normalises every sequence with
+`landmark_format.normalize` (body-relative pose, wrist-relative hand shape,
+aspect-corrected x). Inference must apply the same function to its frames.
 
 ### Smoke test (no video / no MediaPipe)
 
