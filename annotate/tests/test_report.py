@@ -237,3 +237,44 @@ def test_write_report_omits_dataset_notes_when_no_duplicate_is_flagged(tmp_path,
     monkeypatch.setattr("open_gesture_annotate.report.load_manifest", lambda root: gestures)
     text = write_report(tmp_path, tmp_path).read_text(encoding="utf-8")
     assert "## Dataset notes" not in text
+
+
+# --- self_contact ---
+
+
+def test_adaptor_without_predicted_contact_is_flagged():
+    from open_gesture_annotate.report import check_self_contact
+
+    g = [_gesture("a", gesture_type="adaptor")]
+    rel = {"a": {"status": "ok", "self_contact": False,
+                 "regions": [{"label": "left hand"}, {"label": "head"}]}}
+    findings = check_self_contact(g, rel)
+    assert len(findings) == 1
+    assert findings[0].check == "self_contact"
+
+
+def test_adaptor_with_predicted_contact_is_not_flagged():
+    from open_gesture_annotate.report import check_self_contact
+
+    g = [_gesture("a", gesture_type="adaptor")]
+    rel = {"a": {"status": "ok", "self_contact": True,
+                 "regions": [{"label": "left hand"}, {"label": "head"}]}}
+    assert check_self_contact(g, rel) == []
+
+
+def test_non_adaptor_without_contact_is_not_flagged():
+    from open_gesture_annotate.report import check_self_contact
+
+    g = [_gesture("a", gesture_type="emblem")]
+    rel = {"a": {"status": "ok", "self_contact": False,
+                 "regions": [{"label": "left hand"}, {"label": "head"}]}}
+    assert check_self_contact(g, rel) == []
+
+
+def test_adaptor_with_too_few_regions_is_not_flagged():
+    """No pair could be scored, so absent contact is not evidence of anything."""
+    from open_gesture_annotate.report import check_self_contact
+
+    g = [_gesture("a", gesture_type="adaptor")]
+    rel = {"a": {"status": "ok", "self_contact": False, "regions": [{"label": "left hand"}]}}
+    assert check_self_contact(g, rel) == []

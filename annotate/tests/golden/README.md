@@ -1,8 +1,11 @@
 # Golden files
 
 Recorded backend outputs for three representative gesture images, used as
-regression tests. Numeric values are compared with a 1e-3 tolerance; structural
-fields (counts, labels) are compared exactly.
+regression tests. Numeric values are compared with a 1e-3 tolerance. Top-level
+structural fields (counts, labels) are compared exactly, and so is every string
+output at any depth. The nested check matters for uniface's per-face
+`faces[i].emotion.label`: the top-level check never reached it, so the face
+backend's only emotion output went unverified.
 
 These files are committed deliberately, unlike `annotations/`, because they are
 test fixtures rather than generated data.
@@ -35,3 +38,16 @@ that sidecar is ever regenerated (a new face-detection model, a re-run of the
 `face` backend, etc.), the face crop fed into HSEmotion can shift, and the `va`
 golden files may need to be regenerated too — even if the `va` backend itself
 did not change.
+
+## Cross-platform drift
+
+These files were generated on a different platform and library stack from the
+Linux/aarch64 machine they were last run on (torch 2.14, opencv 5.0,
+scikit-learn 1.9). There, three cases fail: `aus` and `face` on
+`single_clear_face`, and `face` on `multi_person`. The cause is uniface landmark
+drift of at most 0.13 px, carried into py-feat AUs (at most 0.026). Every
+categorical output, including all emotion labels, still matches, and `va`
+valence/arousal is bit-identical. Treat that pattern as platform noise. Treat a
+changed label, count or shape as a real regression. Regenerating on one
+machine would make the files fail on the other, so decide per platform rather
+than regenerating reflexively.

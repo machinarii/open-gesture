@@ -36,9 +36,10 @@ gesture_images/
   ... (21 category folders)
 annotations/              # Machine-generated, produced by annotate/
   quality_report.md       # Curated-vs-predicted disagreements
+  fusion_report.md        # Image + speech: does voice help, does it fail safe?
   _meta.json              # Model versions and per-weight licences
-  faces.json, action_units.json, valence_arousal.json,
-  pose.json, embeddings.json          # gitignored; regenerate locally
+  faces.json, action_units.json, valence_arousal.json, pose.json,
+  embeddings.json, relations.json, speech.json   # gitignored; regenerate locally
 annotate/                 # Annotation pipeline (see annotate/README.md)
 pipeline/                 # Synthetic training-data pipeline (see below)
 ```
@@ -107,7 +108,7 @@ Every gesture entry in `manifest.json` includes the following fields:
 
 ## Machine Annotations
 
-`annotate/` is a Python package (`og-annotate`) that runs six ML backends over
+`annotate/` is a Python package (`og-annotate`) that runs eight ML backends over
 all 99 gesture images and writes their predictions to `annotations/`, so the
 curated metadata can be checked against independent models rather than taken
 on faith. `manifest.json` is never modified by the pipeline -- it remains the
@@ -119,8 +120,10 @@ details, and known platform quirks.
 demographics), `aus` (py-feat -- 20 FACS Action Units, emotion, 3D head pose),
 `va` (HSEmotion -- continuous valence/arousal), `pose` (MediaPipe -- 21
 landmarks per hand, 33 body landmarks), `embed` (CLIP ViT-B-32 -- image and
-text embeddings), and `wholebody` (RTMW -- optional, not installed by
-default).
+text embeddings), `relations` (RelateAnything/relsgg -- open-vocabulary
+relations between body regions), `speech` (SpeechT5 TTS -> noise -> Whisper
+speech-to-text -- the voice channel), and `wholebody` (RTMW). `relations`,
+`speech` and `wholebody` are optional and not installed by default.
 
 ```bash
 og-annotate list                       # backends and availability
@@ -129,17 +132,66 @@ og-annotate run --backends face,pose   # a subset
 og-annotate run --force --limit 5      # re-run a sample
 og-annotate report                     # regenerate quality_report.md
 og-annotate export-npz                 # derive embeddings.npz
+og-annotate fusion                     # image + speech -> fusion_report.md
 ```
 
 Runs are idempotent and resumable: completed records are skipped, previous
 errors retried, and a backend that will not import is skipped with a reason
-rather than failing the run. One ordering note: `va` crops faces using the
-boxes `face` writes, so it reports itself unavailable until `face` has run.
-Plain `og-annotate run` handles that for you.
+rather than failing the run. Two backends read another's output and so depend
+on run order: `va` crops faces using the boxes `face` writes, and `relations`
+scores relations between body regions derived from the landmarks `pose` writes.
+Both report themselves unavailable until their dependency has run. Plain
+`og-annotate run` handles that for you.
+
+**Relations.** `relations` is the only backend that checks a *spatial
+configuration* claim rather than the presence of a part or a facial signal.
+[RelateAnything](https://github.com/Maelic/RelateAnything) scores
+`(subject, relation, object)` triplets against a predicate vocabulary supplied
+at inference time -- so this pipeline feeds it hand, head, torso and arm boxes
+derived from MediaPipe landmarks, and a vocabulary of contact and position
+phrases. The resulting `self_contact` check tests the one curated label that
+makes a falsifiable spatial claim: `gesture_type: adaptor` is *defined* as
+self-touching, so an adaptor with no predicted hand-to-body contact is a
+disagreement worth a human look. Its checkpoints carry the **DINOv3 License**,
+not the library's Apache-2.0 -- the strictest weight terms here, and the reason
+it is off by default.
+
+The check agreed with all five curated adaptors: each one predicts
+`right hand -> touching -> head`, which is right for every one of them
+(Facepalm, D'oh Facepalm, Tensed Fingers, Hand Visor, Hands Over Mouth). The
+ranking behind that is the more interesting result. Sorting all 99 gestures by
+their strongest hand-to-body contact score puts genuine hand-to-face gestures
+at the top -- Nose Thumb, Facepalm, Zipped Lips, Hat Tip, Salute, Cuckoo Sign,
+Finger to Lips -- spanning five different curated `gesture_type`s. The model
+recovers a real physical property the curated taxonomy does not encode
+directly, which is what makes it worth running.
+
+One caution learned by measuring: the checkpoint's shipped score calibration
+does **not** transfer to a custom vocabulary. Against the one used here the
+median triplet score is 0.027, and an initial 0.5 threshold called 3 of the 5
+adaptors non-contact -- all three wrongly. The check therefore uses the model's
+per-pair argmax and no fitted constant, and `top_contact_score` is recorded per
+gesture so strength stays visible.
+
+**Voice.** The premise above is that voice fails exactly when a machine needs
+it -- in noise, at distance -- so the pipeline also tests image + speech
+together. There is no audio in the dataset, so `speech` synthesises one
+plausible utterance per gesture ("Stop! Don't come any closer!" for the
+two-hands stop), mixes in noise from clean to -5 dB, and transcribes it with
+Whisper. `og-annotate fusion` then asks whether adding the transcript helps.
+With clear speech it does: fusion finds the right `intent` in the top 5 for 15
+gestures the image alone missed and loses 4 (paired test, p = 0.02), lifting
+top-5 accuracy from 23% to 34%. At -5 dB, where Whisper gets 74% of words
+wrong, fusion falls back to image-level accuracy rather than below it. The
+failure that does hurt is fluent speech about something else -- a bystander,
+not noise -- and no speech-recognition confidence can flag that. Every weight
+in this chain is MIT or Apache-2.0; Piper, the usual offline TTS, is GPL and
+was excluded. Full numbers, with the caveats of synthetic speech, are in
+`annotations/fusion_report.md`.
 
 **Results.** `annotations/quality_report.md` records **49 findings across the
 99 gestures**: 11 `number_of_people`, 20 `arousal`, 9 `emotional_state`, 9
-`intent_similarity`, and **0 `body_parts`**.
+`intent_similarity`, and **0 `body_parts`**, **0 `self_contact`**.
 
 The `body_parts` result is the headline: MediaPipe independently detected a
 hand in every one of the 96 gestures whose curated `body_parts` claims one --
@@ -169,7 +221,7 @@ promises commercial use, that distinction matters for anyone redistributing
 work built on these annotations (it does not affect the dataset's own
 MIT / CC BY 4.0 terms; see License below). `annotations/_meta.json` records
 every weight's licence per backend and `og-annotate run` warns on any that
-isn't known-permissive. Four verified divergences from the libraries' own
+isn't known-permissive. Five verified divergences from the libraries' own
 licences:
 
 - uniface's **FairFace** weights are **CC BY 4.0** (attribution required),
@@ -181,6 +233,10 @@ licences:
 - **RTMW**'s checkpoint licence is **unspecified**, and it is trained partly
   on non-commercial datasets -- which is why `wholebody` is optional and not
   installed by default.
+- **RelateAnything**'s `relsgg-*` checkpoints are **DINOv3-licensed**
+  derivatives of Meta's DINOv3 weights, not the Apache-2.0 of the `relsgg`
+  library -- which is why `relations` is optional and not installed by
+  default.
 
 ## Applying This Framework to CV Gesture Recognition
 
