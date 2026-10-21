@@ -66,7 +66,8 @@ def load_dataset(np, sequences_dir: Path, seq_len: int):
     for i, entry in enumerate(shards):
         data = np.load(sequences_dir / entry["file"])
         seq = data["sequence"][:seq_len]
-        X[i, : len(seq)] = seq
+        aspect = float(data["aspect"]) if "aspect" in data.files else 1.0
+        X[i, : len(seq)] = lf.normalize(seq, aspect)  # inference must apply the same
         Y[i] = data["labels"]
 
     return X, Y, head_order
@@ -108,6 +109,8 @@ def main() -> int:
     parser.add_argument("--seq-len", type=int, default=64, help="Frames per clip (pad/truncate) (default: 64)")
     parser.add_argument("--epochs", type=int, default=30)
     parser.add_argument("--batch", type=int, default=16)
+    parser.add_argument("--mirror", action="store_true",
+                        help="add left-right mirrored copies; only when no gesture's meaning depends on side")
     args = parser.parse_args()
 
     np = _require("numpy", "numpy")
@@ -130,8 +133,25 @@ def main() -> int:
         metrics={name: "accuracy" for name in head_order},
     )
 
+    # Keras's validation_split takes the LAST 15% without shuffling, and shards
+    # load sorted by gesture id -- unshuffled, whole gestures would be held out
+    # and never trained on.
+    perm = np.random.default_rng(0).permutation(len(X))
+    X, Y = X[perm], Y[perm]
+    if args.mirror:
+        # After the shuffle, so the held-out tail gets mirrors of its own samples
+        # only -- appending mirrors before it would leak training samples into it.
+        cut = int(len(X) * 0.85)
+        X = np.concatenate([X[:cut], lf.mirror(X[:cut]), X[cut:]])
+        Y = np.concatenate([Y[:cut], Y[:cut], Y[cut:]])
+        cut2 = 2 * cut
+        tail = np.random.default_rng(1).permutation(cut2)
+        X[:cut2], Y[:cut2] = X[tail], Y[tail]
+        validation_split = (len(X) - cut2) / len(X)
+    else:
+        validation_split = 0.15
     y_split = {name: Y[:, i] for i, name in enumerate(head_order)}
-    model.fit(X, y_split, epochs=args.epochs, batch_size=args.batch, validation_split=0.15)
+    model.fit(X, y_split, epochs=args.epochs, batch_size=args.batch, validation_split=validation_split)
 
     args.out.mkdir(parents=True, exist_ok=True)
     keras_path = args.out / "open_gesture.keras"
