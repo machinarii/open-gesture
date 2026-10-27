@@ -168,6 +168,12 @@ CLASS_TO_GESTURE = {cls: gestures[0] for cls, gestures in HAGRID_TO_GESTURES.ite
 CLASS_TO_GESTURE["no_gesture"] = "none"
 
 
+# HaGRID classes mapped when the first shards were drawn (see select()). Never
+# edit: add new classes to hagrid_hands.HAGRID_TO_GESTURES only.
+SHARED_STREAM_CLASSES = ["call", "dislike", "four", "hand_heart", "holy", "like", "middle_finger", "mute", "ok",
+                         "one", "palm", "peace", "point", "rock", "stop", "take_picture", "three", "timeout", "xsign"]
+
+
 def select(annotations: Path, split: str, per_class: int, rng) -> list[tuple[str, str]]:
     """(HaGRID class, image id) pairs: up to per_class images per mapped class.
 
@@ -177,10 +183,22 @@ def select(annotations: Path, split: str, per_class: int, rng) -> list[tuple[str
     """
     z = zipfile.ZipFile(annotations)
     picked = []
-    # no_gesture last: adding it must not shift the draws of the gesture classes.
-    for cls in sorted(HAGRID_TO_GESTURES) + ["no_gesture"]:
+
+    def draw(cls, gen):
         ids = sorted(json.loads(z.read(f"annotations/{split}/{cls}.json")))
-        picked += [(cls, ids[i]) for i in rng.permutation(len(ids))[:per_class]]
+        return [(cls, ids[i]) for i in gen.permutation(len(ids))[:per_class]]
+
+    # The first classes share one rng stream, in this exact order, so samples
+    # already on disk stay valid. no_gesture is last: adding it must not shift
+    # the draws of the gesture classes.
+    for cls in SHARED_STREAM_CLASSES + ["no_gesture"]:
+        picked += draw(cls, rng)
+    # Classes mapped later each get their own stream seeded from the class
+    # name: inserting them into the shared stream would shift every draw after
+    # them and re-fetch tens of thousands of images.
+    seed = int(rng.integers(2**32))
+    for cls in sorted(set(HAGRID_TO_GESTURES) - set(SHARED_STREAM_CLASSES)):
+        picked += draw(cls, np.random.default_rng([seed, zlib.crc32(cls.encode())]))
     return picked
 
 

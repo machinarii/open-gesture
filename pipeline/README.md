@@ -89,6 +89,8 @@ and correctly detected.
 | `hagrid_hands.py` | HaGRID `annotations.zip` | `model/hagrid_hands.pt` | torch, numpy |
 | `import_hagrid.py` | HaGRID images (remote) / curated images | `sequences_hagrid_*/`, `sequences_curated/` | mediapipe, opencv, numpy |
 | `eval_curated.py` | `model/` + `sequences_curated/` | score on the 99 curated images | tensorflow, numpy |
+| `import_ipn.py` | IPN Hand videos + annotations | `clips_ipn/` (ctrl-06..17, dir-01, none) | opencv |
+| `record_gestures.py` | webcam + `manifest.json` | `recordings/` (your own test clips) | opencv, numpy |
 
 `export_labels.py` writes the class↔index contract; re-run after any manifest
 change. `generate_motion_specs.py` skips existing files so hand-authored specs
@@ -181,6 +183,11 @@ variants) count as one answer:
 | Fast | 2D hand landmarks, ≤20k/class + `no_gesture` | 99.1% (person split) | 24/25 |
 | Full | 18,286 images → Holistic, `--mirror` | 92–97% (random split) | 20–22/25 over 3 seeds |
 | Full | 56,280 images (~3k/class + 1,378 `none`) | 96% (random split) | 21–22/25 over 2 seeds |
+| Fast | as above, 24 classes incl. fist/grabbing/grip/little_finger/two_up (2026-10-26) | 99.0% (person split) | 29/30 |
+
+The 2026-10-26 row covers the 116-gesture manifest: the five new HaGRID
+shapes (ctrl-01..05) are all correct, fist at 0.50 confidence. The full
+model's 2026-10-26 numbers are in the IPN section below.
 
 The fast model's one miss is Evil Horns read as `one`, which the full
 model misses too. With 25 test gestures, one gesture is 4 points: treat
@@ -193,13 +200,28 @@ remaining misses are index-finger shapes (point, horns) read as `mute` and
 crossed forearms read as praying hands. More signal now needs a bigger
 test set, not more HaGRID.
 
+To get that test set, record yourself (gitignored, stays local):
+
+```bash
+python3 record_gestures.py --who me --takes 3      # space=record, s=skip, q=quit; resumable
+python3 extract_landmarks.py --clips recordings --out sequences_recorded
+python3 eval_curated.py --sequences sequences_recorded --all --seq-len 32
+```
+
+`--all` scores every recorded gesture, not just HaGRID's 25. Gestures
+without training data will miss until the synthetic path covers them;
+that is the baseline.
+
 `--seq-len 32` because 56k samples x 64 frames does not fit in 32 GB once
 mirrored; a HaGRID sample is one frame tiled, so 32 loses nothing.
 `import_hagrid.py` is resumable -- re-run the same command after an
 interruption.
 
-The `none` class (export_labels.NONE) is appended to every head, so no
-existing class index moved.
+The `none` class (export_labels.NONE) is appended to every head. Adding
+gestures to the manifest does shift class indices (ids sort), so
+`train_classifier.py` reads each shard's labels from its `gesture_id` in the
+current `labels/`, never the indices stored at extraction -- old shards stay
+usable, but old models must be retrained.
 
 Per-frame CPU cost (one thread, 640px frame): MediaPipe HandLandmarker
 23 ms, Holistic 37 ms, full INT8 TFLite classifier 0.04 ms per 64-frame
@@ -211,6 +233,92 @@ sensitive gestures (the bicycle turn signals) are in the training set.
 `train_classifier.py` normalises every sequence with
 `landmark_format.normalize` (body-relative pose, wrist-relative hand shape,
 aspect-corrected x). Inference must apply the same function to its frames.
+
+### Real data: IPN Hand (touchless-control motions)
+
+[IPN Hand](https://gibranbenitez.github.io/IPN_Hand/) is 13 touchless-control
+gestures (point, click, double click, throw, zoom, open twice) plus
+non-gesture segments, by 50 people at 640x480/30 fps. CC BY 4.0: commercial
+use allowed with attribution. It covers ctrl-06..17, dir-01 and `none`. Its
+official split is by person, so the test set is people never trained on.
+
+Three sets, all split by PERSON. A video name's first two fields are the
+person (`1CM42_12_R_#205` -> `1CM42_12`; 50 people, 4 videos each). Tune
+on `val` -- 7 of the 37 training people, `random.Random(0).sample` -- and
+touch `test` once, at the end:
+
+```bash
+# videos (5 tgz, 4.6 GB) + annotations from IPN's Google Drive into .cache/ipn/
+python3 - <<'EOF'   # Annot_TrainList -> Annot_TrainSubList + Annot_ValList (7 people)
+import random
+rows = [l for l in open(".cache/ipn/Annot_TrainList.txt") if l.strip()]
+person = lambda l: tuple(l.split(",")[0].split("_")[:2])
+val = set(random.Random(0).sample(sorted({person(l) for l in rows}), 7))
+open(".cache/ipn/Annot_ValList.txt", "w").writelines(l for l in rows if person(l) in val)
+open(".cache/ipn/Annot_TrainSubList.txt", "w").writelines(l for l in rows if person(l) not in val)
+EOF
+for s in TrainSub:train Val:val Test:test; do
+  python3 import_ipn.py --videos .cache/ipn/videos/videos --annotations .cache/ipn/Annot_List.txt \
+      --videos-from .cache/ipn/Annot_${s%%:*}List.txt --out clips_ipn_${s##*:}
+  python3 extract_landmarks.py --clips clips_ipn_${s##*:} --out sequences_ipn_${s##*:} \
+      --workers 6 --min-hand-detections 0.5
+done
+I=sequences_ipn_train
+python3 train_classifier.py --sequences sequences_hagrid_train $I $I $I --val-sequences sequences_ipn_val \
+    --batch 128 --seq-len 64 --out model/combined
+python3 eval_curated.py --model model/combined/open_gesture.keras --sequences sequences_ipn_test --all --seq-len 64
+```
+
+- `--min-hand-detections 0.5`: about 2% of IPN clips have the hand off
+  camera or undetected for most of the clip; pose alone would pass the
+  plain `--min-detections` check and label a still body as a throw. It
+  kept 3,943/4,039 train+val and 1,590/1,610 test clips (worst: throw down, 88%).
+- No `--mirror`: mirroring turns throw left into throw right.
+- `--val-sequences` keeps the best epoch on the held-out people and halves
+  the learning rate when it stalls. Without it, held-out accuracy swings
+  by up to 30 points between epochs and the saved last epoch is a lottery.
+
+Results (2026-10-27), one seed each. Tuning, on the 7 validation people
+(786 clips), IPN repeated k times next to HaGRID's ~3,000 per shape:
+
+| IPN x | 1 | 3 | 5 | 10 |
+|---|---|---|---|---|
+| last epoch (no checkpointing) | 60% | 61% | 62% | 43% |
+| best epoch on val | 69% | **71%** | 67% | 70% |
+
+Keeping the best epoch is worth ~9 points; oversampling is within noise.
+x3 was picked on val, then scored once:
+
+| Model | IPN test (13 people, 1,590 clips) | Curated (30 covered) |
+|---|---|---|
+| HaGRID 70,784 + IPN x3, best epoch | **73%** (1,164/1,590) | 23/30 |
+
+An earlier 79% for "IPN x10" (2026-10-26) is withdrawn: it was a last-epoch
+model, and x10 was chosen after looking at the test score.
+
+Per gesture on test: point (1 or 2 fingers) 87-91%, throw left 88%, zoom
+out 78%, `none` 78%, throw down 74%, open twice 70%. Weak: zoom in 23% (read
+as zoom out), clicks and double clicks 37-41% (read as each other or as
+pointing), throw up 48%, throw right 54%.
+
+Read the 73% as a ceiling, not a real-world figure:
+
+- IPN's test people were filmed in the same rooms with the same cameras as
+  its training people. A different webcam, room or distance will score
+  lower -- `record_gestures.py` clips are the test that measures that.
+- One seed per setting; gaps of a few points are noise.
+- Labels are IPN's segment boundaries; our clips inherit any error there.
+
+Not used yet, possibly later: GVHMR (arXiv:2409.06662) recovers 3D body
+motion (SMPL) from ordinary video, which could replace hand-authoring the
+body keyframes in `motion_specs/` for the dynamic gestures. Body only -- the
+fingers would still need a hand model (MANO) -- and its licence and SMPL's
+(believed non-commercial) need checking first.
+
+`extract_landmarks.py` runs clips in parallel (`--workers`) and resumes:
+a clip whose shard exists is skipped. Each worker writes its own shard,
+and the pool is rebuilt every 25 clips per worker -- MediaPipe workers grow
+to ~1.4 GB, and returning frames to the parent piled up gigabytes.
 
 ### Smoke test (no video / no MediaPipe)
 

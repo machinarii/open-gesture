@@ -12,6 +12,12 @@ sequences_smoke/
 sequences_hagrid_*/
 sequences_curated/
 .cache/
+# IPN Hand (CC BY 4.0; large)
+clips_ipn*/
+sequences_ipn*/
+# Your own webcam recordings (record_gestures.py): video of a person, keep local
+recordings/
+sequences_recorded/
 model/
 __pycache__/
 *.pyc
