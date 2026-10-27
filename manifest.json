@@ -1,6 +1,6 @@
 {
   "generated_at": "2026-03-27T23:43:59.058462+00:00",
-  "total_gestures": 99,
+  "total_gestures": 116,
   "categories": [
     "Affirmative & Positive",
     "Bicycle Signals",
@@ -21,6 +21,7 @@
     "Size & Degree",
     "Sports & Taunting",
     "Team Building",
+    "Touchless Control",
     "Urgency & Attention",
     "Wishful & Luck"
   ],
@@ -2530,6 +2531,390 @@
       ],
       "number_of_people": "single",
       "cultural_context": "western"
+    },
+    {
+      "index": 100,
+      "id": "ctrl-01",
+      "name": "Closed Fist",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-01-closed-fist.png",
+      "physical_description": "Close all four fingers into a fist with the thumb wrapped across the front, palm facing forward at chest height; hold still",
+      "intent": "Grab, hold or select something in a touchless interface",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "focus",
+        "control",
+        "determination"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 101,
+      "id": "ctrl-02",
+      "name": "Grabbing Claw",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-02-grabbing-claw.png",
+      "physical_description": "Curl all five fingers into a claw as if gripping a ball, palm facing forward, fingertips spread and bent; hold still",
+      "intent": "Pick up or grab an object in a touchless interface",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "focus",
+        "control",
+        "anticipation"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "fingers",
+        "thumb"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 102,
+      "id": "ctrl-03",
+      "name": "Grip",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-03-grip.png",
+      "physical_description": "Curl all four fingers round until their tips meet the thumb tip, forming a closed ring as if gripping a thick bar, palm facing forward; hold still",
+      "intent": "Hold and drag, or turn a virtual knob, in a touchless interface",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "focus",
+        "control"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "fingers",
+        "thumb"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 103,
+      "id": "ctrl-04",
+      "name": "Pinky Up",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-04-pinky-up.png",
+      "physical_description": "Make a fist and extend only the little finger straight up, palm facing forward; hold still",
+      "intent": "A distinct command shape for touchless control; in parts of East Asia it also means 'small' or 'inferior'",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "playfulness",
+        "focus"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "pinky finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 104,
+      "id": "ctrl-05",
+      "name": "Two Fingers Up Together",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-05-two-fingers-up-together.png",
+      "physical_description": "Raise the index and middle fingers straight up and pressed together, ring and little finger folded under the thumb, palm facing forward; hold still",
+      "intent": "A distinct command shape for touchless control, unlike the spread V of number two",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "focus",
+        "control"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "middle finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 105,
+      "id": "ctrl-06",
+      "name": "Point with Two Fingers",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-06-point-with-two-fingers.png",
+      "physical_description": "Extend the index and middle fingers together toward the screen and move the hand to steer a cursor",
+      "intent": "Point at or move a cursor over an on-screen target",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "focus",
+        "intent"
+      ],
+      "gesture_type": "illustrator-deictic",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "middle finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 106,
+      "id": "ctrl-07",
+      "name": "Air Click (One Finger)",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-07-air-click-one-finger.png",
+      "physical_description": "With the index finger pointing at the screen, flex it down and back up once, like pressing a button in the air",
+      "intent": "Click or select the item being pointed at",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "focus",
+        "decisiveness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 107,
+      "id": "ctrl-08",
+      "name": "Air Click (Two Fingers)",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-08-air-click-two-fingers.png",
+      "physical_description": "With the index and middle fingers pointing at the screen together, flex them down and back up once",
+      "intent": "Click or select, as a secondary click",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "focus",
+        "decisiveness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "middle finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 108,
+      "id": "ctrl-09",
+      "name": "Throw Up",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-09-throw-up.png",
+      "physical_description": "Sweep an open hand quickly upward, as if flicking an item off the top of the screen",
+      "intent": "Dismiss or send an item upward; scroll or swipe up",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "decisiveness",
+        "energy"
+      ],
+      "gesture_type": "illustrator-metaphoric",
+      "body_parts": [
+        "hand",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 109,
+      "id": "ctrl-10",
+      "name": "Throw Down",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-10-throw-down.png",
+      "physical_description": "Sweep an open hand quickly downward, as if flicking an item off the bottom of the screen",
+      "intent": "Dismiss or send an item downward; scroll or swipe down",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "decisiveness",
+        "energy"
+      ],
+      "gesture_type": "illustrator-metaphoric",
+      "body_parts": [
+        "hand",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 110,
+      "id": "ctrl-11",
+      "name": "Throw Left",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-11-throw-left.png",
+      "physical_description": "Sweep an open hand quickly toward the performer's left, as if flicking an item off the side of the screen",
+      "intent": "Swipe left: previous item or dismiss to the left",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "decisiveness",
+        "energy"
+      ],
+      "gesture_type": "illustrator-metaphoric",
+      "body_parts": [
+        "hand",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 111,
+      "id": "ctrl-12",
+      "name": "Throw Right",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-12-throw-right.png",
+      "physical_description": "Sweep an open hand quickly toward the performer's right, as if flicking an item off the side of the screen",
+      "intent": "Swipe right: next item or dismiss to the right",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "decisiveness",
+        "energy"
+      ],
+      "gesture_type": "illustrator-metaphoric",
+      "body_parts": [
+        "hand",
+        "arm"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 112,
+      "id": "ctrl-13",
+      "name": "Open Twice",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-13-open-twice.png",
+      "physical_description": "Bunch the fingertips together, then spread the hand fully open; repeat twice in quick succession",
+      "intent": "Open or launch an item",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "anticipation",
+        "decisiveness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 113,
+      "id": "ctrl-14",
+      "name": "Air Double Click (One Finger)",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-14-air-double-click-one-finger.png",
+      "physical_description": "With the index finger pointing at the screen, flex it down and back up twice in quick succession",
+      "intent": "Double-click or open the item being pointed at",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "focus",
+        "decisiveness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 114,
+      "id": "ctrl-15",
+      "name": "Air Double Click (Two Fingers)",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-15-air-double-click-two-fingers.png",
+      "physical_description": "With the index and middle fingers pointing at the screen together, flex them down and back up twice in quick succession",
+      "intent": "Secondary double-click",
+      "emotional_state": "neutral",
+      "arousal": "medium",
+      "emotional_adjectives": [
+        "focus",
+        "decisiveness"
+      ],
+      "gesture_type": "emblem",
+      "body_parts": [
+        "hand",
+        "index finger",
+        "middle finger"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 115,
+      "id": "ctrl-16",
+      "name": "Zoom In",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-16-zoom-in.png",
+      "physical_description": "Start with the thumb and fingertips pinched together toward the screen, then spread them apart",
+      "intent": "Zoom in or enlarge",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "curiosity",
+        "focus"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hand",
+        "thumb",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
+    },
+    {
+      "index": 116,
+      "id": "ctrl-17",
+      "name": "Zoom Out",
+      "category": "Touchless Control",
+      "file": "gesture_images/touchless-control/ctrl-17-zoom-out.png",
+      "physical_description": "Start with the thumb and fingers spread toward the screen, then pinch them together",
+      "intent": "Zoom out or shrink",
+      "emotional_state": "neutral",
+      "arousal": "low",
+      "emotional_adjectives": [
+        "focus",
+        "overview"
+      ],
+      "gesture_type": "illustrator-iconic",
+      "body_parts": [
+        "hand",
+        "thumb",
+        "fingers"
+      ],
+      "number_of_people": "single",
+      "cultural_context": "universal"
     }
   ]
 }

@@ -1,0 +1,35 @@
+{
+  "id": "ctrl-07",
+  "name": "Air Click (One Finger)",
+  "category": "Touchless Control",
+  "source_physical_description": "With the index finger pointing at the screen, flex it down and back up once, like pressing a button in the air",
+  "dynamic": true,
+  "dynamic_source": "manual",
+  "suggested_duration_s": 2.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

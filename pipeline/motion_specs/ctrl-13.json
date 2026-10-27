@@ -1,0 +1,35 @@
+{
+  "id": "ctrl-13",
+  "name": "Open Twice",
+  "category": "Touchless Control",
+  "source_physical_description": "Bunch the fingertips together, then spread the hand fully open; repeat twice in quick succession",
+  "dynamic": true,
+  "dynamic_source": "manual",
+  "suggested_duration_s": 2.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "fingers"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}
