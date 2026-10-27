@@ -2,7 +2,7 @@
 
 # Open Gesture Framework
 
-An open, structured dataset of **99 human gestures** across **21 categories**, annotated with research-backed metadata for computer vision, affective computing, and human-computer interaction applications.
+An open, structured dataset of **116 human gestures** across **22 categories**, annotated with research-backed metadata for computer vision, affective computing, and human-computer interaction applications.
 
 Each gesture includes a reference image and a rich metadata schema covering physical form, communicative intent, emotional dimensions, and cultural context -- grounded in established gesture taxonomy and affective science research.
 
@@ -23,7 +23,7 @@ Open Gesture bridges this gap by pairing reference images with a multi-dimension
 ## Dataset Structure
 
 ```
-manifest.json             # Machine-readable metadata for all 99 gestures
+manifest.json             # Machine-readable metadata for all 116 gestures
 manifest.md               # Human-readable reference guide
 gesture_images/
   affirmative-and-positive/
@@ -33,7 +33,7 @@ gesture_images/
   directional-and-wayfinding/
   greetings-and-farewells/
   negative-disapproval/
-  ... (21 category folders)
+  ... (22 category folders)
 annotations/              # Machine-generated, produced by annotate/
   quality_report.md       # Curated-vs-predicted disagreements
   _meta.json              # Model versions and per-weight licences
@@ -66,6 +66,7 @@ pipeline/                 # Synthetic training-data pipeline (see below)
 | Size & Degree | 2 | Indicating dimensions |
 | Sports & Taunting | 2 | Athletic signals and displays |
 | Team Building | 2 | Group unity rituals |
+| Touchless Control | 17 | Hand commands for controlling devices (HaGRID shapes, IPN Hand motions) |
 | Urgency & Attention | 8 | Demanding attention or signaling urgency |
 | Wishful & Luck | 2 | Promises and superstitious gestures |
 
@@ -100,10 +101,10 @@ Every gesture entry in `manifest.json` includes the following fields:
 
 | Dimension | Breakdown |
 |-----------|-----------|
-| Emotional state | Positive: 31, Neutral: 49, Negative: 19 |
-| Arousal | Low: 52, Medium: 26, High: 21 |
-| Cultural context | Universal: 63, Western: 35, Southern European: 1 |
-| Participants | Single: 94, 2-person: 4, 3+: 1 |
+| Emotional state | Positive: 31, Neutral: 66, Negative: 19 |
+| Arousal | Low: 61, Medium: 34, High: 21 |
+| Cultural context | Universal: 80, Western: 35, Southern European: 1 |
+| Participants | Single: 111, 2-person: 4, 3+: 1 |
 
 ## Machine Annotations
 
@@ -191,7 +192,7 @@ Rather than training a single classifier that predicts "thumbs up" or "wave," us
 ```
 Input Image --> Backbone CNN/ViT
                   |
-                  +--> Gesture ID head (99 classes)
+                  +--> Gesture ID head (116 classes)
                   +--> Emotional State head (3 classes)
                   +--> Arousal head (3 classes)
                   +--> Gesture Type head (6 classes)
@@ -248,7 +249,7 @@ The [`pipeline/`](pipeline/) directory contains an end-to-end system that turns
 this manifest into training data for an on-device, multi-head gesture
 classifier — **without requiring any real labeled footage**. Instead of
 collecting and annotating thousands of videos, it animates rigged avatars
-through each of the 99 gestures, renders them under heavy domain randomization,
+through each of the 116 gestures, renders them under heavy domain randomization,
 makes them photorealistic, and reduces every frame to the same landmark
 representation a live camera would produce.
 
@@ -303,7 +304,7 @@ manifest.json
   invariant, so photorealism applied *after* extraction is wasted. Its real
   value is making MediaPipe (trained on real footage) detect reliably on
   otherwise-synthetic frames — so it belongs at the extraction step.
-- **Fingers come from SMPL-X's MANO hands.** Many of these 99 gestures (the OK
+- **Fingers come from SMPL-X's MANO hands.** Many of these gestures (the OK
   sign, the finger counts, rude gestures) *are* the finger configuration. SMPL-X
   carries full per-finger articulation, and IK rigs make only the *arm* fast to
   pose — the two are authored separately and composed.

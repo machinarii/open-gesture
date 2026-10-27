@@ -14,8 +14,8 @@ def gestures():
     return load_manifest(repo_root())
 
 
-def test_loads_all_99_gestures(gestures):
-    assert len(gestures) == 99
+def test_loads_all_116_gestures(gestures):
+    assert len(gestures) == 116
 
 
 def test_gesture_ids_are_unique(gestures):

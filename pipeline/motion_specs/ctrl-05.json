@@ -1,0 +1,24 @@
+{
+  "id": "ctrl-05",
+  "name": "Two Fingers Up Together",
+  "category": "Touchless Control",
+  "source_physical_description": "Raise the index and middle fingers straight up and pressed together, ring and little finger folded under the thumb, palm facing forward; hold still",
+  "dynamic": false,
+  "dynamic_source": "manual",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger",
+    "middle finger"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

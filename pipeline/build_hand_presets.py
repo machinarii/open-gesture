@@ -49,6 +49,10 @@ PRESETS = {
     "pinch":           "Thumb and index tips nearly touching, small gap. Money rub, small-size, precision.",
     "crossed_fingers": "Index and middle crossed. Luck / promise.",
     "finger_gun":      "Index extended forward, thumb up, others curled. Finger gun / playful point.",
+    "claw":            "All five fingers curled and spread as if gripping a ball. Grabbing.",
+    "grip":            "All four fingertips curled to meet the thumb tip in a closed ring, as if gripping a thick bar.",
+    "pinky_up":        "Fist with only the little finger extended.",
+    "two_together":    "Index and middle extended and pressed together, others folded under the thumb.",
 }
 
 # Heuristic id/keyword -> preset rules, checked in order; first match wins.
@@ -56,6 +60,9 @@ PRESETS = {
 ID_RULES = {
     "number-01": "point_index", "number-02": "two_v", "number-03": "three_fingers",
     "number-04": "four_fingers", "number-05": "five_spread", "number-10": "five_spread",
+    "ctrl-01": "fist", "ctrl-02": "claw", "ctrl-03": "grip", "ctrl-04": "pinky_up", "ctrl-05": "two_together",
+    "ctrl-06": "two_together", "ctrl-08": "two_together", "ctrl-15": "two_together",
+    "ctrl-13": "five_spread",
 }
 KEYWORD_RULES = [
     (r"\bok\b|thumb and index.*(touch|ring|circle)|index finger to the tip of the thumb", "ok_ring"),

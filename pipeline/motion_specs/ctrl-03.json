@@ -1,0 +1,24 @@
+{
+  "id": "ctrl-03",
+  "name": "Grip",
+  "category": "Touchless Control",
+  "source_physical_description": "Curl all four fingers round until their tips meet the thumb tip, forming a closed ring as if gripping a thick bar, palm facing forward; hold still",
+  "dynamic": false,
+  "dynamic_source": "manual",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "fingers",
+    "thumb"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

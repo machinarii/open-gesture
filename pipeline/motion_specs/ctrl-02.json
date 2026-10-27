@@ -1,0 +1,24 @@
+{
+  "id": "ctrl-02",
+  "name": "Grabbing Claw",
+  "category": "Touchless Control",
+  "source_physical_description": "Curl all five fingers into a claw as if gripping a ball, palm facing forward, fingertips spread and bent; hold still",
+  "dynamic": false,
+  "dynamic_source": "manual",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "fingers",
+    "thumb"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

@@ -493,5 +493,90 @@
     "right_hand": "crossed_fingers",
     "left_hand": "relaxed",
     "review": false
+  },
+  "ctrl-01": {
+    "right_hand": "fist",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-02": {
+    "right_hand": "claw",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-03": {
+    "right_hand": "grip",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-04": {
+    "right_hand": "pinky_up",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-05": {
+    "right_hand": "two_together",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-06": {
+    "right_hand": "two_together",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-07": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-08": {
+    "right_hand": "two_together",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-09": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-10": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-11": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-12": {
+    "right_hand": "flat_open",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-13": {
+    "right_hand": "five_spread",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-14": {
+    "right_hand": "point_index",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-15": {
+    "right_hand": "two_together",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-16": {
+    "right_hand": "pinch",
+    "left_hand": "relaxed",
+    "review": false
+  },
+  "ctrl-17": {
+    "right_hand": "pinch",
+    "left_hand": "relaxed",
+    "review": false
   }
 }

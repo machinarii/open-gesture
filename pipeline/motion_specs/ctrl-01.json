@@ -1,0 +1,23 @@
+{
+  "id": "ctrl-01",
+  "name": "Closed Fist",
+  "category": "Touchless Control",
+  "source_physical_description": "Close all four fingers into a fist with the thumb wrapped across the front, palm facing forward at chest height; hold still",
+  "dynamic": false,
+  "dynamic_source": "manual",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "fingers"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}

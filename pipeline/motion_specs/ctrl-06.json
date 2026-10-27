@@ -1,0 +1,36 @@
+{
+  "id": "ctrl-06",
+  "name": "Point with Two Fingers",
+  "category": "Touchless Control",
+  "source_physical_description": "Extend the index and middle fingers together toward the screen and move the hand to steer a cursor",
+  "dynamic": true,
+  "dynamic_source": "manual",
+  "suggested_duration_s": 2.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "index finger",
+    "middle finger"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "start",
+      "smplx_pose": null,
+      "note": "neutral / pre-stroke"
+    },
+    {
+      "t": 0.5,
+      "phase": "peak",
+      "smplx_pose": null,
+      "note": "stroke apex (most legible frame)"
+    },
+    {
+      "t": 1.0,
+      "phase": "end",
+      "smplx_pose": null,
+      "note": "retraction / rest"
+    }
+  ]
+}

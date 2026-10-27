@@ -1,0 +1,23 @@
+{
+  "id": "ctrl-04",
+  "name": "Pinky Up",
+  "category": "Touchless Control",
+  "source_physical_description": "Make a fist and extend only the little finger straight up, palm facing forward; hold still",
+  "dynamic": false,
+  "dynamic_source": "manual",
+  "suggested_duration_s": 1.0,
+  "loop": false,
+  "participants": "single",
+  "body_parts": [
+    "hand",
+    "pinky finger"
+  ],
+  "keyframes": [
+    {
+      "t": 0.0,
+      "phase": "hold",
+      "smplx_pose": null,
+      "note": "single end pose"
+    }
+  ]
+}
