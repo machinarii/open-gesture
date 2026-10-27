@@ -24,7 +24,7 @@ Export path:
 Requires: tensorflow, numpy  (see requirements.txt)
 
 Usage:
-    python3 train_classifier.py [--sequences DIR] [--labels DIR] [--out DIR]
+    python3 train_classifier.py [--sequences DIR [DIR ...]] [--labels DIR] [--out DIR]
                                 [--seq-len N] [--epochs N] [--batch N]
 """
 from __future__ import annotations
@@ -35,6 +35,7 @@ import sys
 from pathlib import Path
 
 import landmark_format as lf
+from extract_landmarks import load_label_lookup
 
 
 def _require(module: str, pip_name: str):
@@ -47,28 +48,34 @@ def _require(module: str, pip_name: str):
         )
 
 
-def load_dataset(np, sequences_dir: Path, seq_len: int):
+def load_dataset(np, sequences_dirs: list[Path], seq_len: int, labels_dir: Path):
     """Load shards into X [N, seq_len, FEATURE_DIM] and per-head label arrays.
+
+    Labels come from each shard's gesture_id looked up in the CURRENT labels/,
+    not the indices stored at extraction: adding gestures shifts the indices,
+    and stale ones would train silently on the wrong classes.
 
     Sequences are right-padded with zeros or truncated to seq_len. Zero padding
     is consistent with how frame_features zero-fills undetected groups, so the
     model sees padding as 'nothing detected' rather than a spurious pose.
     """
-    index = json.loads((sequences_dir / "index.json").read_text())
-    head_order = index["head_order"]
-    shards = index["shards"]
-    if not shards:
-        sys.exit(f"error: no shards listed in {sequences_dir / 'index.json'}")
+    head_order, lookup = load_label_lookup(labels_dir)
+    shards = []  # (dir, entry) across every --sequences dir, loaded into one array
+    for d in sequences_dirs:
+        entries = json.loads((d / "index.json").read_text())["shards"]
+        if not entries:
+            sys.exit(f"error: no shards listed in {d / 'index.json'}")
+        shards += [(d, e) for e in entries]
 
     X = np.zeros((len(shards), seq_len, lf.FEATURE_DIM), dtype=np.float32)
     Y = np.zeros((len(shards), len(head_order)), dtype=np.int32)
 
-    for i, entry in enumerate(shards):
-        data = np.load(sequences_dir / entry["file"])
+    for i, (d, entry) in enumerate(shards):
+        data = np.load(d / entry["file"])
         seq = data["sequence"][:seq_len]
         aspect = float(data["aspect"]) if "aspect" in data.files else 1.0
         X[i, : len(seq)] = lf.normalize(seq, aspect)  # inference must apply the same
-        Y[i] = data["labels"]
+        Y[i] = lookup[entry["gesture_id"]]
 
     return X, Y, head_order
 
@@ -103,7 +110,8 @@ def representative_dataset(np, X):
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     here = Path(__file__).resolve().parent
-    parser.add_argument("--sequences", type=Path, default=here / "sequences", help="Dir of .npz + index.json")
+    parser.add_argument("--sequences", type=Path, nargs="+", default=[here / "sequences"],
+                        help="Dir(s) of .npz + index.json; several are trained on together")
     parser.add_argument("--labels", type=Path, default=here / "labels", help="labels/ dir (for head class counts)")
     parser.add_argument("--out", type=Path, default=here / "model", help="Output dir for model + tflite")
     parser.add_argument("--seq-len", type=int, default=64, help="Frames per clip (pad/truncate) (default: 64)")
@@ -111,6 +119,8 @@ def main() -> int:
     parser.add_argument("--batch", type=int, default=16)
     parser.add_argument("--mirror", action="store_true",
                         help="add left-right mirrored copies; only when no gesture's meaning depends on side")
+    parser.add_argument("--val-sequences", type=Path, nargs="+",
+                        help="validate on these dir(s) -- people never in --sequences -- instead of a random 15%%")
     args = parser.parse_args()
 
     np = _require("numpy", "numpy")
@@ -120,8 +130,7 @@ def main() -> int:
     schema = json.loads((args.labels / "label_schema.json").read_text())
     heads = schema["heads"]
 
-    X, Y, head_order = load_dataset(np, args.sequences, args.seq_len)
-    # Reorder schema heads to match the label column order recorded at extraction.
+    X, Y, head_order = load_dataset(np, args.sequences, args.seq_len, args.labels)
     heads = {name: heads[name] for name in head_order}
     print(f"Dataset: {X.shape[0]} clips, seq_len={args.seq_len}, feature_dim={lf.FEATURE_DIM}")
     print(f"Heads: {[(n, heads[n]['num_classes']) for n in head_order]}")
@@ -138,7 +147,16 @@ def main() -> int:
     # and never trained on.
     perm = np.random.default_rng(0).permutation(len(X))
     X, Y = X[perm], Y[perm]
-    if args.mirror:
+    fit_kwargs = {}
+    if args.val_sequences:
+        # Held-out PEOPLE, not a random slice: a random slice shares people
+        # (and oversampled copies) with training and reads optimistic.
+        Xv, Yv, _ = load_dataset(np, args.val_sequences, args.seq_len, args.labels)
+        print(f"Validation: {Xv.shape[0]} clips from {[str(d) for d in args.val_sequences]}")
+        fit_kwargs["validation_data"] = (Xv, {name: Yv[:, i] for i, name in enumerate(head_order)})
+        if args.mirror:
+            X, Y = np.concatenate([X, lf.mirror(X)]), np.concatenate([Y, Y])
+    elif args.mirror:
         # After the shuffle, so the held-out tail gets mirrors of its own samples
         # only -- appending mirrors before it would leak training samples into it.
         cut = int(len(X) * 0.85)
@@ -147,14 +165,27 @@ def main() -> int:
         cut2 = 2 * cut
         tail = np.random.default_rng(1).permutation(cut2)
         X[:cut2], Y[:cut2] = X[tail], Y[tail]
-        validation_split = (len(X) - cut2) / len(X)
+        fit_kwargs["validation_split"] = (len(X) - cut2) / len(X)
     else:
-        validation_split = 0.15
+        fit_kwargs["validation_split"] = 0.15
     y_split = {name: Y[:, i] for i, name in enumerate(head_order)}
-    model.fit(X, y_split, epochs=args.epochs, batch_size=args.batch, validation_split=validation_split)
-
     args.out.mkdir(parents=True, exist_ok=True)
     keras_path = args.out / "open_gesture.keras"
+    if args.val_sequences:
+        # Held-out-people accuracy swings by up to 30 points between epochs, so
+        # the last epoch is a lottery: keep the best one, and halve the learning
+        # rate when it stalls to damp the swings.
+        watch = dict(monitor="val_gesture_id_accuracy", mode="max")
+        fit_kwargs["callbacks"] = [
+            keras.callbacks.ModelCheckpoint(str(keras_path), save_best_only=True, **watch),
+            keras.callbacks.ReduceLROnPlateau(factor=0.5, patience=3, **watch),
+        ]
+    history = model.fit(X, y_split, epochs=args.epochs, batch_size=args.batch, **fit_kwargs)
+
+    if args.val_sequences:
+        model = keras.models.load_model(keras_path)
+        best = max(history.history["val_gesture_id_accuracy"])
+        print(f"Kept the best epoch: val_gesture_id_accuracy {best:.3f}")
     model.save(keras_path)
     print(f"Saved {keras_path}")
 

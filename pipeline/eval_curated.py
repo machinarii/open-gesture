@@ -13,7 +13,7 @@ A covered gesture with no shard (Holistic found no hand) counts as a miss.
 Requires tensorflow, numpy.
 
 Usage:
-    python3 eval_curated.py [--model PATH] [--sequences DIR] [--seq-len N]
+    python3 eval_curated.py [--model PATH] [--sequences DIR] [--seq-len N] [--all]
 """
 from __future__ import annotations
 
@@ -35,6 +35,8 @@ def main() -> int:
     parser.add_argument("--sequences", type=Path, default=HERE / "sequences_curated")
     parser.add_argument("--labels", type=Path, default=HERE / "labels")
     parser.add_argument("--seq-len", type=int, default=64)
+    parser.add_argument("--all", action="store_true",
+                        help="score every gesture with a shard (e.g. record_gestures.py clips), not just HaGRID's 25")
     args = parser.parse_args()
 
     import tensorflow as tf
@@ -44,26 +46,31 @@ def main() -> int:
     group = {g: set(gs) for gs in HAGRID_TO_GESTURES.values() for g in gs}
 
     index = json.loads((args.sequences / "index.json").read_text())
-    shards = {s["gesture_id"]: s["file"] for s in index["shards"]}
+    shards: dict[str, list[str]] = {}
+    for s in index["shards"]:
+        shards.setdefault(s["gesture_id"], []).append(s["file"])
     model = tf.keras.models.load_model(args.model)
     gesture_head = model.output_names.index("gesture_id")
 
-    hits = 0
-    for gid in sorted(group):
+    hits = total = 0
+    for gid in sorted(shards) if args.all else sorted(group):
         if gid not in shards:
             print(f"MISS {gid:11} no hand detected by Holistic")
+            total += 1
             continue
-        data = np.load(args.sequences / shards[gid])
-        seq = data["sequence"][: args.seq_len]
-        aspect = float(data["aspect"]) if "aspect" in data.files else 1.0
-        x = np.zeros((1, args.seq_len, seq.shape[1]), dtype=np.float32)
-        x[0, : len(seq)] = lf.normalize(seq, aspect)
-        probs = model.predict(x, verbose=0)[gesture_head][0]
-        pred = id_of[int(probs.argmax())]
-        ok = pred in group[gid]
-        hits += ok
-        print(f"{'ok  ' if ok else 'MISS'} {gid:11} got {pred} ({probs.max():.2f})")
-    print(f"\nCovered gestures: {hits}/{len(group)} correct (by group)")
+        for name in shards[gid]:
+            data = np.load(args.sequences / name)
+            seq = data["sequence"][: args.seq_len]
+            aspect = float(data["aspect"]) if "aspect" in data.files else 1.0
+            x = np.zeros((1, args.seq_len, seq.shape[1]), dtype=np.float32)
+            x[0, : len(seq)] = lf.normalize(seq, aspect)
+            probs = model.predict(x, verbose=0)[gesture_head][0]
+            pred = id_of[int(probs.argmax())]
+            ok = pred in group.get(gid, {gid})
+            hits += ok
+            total += 1
+            print(f"{'ok  ' if ok else 'MISS'} {gid:11} got {pred} ({probs.max():.2f})  {name}")
+    print(f"\n{'All' if args.all else 'Covered'} gestures: {hits}/{total} clips correct (by group)")
     return 0
 
 
