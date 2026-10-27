@@ -1,6 +1,6 @@
 # Open Gesture Library
 
-**99 gestures** across **21 categories**
+**116 gestures** across **22 categories**
 
 Generated: 2026-03-27T23:43:59.058462+00:00
 
@@ -1250,6 +1250,231 @@ Generated: 2026-03-27T23:43:59.058462+00:00
 - **Gesture Type:** emblem
 - **Body Parts:** hands, fingers
 - **People:** single | **Culture:** western
+
+---
+
+## Touchless Control
+
+### 100. Closed Fist
+
+![](gesture_images/touchless-control/ctrl-01-closed-fist.png)
+
+- **ID:** `ctrl-01`
+- **Physical Description:** Close all four fingers into a fist with the thumb wrapped across the front, palm facing forward at chest height; hold still
+- **Intent:** Grab, hold or select something in a touchless interface
+- **Emotional State:** neutral | **Arousal:** low
+- **Emotions:** focus, control, determination
+- **Gesture Type:** emblem
+- **Body Parts:** hand, fingers
+- **People:** single | **Culture:** universal
+
+### 101. Grabbing Claw
+
+![](gesture_images/touchless-control/ctrl-02-grabbing-claw.png)
+
+- **ID:** `ctrl-02`
+- **Physical Description:** Curl all five fingers into a claw as if gripping a ball, palm facing forward, fingertips spread and bent; hold still
+- **Intent:** Pick up or grab an object in a touchless interface
+- **Emotional State:** neutral | **Arousal:** medium
+- **Emotions:** focus, control, anticipation
+- **Gesture Type:** emblem
+- **Body Parts:** hand, fingers, thumb
+- **People:** single | **Culture:** universal
+
+### 102. Grip
+
+![](gesture_images/touchless-control/ctrl-03-grip.png)
+
+- **ID:** `ctrl-03`
+- **Physical Description:** Curl all four fingers round until their tips meet the thumb tip, forming a closed ring as if gripping a thick bar, palm facing forward; hold still
+- **Intent:** Hold and drag, or turn a virtual knob, in a touchless interface
+- **Emotional State:** neutral | **Arousal:** low
+- **Emotions:** focus, control
+- **Gesture Type:** emblem
+- **Body Parts:** hand, fingers, thumb
+- **People:** single | **Culture:** universal
+
+### 103. Pinky Up
+
+![](gesture_images/touchless-control/ctrl-04-pinky-up.png)
+
+- **ID:** `ctrl-04`
+- **Physical Description:** Make a fist and extend only the little finger straight up, palm facing forward; hold still
+- **Intent:** A distinct command shape for touchless control; in parts of East Asia it also means 'small' or 'inferior'
+- **Emotional State:** neutral | **Arousal:** low
+- **Emotions:** playfulness, focus
+- **Gesture Type:** emblem
+- **Body Parts:** hand, pinky finger
+- **People:** single | **Culture:** universal
+
+### 104. Two Fingers Up Together
+
+![](gesture_images/touchless-control/ctrl-05-two-fingers-up-together.png)
+
+- **ID:** `ctrl-05`
+- **Physical Description:** Raise the index and middle fingers straight up and pressed together, ring and little finger folded under the thumb, palm facing forward; hold still
+- **Intent:** A distinct command shape for touchless control, unlike the spread V of number two
+- **Emotional State:** neutral | **Arousal:** low
+- **Emotions:** focus, control
+- **Gesture Type:** emblem
+- **Body Parts:** hand, index finger, middle finger
+- **People:** single | **Culture:** universal
+
+### 105. Point with Two Fingers
+
+![](gesture_images/touchless-control/ctrl-06-point-with-two-fingers.png)
+
+- **ID:** `ctrl-06`
+- **Physical Description:** Extend the index and middle fingers together toward the screen and move the hand to steer a cursor
+- **Intent:** Point at or move a cursor over an on-screen target
+- **Emotional State:** neutral | **Arousal:** low
+- **Emotions:** focus, intent
+- **Gesture Type:** illustrator-deictic
+- **Body Parts:** hand, index finger, middle finger
+- **People:** single | **Culture:** universal
+
+### 106. Air Click (One Finger)
+
+![](gesture_images/touchless-control/ctrl-07-air-click-one-finger.png)
+
+- **ID:** `ctrl-07`
+- **Physical Description:** With the index finger pointing at the screen, flex it down and back up once, like pressing a button in the air
+- **Intent:** Click or select the item being pointed at
+- **Emotional State:** neutral | **Arousal:** low
+- **Emotions:** focus, decisiveness
+- **Gesture Type:** emblem
+- **Body Parts:** hand, index finger
+- **People:** single | **Culture:** universal
+
+### 107. Air Click (Two Fingers)
+
+![](gesture_images/touchless-control/ctrl-08-air-click-two-fingers.png)
+
+- **ID:** `ctrl-08`
+- **Physical Description:** With the index and middle fingers pointing at the screen together, flex them down and back up once
+- **Intent:** Click or select, as a secondary click
+- **Emotional State:** neutral | **Arousal:** low
+- **Emotions:** focus, decisiveness
+- **Gesture Type:** emblem
+- **Body Parts:** hand, index finger, middle finger
+- **People:** single | **Culture:** universal
+
+### 108. Throw Up
+
+![](gesture_images/touchless-control/ctrl-09-throw-up.png)
+
+- **ID:** `ctrl-09`
+- **Physical Description:** Sweep an open hand quickly upward, as if flicking an item off the top of the screen
+- **Intent:** Dismiss or send an item upward; scroll or swipe up
+- **Emotional State:** neutral | **Arousal:** medium
+- **Emotions:** decisiveness, energy
+- **Gesture Type:** illustrator-metaphoric
+- **Body Parts:** hand, arm
+- **People:** single | **Culture:** universal
+
+### 109. Throw Down
+
+![](gesture_images/touchless-control/ctrl-10-throw-down.png)
+
+- **ID:** `ctrl-10`
+- **Physical Description:** Sweep an open hand quickly downward, as if flicking an item off the bottom of the screen
+- **Intent:** Dismiss or send an item downward; scroll or swipe down
+- **Emotional State:** neutral | **Arousal:** medium
+- **Emotions:** decisiveness, energy
+- **Gesture Type:** illustrator-metaphoric
+- **Body Parts:** hand, arm
+- **People:** single | **Culture:** universal
+
+### 110. Throw Left
+
+![](gesture_images/touchless-control/ctrl-11-throw-left.png)
+
+- **ID:** `ctrl-11`
+- **Physical Description:** Sweep an open hand quickly toward the performer's left, as if flicking an item off the side of the screen
+- **Intent:** Swipe left: previous item or dismiss to the left
+- **Emotional State:** neutral | **Arousal:** medium
+- **Emotions:** decisiveness, energy
+- **Gesture Type:** illustrator-metaphoric
+- **Body Parts:** hand, arm
+- **People:** single | **Culture:** universal
+
+### 111. Throw Right
+
+![](gesture_images/touchless-control/ctrl-12-throw-right.png)
+
+- **ID:** `ctrl-12`
+- **Physical Description:** Sweep an open hand quickly toward the performer's right, as if flicking an item off the side of the screen
+- **Intent:** Swipe right: next item or dismiss to the right
+- **Emotional State:** neutral | **Arousal:** medium
+- **Emotions:** decisiveness, energy
+- **Gesture Type:** illustrator-metaphoric
+- **Body Parts:** hand, arm
+- **People:** single | **Culture:** universal
+
+### 112. Open Twice
+
+![](gesture_images/touchless-control/ctrl-13-open-twice.png)
+
+- **ID:** `ctrl-13`
+- **Physical Description:** Bunch the fingertips together, then spread the hand fully open; repeat twice in quick succession
+- **Intent:** Open or launch an item
+- **Emotional State:** neutral | **Arousal:** medium
+- **Emotions:** anticipation, decisiveness
+- **Gesture Type:** emblem
+- **Body Parts:** hand, fingers
+- **People:** single | **Culture:** universal
+
+### 113. Air Double Click (One Finger)
+
+![](gesture_images/touchless-control/ctrl-14-air-double-click-one-finger.png)
+
+- **ID:** `ctrl-14`
+- **Physical Description:** With the index finger pointing at the screen, flex it down and back up twice in quick succession
+- **Intent:** Double-click or open the item being pointed at
+- **Emotional State:** neutral | **Arousal:** medium
+- **Emotions:** focus, decisiveness
+- **Gesture Type:** emblem
+- **Body Parts:** hand, index finger
+- **People:** single | **Culture:** universal
+
+### 114. Air Double Click (Two Fingers)
+
+![](gesture_images/touchless-control/ctrl-15-air-double-click-two-fingers.png)
+
+- **ID:** `ctrl-15`
+- **Physical Description:** With the index and middle fingers pointing at the screen together, flex them down and back up twice in quick succession
+- **Intent:** Secondary double-click
+- **Emotional State:** neutral | **Arousal:** medium
+- **Emotions:** focus, decisiveness
+- **Gesture Type:** emblem
+- **Body Parts:** hand, index finger, middle finger
+- **People:** single | **Culture:** universal
+
+### 115. Zoom In
+
+![](gesture_images/touchless-control/ctrl-16-zoom-in.png)
+
+- **ID:** `ctrl-16`
+- **Physical Description:** Start with the thumb and fingertips pinched together toward the screen, then spread them apart
+- **Intent:** Zoom in or enlarge
+- **Emotional State:** neutral | **Arousal:** low
+- **Emotions:** curiosity, focus
+- **Gesture Type:** illustrator-iconic
+- **Body Parts:** hand, thumb, fingers
+- **People:** single | **Culture:** universal
+
+### 116. Zoom Out
+
+![](gesture_images/touchless-control/ctrl-17-zoom-out.png)
+
+- **ID:** `ctrl-17`
+- **Physical Description:** Start with the thumb and fingers spread toward the screen, then pinch them together
+- **Intent:** Zoom out or shrink
+- **Emotional State:** neutral | **Arousal:** low
+- **Emotions:** focus, overview
+- **Gesture Type:** illustrator-iconic
+- **Body Parts:** hand, thumb, fingers
+- **People:** single | **Culture:** universal
 
 ---
 

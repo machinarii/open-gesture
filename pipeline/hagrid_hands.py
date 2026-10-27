@@ -64,6 +64,14 @@ HAGRID_TO_GESTURES = {
     "take_picture": ["prac-03"],
     "xsign": ["neg-03"],
     "hand_heart": ["love-03"],
+    # Touchless Control shapes added for HaGRID (manifest ctrl-01..05).
+    # The descriptions are written from HaGRID's class names; check them
+    # against images/gestures.png.
+    "fist": ["ctrl-01"],
+    "grabbing": ["ctrl-02"],
+    "grip": ["ctrl-03"],
+    "little_finger": ["ctrl-04"],
+    "two_up": ["ctrl-05"],
 }
 NO_GESTURE = "no_gesture"
 CLASSES = sorted(HAGRID_TO_GESTURES) + [NO_GESTURE]

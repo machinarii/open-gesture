@@ -69,6 +69,26 @@
       "description": "Index extended forward, thumb up, others curled. Finger gun / playful point.",
       "left": null,
       "right": null
+    },
+    "claw": {
+      "description": "All five fingers curled and spread as if gripping a ball. Grabbing.",
+      "left": null,
+      "right": null
+    },
+    "grip": {
+      "description": "All four fingertips curled to meet the thumb tip in a closed ring, as if gripping a thick bar.",
+      "left": null,
+      "right": null
+    },
+    "pinky_up": {
+      "description": "Fist with only the little finger extended.",
+      "left": null,
+      "right": null
+    },
+    "two_together": {
+      "description": "Index and middle extended and pressed together, others folded under the thumb.",
+      "left": null,
+      "right": null
     }
   }
 }
